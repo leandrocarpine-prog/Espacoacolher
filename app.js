@@ -4,7 +4,13 @@ const nav=document.querySelector('#main-nav');
 const dialog=document.querySelector('#start-dialog');
 const dialogContinue=document.querySelector('#dialog-continue');
 
-window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20),{passive:true});
+const progressBar=document.querySelector('.page-progress i');
+function updateScrollState(){
+  header.classList.toggle('scrolled',scrollY>20);
+  if(progressBar){const available=document.documentElement.scrollHeight-innerHeight;progressBar.style.transform=`scaleX(${available>0?Math.min(scrollY/available,1):0})`}
+}
+window.addEventListener('scroll',updateScrollState,{passive:true});
+updateScrollState();
 menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.classList.toggle('active',open);menuButton.setAttribute('aria-expanded',String(open))});
 nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton.classList.remove('active');menuButton.setAttribute('aria-expanded','false')}));
 

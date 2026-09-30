@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=36">
+  <link rel="stylesheet" href="style.css?v=38">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -18,6 +18,7 @@
     <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
     <nav id="main-nav" aria-label="Navegação principal"><a href="quem-somos.html">Quem somos</a><a href="terapia.html">Terapia</a><a href="login.html">Conta do paciente</a><a href="profissionais.html">Para profissionais</a><a class="nav-cta" href="login.html?cadastro=1&next=triagem.html">Comece o questionário <span>↗</span></a></nav>
   </header>
+  <div class="page-progress" aria-hidden="true"><i></i></div>
   <main id="conteudo">
     <section class="hero" id="inicio">
       <div class="hero-image" aria-hidden="true"><img src="assets/hero-terapia-v2.webp" alt=""><div class="hero-image-shade"></div></div>
@@ -29,7 +30,7 @@
         <div class="hero-trust" aria-label="Informações do atendimento"><span>Rio Claro e região</span><i></i><span>Presencial</span><i></i><span>Online</span></div>
       </div>
       <aside class="hero-note reveal"><span class="note-icon">01</span><div><small>COMO COMEÇAR</small><b>Conte o que você procura.</b><p>Crie sua conta, responda à pré-triagem e receba um retorno pessoal sobre as possibilidades de atendimento.</p></div></aside>
-      <a class="scroll-cue" href="quem-somos.html"><span></span>Conheça o espaço</a>
+      <a class="scroll-cue" href="#boas-vindas"><span></span>Role para conhecer</a>
     </section>
 
     <section class="intro section" id="boas-vindas">
@@ -88,6 +89,6 @@
   <dialog class="start-dialog" id="start-dialog" aria-labelledby="start-title"><button class="dialog-close" type="button" data-close-dialog aria-label="Fechar">×</button><div class="dialog-brand"><span>EA</span><small>PRIMEIRO PASSO</small></div><h2 id="start-title">Para quem você está buscando cuidado?</h2><p>Isso ajuda a organizar o início. Você poderá explicar melhor depois, com calma.</p><div class="start-options"><button type="button" data-start-value="mim"><span>Para mim</span><small>Quero falar sobre o que estou vivendo</small><i>→</i></button><button type="button" data-start-value="filho"><span>Para meu filho ou filha</span><small>Sou responsável pela criança ou adolescente</small><i>→</i></button><button type="button" data-start-value="familiar"><span>Para uma pessoa próxima</span><small>Quero entender como posso ajudar</small><i>→</i></button></div><a class="dialog-continue disabled" id="dialog-continue" href="login.html?cadastro=1">Continuar para o cadastro <span>→</span></a><small class="dialog-note">Você criará uma conta segura antes de enviar informações de pré-triagem.</small></dialog>
   <a class="whatsapp-float" href="https://wa.me/5519989477456" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp"><span>◌</span><b>WhatsApp</b></a>
   <div class="mobile-action"><button type="button" data-open-start>Quero iniciar <span>→</span></button></div>
-  <script src="app.js?v=32"></script>
+  <script src="app.js?v=38"></script>
 </body>
 </html>

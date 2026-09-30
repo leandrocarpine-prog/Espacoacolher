@@ -238,3 +238,113 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 .pro-orbit{animation:slow-orbit 14s linear infinite}
 @keyframes slow-orbit{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.pro-orbit{animation:none}.topics-panel article:after{transition:none}}
+
+/* v37 — capa mais luminosa, legível e proporcional */
+@media(min-width:851px){
+  .home-page main>.hero{
+    background:
+      radial-gradient(circle at 9% 18%,rgba(164,220,239,.38),transparent 32%),
+      radial-gradient(circle at 39% 86%,rgba(210,239,246,.55),transparent 32%),
+      linear-gradient(145deg,#fbfdfe,#eef8fb);
+  }
+  .home-page .hero-copy{width:45vw;margin-left:max(5vw,48px)}
+  .home-page .hero h1{
+    max-width:720px;
+    font-size:clamp(54px,5.35vw,82px);
+    line-height:1.01;
+    background:linear-gradient(135deg,#183f56 8%,#2e718f 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .home-page .hero-lead{max-width:630px;font-size:18px;line-height:1.6;color:#527186}
+  .home-page .eyebrow{font-size:11px;color:#3184a7}
+  .home-page .hero-actions{margin-top:32px}
+  .home-page .button-light{background:linear-gradient(135deg,#2c7fa3,#58a4c0);box-shadow:0 16px 38px rgba(48,132,166,.25)}
+  .home-page .text-link.light{color:#276e8d;font-size:14px}
+  .home-page .hero-trust{margin-top:38px;color:#58798d;font-size:13px}
+  .home-page .hero-image img{filter:saturate(.96) contrast(.98) brightness(1.08)}
+  .home-page .hero-image-shade{background:linear-gradient(90deg,rgba(241,249,252,.05),rgba(62,128,156,.02))!important}
+  .home-page .hero-note{
+    right:2.5vw;bottom:5.5%;width:min(500px,40vw);padding:34px 36px;
+    grid-template-columns:54px 1fr;gap:20px;border-radius:26px;
+    background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,247,252,.94));
+    border:1px solid rgba(156,205,224,.8);
+    box-shadow:0 30px 85px rgba(35,101,130,.22);
+  }
+  .home-page .hero-note:before{content:"";position:absolute;left:0;top:26px;bottom:26px;width:5px;border-radius:0 8px 8px 0;background:linear-gradient(#55b4d3,#2f7f9f)}
+  .home-page .note-icon{width:54px;height:54px;border-radius:17px;background:#d9f1f8;color:#287b9d;font-size:16px}
+  .home-page .hero-note small{font-size:10px;color:#2f83a5}
+  .home-page .hero-note b{font-size:29px;line-height:1.12;margin:7px 0 10px;color:#1b4960}
+  .home-page .hero-note p{font-size:14px;line-height:1.55;color:#58788b}
+  .home-page .site-header nav>a{font-size:14px}
+}
+
+/* v38 — páginas vivas: fluxo completo, movimento contextual e respostas ao toque */
+.home-page{height:auto;min-height:100vh;overflow-x:hidden;overflow-y:auto}
+.home-page main>.hero{height:min(900px,100svh);min-height:720px}
+.home-page main>section.intro{display:grid}
+.home-page main>section.needs,.home-page main>section.process,.home-page main>section.final-cta{display:block}
+.home-page main>section.social-care,.home-page main>section.professional,.home-page main>section.portal-preview,.home-page main>section.faq{display:grid}
+.home-page footer{display:block}
+.home-page .mobile-action{display:none}
+
+.page-progress{position:fixed;z-index:95;left:0;right:0;top:0;height:3px;pointer-events:none}
+.page-progress i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#63b5d1,#2d708f,#83c8dc);transform:scaleX(0);transform-origin:left;will-change:transform}
+
+.home-page .hero-image{overflow:hidden}
+.home-page .hero-image img{animation:hero-breathe 14s cubic-bezier(.45,0,.55,1) infinite alternate;will-change:transform}
+.home-page .hero:before,.home-page .hero:after{content:"";position:absolute;z-index:1;pointer-events:none;border-radius:50%}
+.home-page .hero:before{width:340px;height:340px;left:-170px;top:14%;background:radial-gradient(circle,rgba(104,188,216,.18),rgba(104,188,216,0) 69%);animation:light-drift 9s ease-in-out infinite alternate}
+.home-page .hero:after{width:170px;height:170px;left:39%;bottom:-65px;border:1px solid rgba(77,157,186,.2);animation:soft-orbit 11s ease-in-out infinite alternate}
+.home-page .button-light{background-size:180% 180%;animation:cta-flow 5s ease-in-out infinite}
+.home-page .scroll-cue{left:50%;bottom:18px;transform:translateX(-50%);color:#2c7796;font-weight:800;white-space:nowrap}
+.home-page .scroll-cue span{height:42px;background:linear-gradient(#2f82a4,rgba(47,130,164,0));animation:scroll-line 1.8s ease-in-out infinite;transform-origin:top}
+.home-page .hero-trust i{animation:trust-pulse 2.2s ease-in-out infinite}
+.home-page .hero-trust i:nth-of-type(2){animation-delay:.55s}
+
+.home-page .therapy-card.featured{background-size:180% 180%;animation:featured-flow 8s ease-in-out infinite}
+.home-page .social-visual .ring-a{animation:ring-turn 22s linear infinite}
+.home-page .social-visual .ring-b{animation:ring-turn 30s linear infinite reverse}
+.home-page .professional-portrait:before{animation:ring-turn 24s linear infinite}
+.home-page .professional-portrait:after{animation:ring-turn 32s linear infinite reverse}
+.home-page .portal-window{animation:window-float 6.5s ease-in-out infinite}
+.home-page .status-card i:first-child{background:linear-gradient(90deg,#2d708f,#79bed5,#2d708f);background-size:200% 100%;animation:status-flow 3.5s linear infinite}
+.home-page .final-orbit{animation:final-breathe 8s ease-in-out infinite}
+
+.screen-page:before{content:"";position:fixed;z-index:0;width:360px;height:360px;left:-210px;bottom:-180px;border-radius:50%;background:radial-gradient(circle,rgba(102,178,207,.2),transparent 70%);animation:light-drift 10s ease-in-out infinite alternate;pointer-events:none}
+.screen-page .info-screen{position:relative;z-index:1}
+.screen-page .photo-visual img{animation:screen-photo-breathe 13s ease-in-out infinite alternate;will-change:transform}
+.screen-page .glass-profile{animation:glass-float 6s ease-in-out infinite}
+.screen-page .topics-panel article:nth-child(2){animation:card-breathe 6s ease-in-out infinite .4s}
+.screen-page .topics-panel article:nth-child(4){animation:card-breathe 7s ease-in-out infinite 1.2s}
+.screen-page .topics-panel article:nth-child(6){animation:card-breathe 6.5s ease-in-out infinite .8s}
+.screen-page .pro-card{animation:glass-float 6.5s ease-in-out infinite}
+
+@keyframes hero-breathe{from{transform:scale(1.015) translate3d(-.4%,0,0)}to{transform:scale(1.075) translate3d(.9%,-.5%,0)}}
+@keyframes light-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(48px,-28px,0) scale(1.12)}}
+@keyframes soft-orbit{from{transform:translate3d(0,0,0) rotate(0)}to{transform:translate3d(28px,-34px,0) rotate(22deg)}}
+@keyframes cta-flow{0%,100%{background-position:0 50%;box-shadow:0 16px 38px rgba(48,132,166,.22)}50%{background-position:100% 50%;box-shadow:0 20px 48px rgba(48,132,166,.36)}}
+@keyframes scroll-line{0%,100%{transform:scaleY(.6);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+@keyframes trust-pulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(2.2);opacity:1}}
+@keyframes featured-flow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes ring-turn{to{transform:rotate(360deg)}}
+@keyframes window-float{0%,100%{transform:rotate(1.2deg) translateY(0)}50%{transform:rotate(.3deg) translateY(-10px)}}
+@keyframes status-flow{to{background-position:200% 0}}
+@keyframes final-breathe{0%,100%{transform:translate(-50%,-50%) scale(.96);opacity:.65}50%{transform:translate(-50%,-50%) scale(1.08);opacity:1}}
+@keyframes screen-photo-breathe{from{transform:scale(1.01) translateX(-.4%)}to{transform:scale(1.065) translateX(.7%)}}
+@keyframes glass-float{0%,100%{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(0)}50%{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-9px)}}
+@keyframes card-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+@media(max-width:850px){
+  .home-page main>.hero{height:auto;min-height:calc(100svh - 70px)}
+  .home-page .hero:before{width:230px;height:230px;left:-120px;top:26%}
+  .home-page .hero:after{width:120px;height:120px;left:auto;right:-46px;bottom:4%}
+  .home-page .scroll-cue{display:none}
+}
+@media(max-width:560px){
+  .home-page .mobile-action{display:block}
+  .home-page .intro,.home-page .social-care,.home-page .professional,.home-page .portal-preview,.home-page .faq{display:grid}
+  .home-page .hero-image img{animation-duration:11s}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-page .hero-image img,.home-page .hero:before,.home-page .hero:after,.home-page .button-light,.home-page .scroll-cue span,.home-page .hero-trust i,.home-page .therapy-card.featured,.home-page .social-visual .ring-a,.home-page .social-visual .ring-b,.home-page .professional-portrait:before,.home-page .professional-portrait:after,.home-page .portal-window,.home-page .status-card i:first-child,.home-page .final-orbit,.screen-page:before,.screen-page .photo-visual img,.screen-page .glass-profile,.screen-page .topics-panel article,.screen-page .pro-card{animation:none!important}
+}

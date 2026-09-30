@@ -153,3 +153,23 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
   .auth-v2 .register-view .register-top>span{padding:6px 8px;border-radius:999px;background:rgba(249,252,254,.82);backdrop-filter:blur(8px)}
 }
 @media(prefers-reduced-motion:reduce){.auth-v2 .auth-panel:before,.intake-aside:after{animation:none!important}}
+
+/* v38 — movimento discreto também no cadastro, pré-triagem e área do paciente */
+.auth-v2 .auth-side{animation:auth-photo-breathe 14s ease-in-out infinite alternate;background-size:cover!important}
+.auth-v2 .auth-side-content{animation:auth-card-float 6.5s ease-in-out infinite}
+.auth-v2 .form-symbol{animation:symbol-breathe 3.8s ease-in-out infinite}
+.auth-v2 .progress-line i{background-size:200% 100%;animation:portal-progress-flow 3s linear infinite}
+.auth-v2 label input,.auth-v2 label select{transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease,background .22s ease}
+.auth-v2 label input:focus,.auth-v2 label select:focus{transform:translateY(-1px)}
+.intake-next,.intake-back,.intake-choices label>span,.reason-grid label>span{transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
+.intake-next:hover,.intake-back:hover,.intake-choices label:hover>span,.reason-grid label:hover>span{transform:translateY(-2px)}
+.user-welcome{background-size:160% 160%;animation:user-gradient-flow 8s ease-in-out infinite}
+.user-grid article,.content-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.user-grid article:hover,.content-card:hover{transform:translateY(-4px);box-shadow:0 22px 55px rgba(39,92,118,.13);border-color:#b9d8e5}
+
+@keyframes auth-photo-breathe{from{background-position:48% 50%}to{background-position:54% 47%}}
+@keyframes auth-card-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes portal-progress-flow{to{background-position:200% 0}}
+@keyframes user-gradient-flow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@media(max-width:900px){.auth-v2 .auth-side,.auth-v2 .auth-side-content{animation:none}}
+@media(prefers-reduced-motion:reduce){.auth-v2 .auth-side,.auth-v2 .auth-side-content,.auth-v2 .form-symbol,.auth-v2 .progress-line i,.user-welcome{animation:none!important}.user-grid article,.content-card,.intake-next,.intake-back,.intake-choices label>span,.reason-grid label>span{transition:none!important}}
