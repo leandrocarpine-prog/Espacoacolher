@@ -43,7 +43,12 @@ html,body{max-width:100%;overflow-x:hidden}
   .auth-v2 .portal-header{padding:0 18px;width:100%}
   .auth-v2 .portal-brand{min-width:0}.auth-v2 .portal-brand div{min-width:0}.auth-v2 .portal-brand b{white-space:nowrap;font-size:14px}
   .auth-v2 .auth-shell,.auth-v2 .auth-panel,.auth-v2 .auth-form,.auth-v2 form,.auth-v2 .register-step{width:100%;max-width:100%;min-width:0}
-  .auth-v2 .auth-panel{padding:30px 20px 88px;overflow:hidden}
+  .auth-v2 .auth-form{margin:0 auto}
+  .auth-v2 .auth-panel{position:relative;padding:24px 18px 72px;overflow:hidden;background:radial-gradient(circle at 88% 9%,rgba(127,188,211,.28),transparent 28%),radial-gradient(circle at 4% 68%,rgba(190,222,235,.36),transparent 31%),linear-gradient(160deg,#f9fcfd,#edf6fa)}
+  .auth-v2 .auth-panel:before{content:"";position:absolute;width:190px;height:190px;right:-82px;top:-66px;border:1px solid rgba(70,139,166,.28);border-radius:46% 54% 63% 37%/41% 43% 57% 59%;background:linear-gradient(145deg,rgba(255,255,255,.42),rgba(255,255,255,.04));animation:mobile-orbit 8s ease-in-out infinite alternate;pointer-events:none}
+  .auth-v2 .auth-panel:after{content:"";position:absolute;width:120px;height:120px;left:-66px;bottom:34px;border-radius:50%;background:radial-gradient(circle,rgba(79,151,179,.14) 1.5px,transparent 1.8px);background-size:10px 10px;pointer-events:none}
+  .auth-v2 .auth-form{position:relative;z-index:1}
+  .auth-v2 .auth-form.login-view{padding:22px 18px 20px;border:1px solid rgba(188,216,227,.78);border-radius:24px;background:rgba(255,255,255,.68);box-shadow:0 22px 60px rgba(40,94,121,.1);backdrop-filter:blur(18px)}
   .auth-v2 .form-heading{text-align:left;margin-bottom:28px}
   .auth-v2 .form-symbol{margin:0 0 18px}
   .auth-v2 .form-heading h2,.auth-v2 .step-heading h2{overflow-wrap:anywhere}
@@ -52,8 +57,26 @@ html,body{max-width:100%;overflow-x:hidden}
   .auth-v2 .login-options{gap:14px;align-items:flex-start}
   .auth-v2 .login-options .text-action{text-align:right;line-height:1.35}
   .auth-v2 .register-top{gap:12px}.auth-v2 .register-top>span{font-size:9px;text-align:right;line-height:1.35}
-  .auth-v2 .register-actions{left:0;right:0;z-index:4;margin-left:-20px;margin-right:-20px;padding:22px 20px 8px}
+  .auth-v2 .register-actions{left:0;right:0;z-index:4;margin-left:-18px;margin-right:-18px;padding:22px 18px 8px}
   .auth-v2 .password-rules{display:flex;flex-wrap:wrap;gap:7px}
+  .auth-v2 input,.auth-v2 select{transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease,background .22s ease}
+  .auth-v2 input:focus,.auth-v2 select:focus{transform:translateY(-1px);background:#fff}
+  .auth-v2 .portal-button:active{transform:scale(.985)}
+  .auth-v2 .form-symbol{animation:symbol-breathe 3.8s ease-in-out infinite}
+}
+
+@keyframes mobile-orbit{from{transform:translate(0,0) rotate(0)}to{transform:translate(-14px,14px) rotate(9deg)}}
+@keyframes symbol-breathe{0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(75,145,173,0)}50%{transform:translateY(-4px);box-shadow:0 12px 30px rgba(75,145,173,.18)}}
+
+/* A imagem comunica psicoterapia; o formulario continua sendo o foco */
+.auth-context-thumb{display:none}
+.auth-v2 .auth-side{background-image:linear-gradient(0deg,rgba(30,75,96,.18),rgba(255,255,255,.02)),url('assets/hero-terapia-v2.webp')!important;background-size:cover!important;background-position:center 58%!important}
+.auth-v2 .auth-side:before{display:none}
+@media(max-width:600px){
+  .auth-v2 .form-heading{display:grid;grid-template-columns:minmax(0,1fr) 92px;column-gap:14px;align-items:start}
+  .auth-v2 .form-heading .form-symbol,.auth-v2 .form-heading p,.auth-v2 .form-heading h2,.auth-v2 .form-heading>span{grid-column:1}
+  .auth-v2 .form-heading h2{font-size:29px;line-height:1.05}
+  .auth-v2 .auth-context-thumb{display:block;grid-column:2;grid-row:1/6;width:92px;height:122px;border-radius:18px;background:linear-gradient(0deg,rgba(36,86,108,.12),transparent),url('assets/hero-terapia-v2.webp') center/cover;box-shadow:0 15px 34px rgba(42,96,121,.16)}
 }
 
 /* Transicoes e movimento do portal, preservando leveza e acessibilidade */

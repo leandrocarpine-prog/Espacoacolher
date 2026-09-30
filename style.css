@@ -146,3 +146,22 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
   .hero-note{animation:none}
 }
 @media(prefers-reduced-motion:reduce){body,.hero-image:before,.hero-image:after,.hero-note,.screen-copy>*{animation:none!important;transition:none!important}.therapy-card,.topics-panel article,.pro-card,.glass-profile{transform:none!important}}
+
+/* Imagem contextual: deixa a finalidade do site evidente sem perder leveza */
+.hero-image{background:#dcebf2}
+.hero-image img{display:block!important;object-fit:cover;object-position:center 55%;filter:saturate(.78) contrast(.95) brightness(1.04)}
+.hero-image:before,.hero-image:after{display:none}
+.hero-image-shade{display:block!important;background:linear-gradient(90deg,rgba(237,247,251,.1),rgba(34,79,99,.08))!important}
+.photo-visual img{display:block!important;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 57%;filter:saturate(.78) contrast(.95) brightness(1.03)}
+.photo-visual:before{display:none}.photo-visual:after{inset:0;border:0;border-radius:0;background:linear-gradient(0deg,rgba(27,68,87,.25),transparent 55%);box-shadow:none;backdrop-filter:none}
+@media(max-width:850px){
+  .home-page main>.hero{display:block;min-height:100svh;padding:320px 20px 50px;background:linear-gradient(160deg,#f9fcfd,#eef6fa)}
+  .home-page .hero-image{inset:70px 0 auto;width:100%;height:220px;opacity:1}
+  .home-page .hero-image img{opacity:1;object-position:center 56%}
+  .home-page .hero-image-shade{background:linear-gradient(0deg,#f4fafc 0%,rgba(244,250,252,0) 38%)!important}
+}
+@media(max-width:560px){
+  .home-page main>.hero{padding:310px 20px 44px}
+  .home-page .hero-image{height:210px}
+  .home-page .hero h1{font-size:clamp(36px,10vw,43px)}
+}
