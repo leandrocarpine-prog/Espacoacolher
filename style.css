@@ -348,3 +348,103 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 @media(prefers-reduced-motion:reduce){
   .home-page .hero-image img,.home-page .hero:before,.home-page .hero:after,.home-page .button-light,.home-page .scroll-cue span,.home-page .hero-trust i,.home-page .therapy-card.featured,.home-page .social-visual .ring-a,.home-page .social-visual .ring-b,.home-page .professional-portrait:before,.home-page .professional-portrait:after,.home-page .portal-window,.home-page .status-card i:first-child,.home-page .final-orbit,.screen-page:before,.screen-page .photo-visual img,.screen-page .glass-profile,.screen-page .topics-panel article,.screen-page .pro-card{animation:none!important}
 }
+
+/* v39 — a próxima parte já aparece na primeira tela */
+@media(min-width:851px){
+  .home-page main>.hero{height:min(820px,calc(100svh - 150px));min-height:620px}
+  .home-page main>section.intro{padding-top:48px;padding-bottom:96px}
+  .home-page .scroll-cue{
+    bottom:16px;padding:9px 15px;border:1px solid rgba(88,162,190,.42);border-radius:999px;
+    background:rgba(250,253,254,.88);box-shadow:0 10px 30px rgba(42,105,132,.12);backdrop-filter:blur(12px)
+  }
+  .home-page .scroll-cue span{
+    width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+    background:none;transform:rotate(45deg);animation:cue-bounce 1.6s ease-in-out infinite
+  }
+}
+@keyframes cue-bounce{0%,100%{transform:translateY(-2px) rotate(45deg)}50%{transform:translateY(3px) rotate(45deg)}}
+@media(prefers-reduced-motion:reduce){.home-page .scroll-cue span{animation:none!important}}
+
+/* v40 — narrativa visual, fotografias temáticas e paletas variadas */
+.home-page main>section.intro{
+  position:relative;max-width:none;margin:0;padding:90px max(6vw,50px);
+  grid-template-columns:minmax(380px,.88fr) minmax(480px,1.12fr);gap:clamp(42px,7vw,100px);align-items:center;
+  background:
+    radial-gradient(circle at 8% 88%,rgba(229,188,155,.26),transparent 27%),
+    radial-gradient(circle at 91% 14%,rgba(138,197,216,.28),transparent 30%),
+    linear-gradient(135deg,#fbf8f2,#eef7fa)
+}
+.intro-media{position:relative;height:600px;overflow:hidden;border-radius:34px 110px 34px 34px;box-shadow:0 32px 90px rgba(43,91,110,.18)}
+.intro-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(24,57,69,.42));pointer-events:none}
+.intro-media>img{width:100%;height:100%;object-fit:cover;object-position:center;animation:intro-photo 13s ease-in-out infinite alternate}
+.intro-media .intro-label{position:absolute;z-index:2;left:24px;top:24px;padding:15px 18px;border-radius:18px;background:rgba(255,255,255,.88);box-shadow:0 12px 36px rgba(26,70,88,.14);backdrop-filter:blur(14px)}
+.intro-media .intro-label>span{font:700 28px/1 "Plus Jakarta Sans",sans-serif;color:#2d708f}
+.intro-media .intro-label p{font-size:8px;color:#466b7b}
+.intro-media-note{position:absolute;z-index:2;left:24px;bottom:24px;display:flex;align-items:center;gap:10px;padding:12px 15px;border:1px solid rgba(255,255,255,.54);border-radius:999px;background:rgba(21,66,82,.72);color:#fff;font-size:11px;font-weight:700;backdrop-filter:blur(12px)}
+.intro-media-note i{width:8px;height:8px;border-radius:50%;background:#91d2c1;box-shadow:0 0 0 6px rgba(145,210,193,.16);animation:trust-pulse 2.2s ease-in-out infinite}
+.home-page .intro-copy{padding:clamp(30px,4vw,58px);border:1px solid rgba(184,211,221,.72);border-radius:34px;background:rgba(255,255,255,.78);box-shadow:0 28px 80px rgba(44,96,120,.11);backdrop-filter:blur(18px)}
+.home-page .intro-copy h2{font-size:clamp(44px,4.5vw,70px);color:#183b50}
+.home-page .intro-copy>p:not(.eyebrow){font-size:18px;line-height:1.75;color:#587386}
+.home-page .intro-pullquote{margin:30px 0;padding:22px 24px;border:0;border-radius:20px;background:linear-gradient(135deg,#edf6f8,#f7efe5);display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:start}
+.home-page .intro-pullquote span{font-size:48px;line-height:.9;color:#4f97b3}
+.home-page .intro-pullquote p{font:600 18px/1.5 "Plus Jakarta Sans",sans-serif;color:#254a5c;margin:0}
+@keyframes intro-photo{from{transform:scale(1.01)}to{transform:scale(1.07) translate3d(1%,-.6%,0)}}
+
+.home-page .needs{background:
+  radial-gradient(circle at 7% 18%,rgba(246,190,151,.22),transparent 24%),
+  radial-gradient(circle at 92% 82%,rgba(158,205,224,.28),transparent 27%),
+  linear-gradient(145deg,#f7fbfd,#fffaf4)}
+.home-page .therapy-grid{gap:22px;grid-auto-rows:auto}
+.home-page .therapy-card,.home-page .therapy-card.featured{min-height:430px;padding:0;overflow:hidden;border:1px solid rgba(173,204,218,.72);color:#18384a;background:#fff;animation:none}
+.home-page .therapy-card:nth-child(1){background:#fff3eb}.home-page .therapy-card:nth-child(2){background:#edf5fb}.home-page .therapy-card:nth-child(3){background:#f5f0e7}.home-page .therapy-card:nth-child(4){background:#edf6f0}.home-page .therapy-card:nth-child(5){background:#fff6e8}.home-page .therapy-card:nth-child(6){background:#f2eff8}
+.therapy-card-image{position:relative;height:180px;overflow:hidden}
+.therapy-card-image:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,rgba(18,55,70,.34))}
+.therapy-card-image img{width:100%;height:100%;object-fit:cover;transition:transform .75s cubic-bezier(.2,.8,.2,1);filter:saturate(.88) contrast(.96)}
+.therapy-card:hover .therapy-card-image img{transform:scale(1.07)}
+.therapy-card-image>span{position:absolute;z-index:2;left:18px;top:18px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.88);color:#2d708f;font-size:10px;font-weight:800;box-shadow:0 8px 24px rgba(24,67,85,.16);backdrop-filter:blur(10px)}
+.therapy-card-body{position:relative;min-height:250px;padding:22px 24px 24px;display:flex;flex-direction:column}
+.therapy-card-body .therapy-card-top{position:absolute;right:20px;top:-24px}
+.home-page .therapy-card-top i,.home-page .therapy-card.featured .therapy-card-top i{width:46px;height:46px;background:rgba(255,255,255,.92);color:#2d708f;box-shadow:0 8px 24px rgba(25,68,87,.14)}
+.home-page .therapy-card h3{font-size:24px!important;line-height:1.15;margin:4px 58px 10px 0;color:#18384a}
+.home-page .therapy-card p,.home-page .therapy-card.featured p{font-size:15px;line-height:1.6;color:#526f81}
+.home-page .therapy-card button,.home-page .therapy-card.featured button{margin-top:auto;padding-top:20px;color:#246f8d;font-size:12px}
+
+.home-page .social-care{background:#f5eee5;color:#18384a;grid-template-columns:1fr 1fr}
+.home-page .social-visual{position:relative;min-height:720px;background:#dcecf1;overflow:hidden}
+.home-page .social-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(.96);animation:social-photo 14s ease-in-out infinite alternate}
+.home-page .social-visual:after{content:"";position:absolute;inset:0;width:auto;height:auto;border:0;border-radius:0;background:linear-gradient(180deg,transparent 42%,rgba(31,62,72,.46));box-shadow:none}
+.social-image-card{position:absolute;z-index:2;left:7%;right:7%;bottom:7%;padding:24px 27px;border:1px solid rgba(255,255,255,.7);border-radius:22px;background:rgba(255,250,244,.86);box-shadow:0 24px 70px rgba(45,70,77,.2);backdrop-filter:blur(17px)}
+.social-image-card span{font-size:9px;letter-spacing:.16em;color:#b36e4b;font-weight:800}
+.social-image-card strong{display:block;margin-top:8px;font:600 30px/1.16 "Plus Jakarta Sans",sans-serif;color:#244e5c;text-align:left}
+.home-page .social-copy{padding:90px 7vw;background:
+  radial-gradient(circle at 92% 10%,rgba(225,165,123,.25),transparent 28%),linear-gradient(145deg,#fffaf4,#f4eee6)}
+.home-page .social-copy .eyebrow.light{color:#b06b48}
+.home-page .social-copy h2{color:#183f50;font-size:clamp(48px,4.7vw,72px)}
+.home-page .social-copy>p:not(.eyebrow){color:#597181;font-size:17px;line-height:1.7}
+.home-page .social-facts{gap:10px}
+.home-page .social-facts>div{padding:17px 18px;border:1px solid rgba(220,190,168,.56);border-radius:16px;background:rgba(255,255,255,.62)}
+.home-page .social-facts span{color:#bd7450}.home-page .social-facts p{color:#5c7079;font-size:14px}.home-page .social-facts b{color:#234a59;font-size:15px}
+.home-page .button-sage{background:linear-gradient(135deg,#d98a5c,#b66b4d);color:#fff;box-shadow:0 14px 34px rgba(176,100,67,.22)}
+@keyframes social-photo{from{transform:scale(1.01)}to{transform:scale(1.075) translateX(-1%)}}
+
+/* Cada página do menu ganha uma atmosfera própria */
+.who-screen{background:radial-gradient(circle at 12% 18%,rgba(184,213,190,.4),transparent 34%),linear-gradient(145deg,#faf8f0,#edf5ee)}
+.therapy-screen{background:radial-gradient(circle at 10% 16%,rgba(210,188,224,.4),transparent 34%),linear-gradient(145deg,#fbf7fc,#f3eef7)}
+.therapy-screen .topics-panel{background:radial-gradient(circle at 84% 14%,rgba(232,180,145,.32),transparent 29%),linear-gradient(145deg,#fff8f3,#f1edf7)}
+.pro-screen{background:radial-gradient(circle at 12% 18%,rgba(231,184,144,.38),transparent 34%),linear-gradient(145deg,#fff9f1,#f5eee7)}
+.pro-screen .pro-panel{background:radial-gradient(circle at 20% 20%,rgba(195,220,203,.56),transparent 28%),radial-gradient(circle at 83% 78%,rgba(226,179,147,.32),transparent 31%),linear-gradient(145deg,#f4f7ef,#f8eee5)}
+
+@media(max-width:900px){
+  .home-page main>section.intro{grid-template-columns:1fr;padding:70px 24px;gap:28px}
+  .intro-media{height:500px}
+  .home-page .social-care{grid-template-columns:1fr}.home-page .social-visual{min-height:560px}.home-page .social-copy{padding:70px 24px}
+}
+@media(max-width:560px){
+  .home-page main>section.intro{padding:54px 18px}.intro-media{height:360px;border-radius:24px 70px 24px 24px}
+  .home-page .intro-copy{padding:26px 22px;border-radius:24px}.home-page .intro-copy h2{font-size:38px}.home-page .intro-copy>p:not(.eyebrow){font-size:16px}
+  .home-page .intro-pullquote{padding:18px}.home-page .intro-pullquote p{font-size:16px}
+  .home-page .therapy-card,.home-page .therapy-card.featured{min-height:410px}.therapy-card-image{height:190px}.therapy-card-body{min-height:220px}
+  .home-page .social-visual{min-height:430px}.social-image-card{left:16px;right:16px;bottom:16px;padding:20px}.social-image-card strong{font-size:24px}
+  .home-page .social-copy h2{font-size:42px}
+}
+@media(prefers-reduced-motion:reduce){.intro-media>img,.intro-media-note i,.home-page .social-visual>img{animation:none!important}}
