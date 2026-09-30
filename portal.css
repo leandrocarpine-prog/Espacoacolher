@@ -28,3 +28,30 @@
 .portal-nav{display:flex;align-items:center;gap:28px}.portal-nav a{font-size:13px;font-weight:700;text-decoration:none;color:#20384a}.portal-nav a.active{color:#2d708f}.portal-nav .portal-nav-cta{border-radius:999px;padding:11px 18px;background:linear-gradient(135deg,#2c6e8d,#4b91ad);color:#fff;display:flex;gap:10px;align-items:center;box-shadow:0 9px 25px rgba(45,112,143,.18)}.auth-v2{height:100vh;overflow:hidden}.auth-v2 .portal-header{height:82px;padding:0 max(3.5vw,26px)}.auth-v2 .auth-shell{height:calc(100vh - 82px);min-height:0;width:100%;max-width:none;margin:0;border:0;border-radius:0;box-shadow:none;grid-template-columns:50% 50%;grid-template-areas:"panel side"}.auth-v2 .auth-panel{grid-area:panel;padding:32px 7vw;background:radial-gradient(circle at 18% 20%,rgba(184,219,234,.3),transparent 38%),rgba(248,252,254,.78)}.auth-v2 .auth-side{grid-area:side;background-image:linear-gradient(0deg,rgba(37,85,108,.16),rgba(54,113,137,.04)),url('assets/hero-consultorio.png');background-size:cover;background-position:center;position:relative;padding:0}.auth-v2 .auth-side-content{position:absolute;left:7%;right:7%;bottom:7%;z-index:2;padding:25px 28px;border:1px solid rgba(255,255,255,.72);border-radius:22px;background:rgba(248,252,254,.78);box-shadow:0 25px 70px rgba(27,75,98,.18);backdrop-filter:blur(22px) saturate(140%);color:var(--ink)}.auth-v2 .auth-side .side-label{color:#4388a5}.auth-v2 .auth-side .side-label:before{background:#4388a5}.auth-v2 .auth-side h1{font-size:30px;line-height:1.1;margin:15px 0 9px;max-width:500px;color:var(--ink)}.auth-v2 .auth-side p{color:var(--muted);font-size:12px;margin:0}.auth-v2 .side-points{display:flex;flex-wrap:wrap;gap:7px;margin-top:17px}.auth-v2 .side-points span{background:rgba(219,237,245,.82);color:#396c82;border-radius:99px;padding:6px 9px;font-size:9px}.auth-v2 .auth-side blockquote,.auth-v2 .side-orbit{display:none}.auth-v2 .auth-form{max-width:620px}.auth-v2 .form-heading{margin-bottom:25px}.auth-v2 .form-heading h2{font-size:34px}.auth-v2 .form-symbol{margin-bottom:13px}.auth-v2 .auth-form>label,.auth-v2 .register-step>label,.auth-v2 .form-grid label,.auth-v2 .address-row label,.auth-v2 .cep-field label{margin:11px 0}.auth-v2 input,.auth-v2 select{height:46px}.auth-v2 .portal-button{height:48px}.auth-v2 .auth-switch{margin-top:19px;padding-top:16px}.auth-v2 .register-progress{margin-bottom:24px}.auth-v2 .step-heading{margin-bottom:17px}.auth-v2 .step-heading h2{font-size:29px;margin:7px 0}.auth-v2 .register-top{margin-bottom:18px}.auth-v2 .cep-field{padding:13px 16px;margin-bottom:11px}.auth-v2 .register-actions{margin-top:16px}.auth-v2 .password-rules{margin-bottom:4px}
 @media(max-width:1000px){.portal-nav{gap:16px}.portal-nav a{font-size:11px}.portal-nav .portal-nav-cta{padding:10px 14px}}
 @media(max-width:900px){.portal-nav{display:none}.auth-v2{height:auto;min-height:100vh;overflow:auto}.auth-v2 .auth-shell{height:auto;min-height:calc(100vh - 68px);display:block}.auth-v2 .auth-side{display:none}.auth-v2 .auth-panel{min-height:calc(100vh - 68px);padding:42px 24px}}
+
+/* Conta e cadastro sem fotografia, seguindo o mesmo sistema abstrato do site */
+html,body{max-width:100%;overflow-x:hidden}
+.auth-v2 .auth-side{background:
+  radial-gradient(circle at 68% 25%,rgba(255,255,255,.88) 0 5%,transparent 5.2%),
+  radial-gradient(circle at 55% 42%,transparent 0 25%,rgba(93,158,184,.28) 25.2% 25.5%,transparent 25.7%),
+  linear-gradient(145deg,#e7f3f8,#bddce8)!important}
+.auth-v2 .auth-side:before{content:"EA";position:absolute;left:50%;top:39%;transform:translate(-50%,-50%);font:700 clamp(140px,16vw,260px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.12em;color:rgba(45,112,143,.11)}
+.auth-v2 .auth-side:after{content:"";position:absolute;inset:8%;border:1px solid rgba(255,255,255,.76);border-radius:48% 52% 20px 48%;background:linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.03));box-shadow:0 35px 90px rgba(39,91,116,.12);backdrop-filter:blur(6px)}
+.auth-v2 .auth-side-content{z-index:2}
+
+@media(max-width:600px){
+  .auth-v2 .portal-header{padding:0 18px;width:100%}
+  .auth-v2 .portal-brand{min-width:0}.auth-v2 .portal-brand div{min-width:0}.auth-v2 .portal-brand b{white-space:nowrap;font-size:14px}
+  .auth-v2 .auth-shell,.auth-v2 .auth-panel,.auth-v2 .auth-form,.auth-v2 form,.auth-v2 .register-step{width:100%;max-width:100%;min-width:0}
+  .auth-v2 .auth-panel{padding:30px 20px 88px;overflow:hidden}
+  .auth-v2 .form-heading{text-align:left;margin-bottom:28px}
+  .auth-v2 .form-symbol{margin:0 0 18px}
+  .auth-v2 .form-heading h2,.auth-v2 .step-heading h2{overflow-wrap:anywhere}
+  .auth-v2 .form-heading>span,.auth-v2 .step-heading>span{display:block;max-width:100%}
+  .auth-v2 input,.auth-v2 select{min-width:0;max-width:100%;font-size:16px}
+  .auth-v2 .login-options{gap:14px;align-items:flex-start}
+  .auth-v2 .login-options .text-action{text-align:right;line-height:1.35}
+  .auth-v2 .register-top{gap:12px}.auth-v2 .register-top>span{font-size:9px;text-align:right;line-height:1.35}
+  .auth-v2 .register-actions{left:0;right:0;z-index:4;margin-left:-20px;margin-right:-20px;padding:22px 20px 8px}
+  .auth-v2 .password-rules{display:flex;flex-wrap:wrap;gap:7px}
+}
