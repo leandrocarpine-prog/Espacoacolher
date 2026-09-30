@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#123f39">
   <title>Área do usuário | Espaço Acolher</title>
-  <link rel="stylesheet" href="portal.css?v=10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css?v=28">
 </head>
 <body class="auth-page auth-v2">
   <header class="portal-header">
-    <a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Área do usuário</small></div></a>
-    <a href="index.html">← Voltar ao site</a>
+    <a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Psicologia e cuidado</small></div></a>
+    <nav class="portal-nav" aria-label="Navegação principal"><a href="quem-somos.html">Quem somos</a><a href="terapia.html">Terapia</a><a class="active" href="login.html">Conta do paciente</a><a href="profissionais.html">Para profissionais</a><a class="portal-nav-cta" href="login.html?cadastro=1&next=triagem.html">Comece o questionário <span>↗</span></a></nav>
   </header>
 
   <main class="auth-shell">
@@ -33,11 +36,11 @@
         <div class="login-options"><label class="remember"><input type="checkbox"><span>Lembrar de mim</span></label><button class="text-action" id="forgot" type="button">Esqueci minha senha</button></div>
         <button class="portal-button" type="submit">Entrar na minha área <span>→</span></button>
         <div class="auth-feedback" id="login-feedback" role="alert"></div>
-        <div class="auth-switch"><span>Primeiro acesso?</span><button data-tab="register" type="button">Criar minha conta</button></div>
+        <div class="auth-switch"><span>Primeiro acesso?</span><a data-tab="register" href="login.html?cadastro=1">Criar minha conta</a></div>
       </form>
 
       <form id="register-form" class="auth-form register-view hidden" novalidate>
-        <div class="register-top"><button class="back-login" data-tab="login" type="button">← Voltar</button><span>CADASTRO DO PACIENTE</span></div>
+        <div class="register-top"><a class="back-login" data-tab="login" href="login.html">← Voltar</a><span>CADASTRO DO PACIENTE</span></div>
         <div class="register-progress" aria-label="Progresso do cadastro">
           <div class="progress-line"><i id="register-progress-bar"></i></div>
           <div class="progress-labels"><span class="active" data-progress="0"><b>1</b>Identificação</span><span data-progress="1"><b>2</b>Endereço</span><span data-progress="2"><b>3</b>Acesso</span></div>
@@ -75,6 +78,6 @@
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=10"></script><script src="auth.js?v=10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="auth.js?v=20"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 const loginForm=document.querySelector('#login-form'),registerForm=document.querySelector('#register-form'),steps=[...document.querySelectorAll('.register-step')],progressLabels=[...document.querySelectorAll('[data-progress]')],nextButton=document.querySelector('#register-next'),backButton=document.querySelector('#register-back'),submitButton=document.querySelector('#register-submit'),progressBar=document.querySelector('#register-progress-bar');let currentStep=0;
 const feedback=(id,message,type='error')=>{const box=document.querySelector(id);box.textContent=message;box.className=`auth-feedback ${type}`};
 function showView(name){loginForm.classList.toggle('hidden',name!=='login');registerForm.classList.toggle('hidden',name!=='register');if(name==='register'){currentStep=0;updateStep();setTimeout(()=>registerForm.querySelector('input')?.focus(),250)}}
-document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>showView(button.dataset.tab)));
+document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();showView(button.dataset.tab)}));
 const params=new URLSearchParams(location.search);if(params.get('cadastro')==='1')showView('register');
 window.sb.auth.getSession().then(({data})=>{if(data.session)location.replace(params.get('next')||'usuario.html')});
 

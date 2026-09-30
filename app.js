@@ -1,9 +1,42 @@
-const menuButton=document.querySelector('.menu-button'),nav=document.querySelector('#main-nav'),form=document.querySelector('#triage-form'),fieldsets=[...form.querySelectorAll('fieldset')],nextButton=document.querySelector('#next-button'),backButton=document.querySelector('#back-button'),submitButton=document.querySelector('#submit-button'),errorBox=document.querySelector('#form-error'),progressBar=document.querySelector('#progress-bar'),stepKicker=document.querySelector('#step-kicker'),stepTitle=document.querySelector('#step-title'),percent=document.querySelector('#percent'),successPanel=document.querySelector('#success-panel');let currentStep=0,currentUser=null;
-menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));
-function updateStep(){fieldsets.forEach((field,index)=>field.classList.toggle('active',index===currentStep));const progress=Math.round((currentStep+1)/fieldsets.length*100);progressBar.style.width=`${progress}%`;stepKicker.textContent=`Etapa ${currentStep+1} de ${fieldsets.length}`;stepTitle.textContent=fieldsets[currentStep].dataset.title;percent.textContent=`${progress}%`;backButton.disabled=currentStep===0;nextButton.classList.toggle('hidden',currentStep===fieldsets.length-1);submitButton.classList.toggle('hidden',currentStep!==fieldsets.length-1);errorBox.textContent='';form.querySelectorAll('.invalid').forEach(element=>element.classList.remove('invalid'))}
-function validateStep(){const fields=[...fieldsets[currentStep].querySelectorAll('[required]')];let firstInvalid=null;const radioGroups=new Set();fields.forEach(field=>{if(field.type==='radio'){if(radioGroups.has(field.name))return;radioGroups.add(field.name);if(!fieldsets[currentStep].querySelector(`[name="${field.name}"]:checked`))firstInvalid||=field}else if(!field.checkValidity()){field.classList.add('invalid');firstInvalid||=field}});if(firstInvalid){errorBox.textContent=firstInvalid.type==='email'?'Informe um e-mail válido para continuar.':'Preencha os campos obrigatórios para continuar.';firstInvalid.focus();return false}return true}
-nextButton.addEventListener('click',()=>{if(!validateStep())return;currentStep++;updateStep();fieldsets[currentStep].scrollIntoView({behavior:'smooth',block:'center'})});backButton.addEventListener('click',()=>{if(currentStep===0)return;currentStep--;updateStep()});
-form.elements.whatsapp.addEventListener('input',event=>{const digits=event.target.value.replace(/\D/g,'').slice(0,11);let formatted=digits;if(digits.length>2)formatted=`(${digits.slice(0,2)}) ${digits.slice(2)}`;if(digits.length>7)formatted=`(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;event.target.value=formatted});form.elements.relato.addEventListener('input',event=>document.querySelector('#char-count').textContent=event.target.value.length);
-async function loadUser(){if(!window.sb)return;const {data:{user}}=await window.sb.auth.getUser();currentUser=user;if(location.hash==='#triagem'&&!user)return location.replace('login.html?cadastro=1&next=index.html%23triagem');if(user){const {data:profile}=await window.sb.from('profiles').select('full_name,phone').eq('id',user.id).single();form.elements.nome.value=profile?.full_name||'';form.elements.whatsapp.value=profile?.phone||'';form.elements.email.value=user.email||''}}
-form.addEventListener('submit',async event=>{event.preventDefault();if(!validateStep())return;if(!currentUser)return location.assign('login.html?cadastro=1&next=index.html%23triagem');submitButton.disabled=true;submitButton.textContent='Enviando…';const data=Object.fromEntries(new FormData(form)),birth=new Date(`${data.nascimento}T12:00:00`),today=new Date();let age=today.getFullYear()-birth.getFullYear();if(today<new Date(today.getFullYear(),birth.getMonth(),birth.getDate()))age--;const {error}=await window.sb.from('intake_requests').insert({user_id:currentUser.id,for_whom:data.paraQuem,age,city:data.cidade,reason:data.motivo,details:data.relato||null,modality:data.modalidade,preferred_period:data.periodo,preferred_days:data.dias,interest:data.interesse,desired_start:data.inicio});submitButton.disabled=false;submitButton.textContent='Enviar solicitação →';if(error){errorBox.textContent='Não foi possível enviar agora. Tente novamente.';return}form.classList.add('hidden');successPanel.classList.remove('hidden');successPanel.focus()});
-document.querySelector('#restart-button').addEventListener('click',()=>{form.reset();successPanel.classList.add('hidden');form.classList.remove('hidden');currentStep=0;updateStep();loadUser()});document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(!detail.open)return;document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false})}));document.querySelector('#year').textContent=new Date().getFullYear();updateStep();loadUser();
+const header=document.querySelector('.site-header');
+const menuButton=document.querySelector('.menu-button');
+const nav=document.querySelector('#main-nav');
+const dialog=document.querySelector('#start-dialog');
+const dialogContinue=document.querySelector('#dialog-continue');
+
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20),{passive:true});
+menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.classList.toggle('active',open);menuButton.setAttribute('aria-expanded',String(open))});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton.classList.remove('active');menuButton.setAttribute('aria-expanded','false')}));
+
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(item=>observer.observe(item));
+
+const needs={
+  ansiedade:{number:'01',kicker:'ANSIEDADE E SOBRECARGA',title:'Quando a mente não encontra pausa.',copy:'Preocupações constantes, crises, tensão, dificuldade para descansar ou a sensação de estar sempre no limite podem ser trabalhadas com cuidado e sem julgamentos.',items:['Ansiedade e medos','Estresse e esgotamento','Dificuldade para desacelerar']},
+  neuro:{number:'02',kicker:'NEURODIVERGÊNCIAS',title:'Compreender seu modo de estar no mundo.',copy:'Um espaço para elaborar vivências relacionadas a TDAH, autismo e outras formas de neurodivergência, considerando sua história para além de rótulos ou respostas prontas.',items:['Identidade e autocompreensão','Rotina e sobrecarga','Relações e pertencimento']},
+  relacoes:{number:'03',kicker:'RELACIONAMENTOS E VÍNCULOS',title:'Quando estar com o outro também dói.',copy:'Conflitos, padrões que se repetem, separações ou dificuldade para estabelecer limites podem ser compreendidos a partir da sua experiência e dos seus vínculos.',items:['Conflitos afetivos','Limites e comunicação','Família e vínculos']},
+  mudancas:{number:'04',kicker:'MUDANÇAS, PERDAS E RECOMEÇOS',title:'Dar lugar ao que mudou.',copy:'Lutos, separações, mudanças profissionais ou momentos de transição podem provocar desorientação. A psicoterapia oferece tempo e espaço para elaborar o vivido.',items:['Luto e perdas','Transições de vida','Crises e recomeços']},
+  autoconhecimento:{number:'05',kicker:'AUTOCONHECIMENTO',title:'Conhecer-se também é uma forma de cuidado.',copy:'Nem sempre é preciso esperar uma crise. A análise pode ajudar a reconhecer desejos, escolhas, repetições e novas possibilidades para a própria vida.',items:['Escolhas e desejos','Padrões de repetição','Projetos de vida']}
+};
+const needDetail=document.querySelector('#need-detail');
+document.querySelectorAll('.need-button').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('.need-button').forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-selected',String(active))});
+  const data=needs[button.dataset.need];
+  needDetail.classList.remove('content-change');void needDetail.offsetWidth;needDetail.classList.add('content-change');
+  needDetail.querySelector('.need-art b').textContent=data.number;needDetail.querySelector('.detail-kicker').textContent=data.kicker;needDetail.querySelector('h3').textContent=data.title;needDetail.querySelector('.detail-copy').textContent=data.copy;needDetail.querySelector('ul').innerHTML=data.items.map(item=>`<li>${item}</li>`).join('');
+}));
+
+function openDialog(){dialog.showModal();document.body.classList.add('dialog-open')}
+function closeDialog(){dialog.close();document.body.classList.remove('dialog-open')}
+document.querySelectorAll('[data-open-start]').forEach(button=>button.addEventListener('click',openDialog));
+document.querySelector('[data-close-dialog]').addEventListener('click',closeDialog);
+dialog.addEventListener('click',event=>{if(event.target===dialog)closeDialog()});
+dialog.addEventListener('close',()=>document.body.classList.remove('dialog-open'));
+document.querySelectorAll('[data-start-value]').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('[data-start-value]').forEach(item=>item.classList.toggle('selected',item===button));
+  const value=button.dataset.startValue;sessionStorage.setItem('espacoAcolherParaQuem',value);
+  dialogContinue.classList.remove('disabled');dialogContinue.href=`login.html?cadastro=1&next=${encodeURIComponent('triagem.html')}&para=${value}`;
+}));
+
+document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false})}));
+document.querySelector('#year').textContent=new Date().getFullYear();

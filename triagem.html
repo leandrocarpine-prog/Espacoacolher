@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0e3d36">
+  <title>Pré-triagem | Espaço Acolher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css?v=28">
+</head>
+<body class="intake-page">
+  <header class="portal-header"><a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Pré-triagem</small></div></a><div class="secure-label"><span>✓</span> Ambiente reservado</div></header>
+  <main class="intake-shell">
+    <aside class="intake-aside">
+      <a href="usuario.html">← Voltar para minha área</a>
+      <div><p>PRIMEIRO PASSO</p><h1>Conte apenas o necessário, no seu tempo.</h1><span>Estas perguntas ajudam a compreender sua procura e verificar as possibilidades de atendimento.</span></div>
+      <ol id="intake-steps"><li class="active"><b>1</b><span>Sobre você</span></li><li><b>2</b><span>O que está acontecendo</span></li><li><b>3</b><span>Um pouco mais</span></li><li><b>4</b><span>Preferências</span></li><li><b>5</b><span>Disponibilidade</span></li><li><b>6</b><span>Revisar e enviar</span></li></ol>
+      <small>Seus dados ficam vinculados à sua conta e não são publicados.</small>
+    </aside>
+    <section class="intake-card">
+      <div class="intake-mobile-progress"><span id="mobile-step">Etapa 1 de 6</span><div><i id="mobile-progress"></i></div></div>
+      <form id="intake-form" novalidate>
+        <section class="intake-step active" data-title="Sobre você">
+          <div class="intake-heading"><p>ETAPA 1 DE 6</p><h2>Para quem é o atendimento?</h2><span>Escolha a opção que melhor representa a sua procura.</span></div>
+          <div class="intake-choices cards-three">
+            <label><input required type="radio" name="for_whom" value="Para mim"><span><b>Para mim</b><small>Estou buscando atendimento para mim</small></span></label>
+            <label><input required type="radio" name="for_whom" value="Filho(a)"><span><b>Para meu filho ou filha</b><small>Sou responsável legal</small></span></label>
+            <label><input required type="radio" name="for_whom" value="Familiar"><span><b>Para uma pessoa próxima</b><small>Estou ajudando alguém</small></span></label>
+          </div>
+          <div class="intake-grid"><label>Data de nascimento de quem será atendido<input required type="date" name="birth_date" autocomplete="bday"></label><label>Cidade<input required name="city" autocomplete="address-level2" placeholder="Ex.: Rio Claro"></label></div>
+        </section>
+
+        <section class="intake-step" data-title="O que está acontecendo">
+          <div class="intake-heading"><p>ETAPA 2 DE 6</p><h2>O que mais se aproxima do seu momento?</h2><span>Não precisa ser uma definição exata. Escolha o principal motivo da procura.</span></div>
+          <div class="reason-grid">
+            <label><input required type="radio" name="reason" value="Ansiedade, medos ou crises"><span>Ansiedade, medos ou crises</span></label>
+            <label><input required type="radio" name="reason" value="Desânimo, tristeza ou depressão"><span>Desânimo ou tristeza</span></label>
+            <label><input required type="radio" name="reason" value="TDAH, autismo ou neurodivergência"><span>Neurodivergências</span></label>
+            <label><input required type="radio" name="reason" value="Relacionamentos e conflitos"><span>Relacionamentos e conflitos</span></label>
+            <label><input required type="radio" name="reason" value="Luto, perdas ou mudanças"><span>Luto, perdas ou mudanças</span></label>
+            <label><input required type="radio" name="reason" value="Autoconhecimento"><span>Autoconhecimento</span></label>
+            <label><input required type="radio" name="reason" value="Outro motivo"><span>Outro motivo</span></label>
+          </div>
+        </section>
+
+        <section class="intake-step" data-title="Um pouco mais">
+          <div class="intake-heading"><p>ETAPA 3 DE 6</p><h2>O que você gostaria que eu soubesse?</h2><span>Escreva somente o que se sentir confortável em compartilhar agora.</span></div>
+          <label class="story-field"><textarea name="details" maxlength="900" rows="9" placeholder="Você pode contar quando isso começou, como tem afetado sua rotina ou o que espera encontrar no atendimento..."></textarea><small><span id="details-count">0</span>/900</small></label>
+          <div class="gentle-note"><span>✦</span><p>Você não precisa contar toda a sua história neste formulário. Haverá tempo e espaço para isso no momento adequado.</p></div>
+        </section>
+
+        <section class="intake-step" data-title="Preferências">
+          <div class="intake-heading"><p>ETAPA 4 DE 6</p><h2>Como você prefere ser atendido?</h2><span>Escolha a modalidade e o período que fazem sentido para sua rotina.</span></div>
+          <p class="field-title">Modalidade</p>
+          <div class="intake-choices"><label><input required type="radio" name="modality" value="Presencial em Rio Claro"><span><b>Presencial</b><small>Em Rio Claro/SP</small></span></label><label><input required type="radio" name="modality" value="Online"><span><b>Online</b><small>Por videochamada</small></span></label><label><input required type="radio" name="modality" value="Sem preferência"><span><b>Sem preferência</b><small>Podemos conversar</small></span></label></div>
+          <p class="field-title">Melhor período</p>
+          <div class="intake-choices"><label><input required type="radio" name="preferred_period" value="Manhã"><span><b>Manhã</b></span></label><label><input required type="radio" name="preferred_period" value="Tarde"><span><b>Tarde</b></span></label><label><input required type="radio" name="preferred_period" value="Noite"><span><b>Noite</b></span></label><label><input required type="radio" name="preferred_period" value="Flexível"><span><b>Flexível</b></span></label></div>
+        </section>
+
+        <section class="intake-step" data-title="Disponibilidade">
+          <div class="intake-heading"><p>ETAPA 5 DE 6</p><h2>Vamos alinhar as possibilidades.</h2><span>Isso ajuda a avaliar a disponibilidade de forma mais precisa.</span></div>
+          <label>Dias e horários possíveis<input required name="preferred_days" placeholder="Ex.: segunda e quarta depois das 18h"></label>
+          <div class="intake-grid"><label>Condição de atendimento<select required name="interest"><option value="">Selecione</option><option>Atendimento com valor social</option><option>Atendimento particular</option><option>Quero conhecer todas as possibilidades</option></select></label><label>Quando pretende começar?<select required name="desired_start"><option value="">Selecione</option><option>O quanto antes</option><option>Nas próximas semanas</option><option>Ainda estou pesquisando</option></select></label></div>
+        </section>
+
+        <section class="intake-step" data-title="Revisar e enviar">
+          <div class="intake-heading"><p>ETAPA 6 DE 6</p><h2>Está tudo certo para enviar?</h2><span>Você poderá acompanhar o andamento na sua área do usuário.</span></div>
+          <div class="review-box" id="review-box"></div>
+          <label class="intake-consent"><input required type="checkbox" name="consent"><span>Autorizo o uso destas informações exclusivamente para análise da solicitação e contato sobre o atendimento. Li a <a href="politica.html" target="_blank">Política de Privacidade</a>.</span></label>
+          <div class="important-note"><b>Importante</b><p>O envio não garante vaga e não estabelece vínculo terapêutico. Este formulário não é um canal de emergência.</p></div>
+        </section>
+        <div class="intake-feedback" id="intake-feedback" role="alert"></div>
+        <div class="intake-actions"><button class="intake-back hidden" id="intake-back" type="button">← Voltar</button><button class="intake-next" id="intake-next" type="button">Continuar <span>→</span></button><button class="intake-next hidden" id="intake-submit" type="submit">Enviar solicitação <span>→</span></button></div>
+      </form>
+      <div class="intake-success hidden" id="intake-success"><span>✓</span><p>SOLICITAÇÃO RECEBIDA</p><h2>Obrigado por confiar este primeiro passo.</h2><div>Sua solicitação já está na sua área. Ela será analisada e você poderá acompanhar o andamento por lá.</div><a class="intake-next" href="usuario.html">Acompanhar solicitação <span>→</span></a></div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="triagem.js?v=20"></script>
+</body>
+</html>
