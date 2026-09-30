@@ -1,6 +1,80 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123f39"><title>Área do usuário | Espaço Acolher</title><link rel="stylesheet" href="portal.css?v=9"></head><body class="auth-page">
-<header class="portal-header"><a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Área do usuário</small></div></a><a href="index.html">← Voltar ao site</a></header>
-<main class="auth-layout"><section class="auth-message"><span class="aside-mark">EA</span><p class="kicker">ESPAÇO ACOLHER</p><h1>Um acesso simples para começar seu cuidado.</h1><p>Crie sua conta, envie a solicitação e acompanhe o retorno em um só lugar.</p><ul><li>Atendimento com Leandro Carpine</li><li>Presencial em Rio Claro ou online</li><li>Dados protegidos e acesso individual</li></ul><div class="aside-support"><small>DÚVIDAS?</small><a href="https://wa.me/5519989477456">Fale pelo WhatsApp</a></div></section><section class="auth-card">
-<form id="login-form"><h2>Entrar na sua conta</h2><p>Acesse sua área para acompanhar as solicitações.</p><label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="voce@email.com"></label><label>Senha<input required type="password" name="password" autocomplete="current-password" placeholder="Digite sua senha"></label><button class="portal-button" type="submit">Entrar →</button><button class="text-action" id="forgot" type="button">Esqueci minha senha</button><div class="auth-feedback" id="login-feedback" role="alert"></div><div class="auth-switch"><span>Ainda não tem uma conta?</span><button data-tab="register" type="button">Cadastrar</button></div></form>
-<form id="register-form" class="hidden"><button class="back-login" data-tab="login" type="button">← Voltar para entrar</button><h2>Cadastro do paciente</h2><p>Preencha seus dados para criar uma conta segura.</p><label>Nome completo<input required name="full_name" autocomplete="name" placeholder="Nome e sobrenome"></label><div class="password-grid"><label>RG<input required name="rg" inputmode="numeric" placeholder="Digite seu RG"></label><label>Celular com WhatsApp<input required name="phone" autocomplete="tel" inputmode="tel" placeholder="(19) 99999-9999"></label></div><div class="address-block"><div class="cep-row"><label>CEP<input required name="cep" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label><span id="cep-status" aria-live="polite"></span></div><label>Logradouro<input required name="street" autocomplete="address-line1" placeholder="Rua ou avenida"></label><div class="address-grid"><label>Número<input required name="number" inputmode="numeric" placeholder="Nº"></label><label>Complemento <small>(opcional)</small><input name="complement" autocomplete="address-line2" placeholder="Apto, bloco..."></label><label>Bairro<input required name="neighborhood" placeholder="Bairro"></label></div><div class="password-grid"><label>Cidade<input required name="city" list="cities-sp" autocomplete="address-level2" placeholder="Cidade"></label><label>Estado<select required name="state" autocomplete="address-level1"><option value="SP" selected>São Paulo</option><option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option><option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PR">Paraná</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option><option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option></select></label></div><datalist id="cities-sp"><option value="Rio Claro"><option value="Santa Gertrudes"><option value="Cordeirópolis"><option value="Limeira"><option value="Araras"><option value="Piracicaba"><option value="São Carlos"><option value="Campinas"></datalist></div><label>Rede social <small>(opcional)</small><input name="social" placeholder="Ex.: @seuusuario"></label><label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="voce@email.com"></label><div class="password-grid"><label>Crie uma senha<input required type="password" name="password" minlength="8" autocomplete="new-password" placeholder="Mínimo de 8 caracteres"></label><label>Repita a senha<input required type="password" name="password_confirmation" minlength="8" autocomplete="new-password" placeholder="Digite novamente"></label></div><label class="portal-consent"><input required type="checkbox" name="privacy"><span>Li e aceito a <a href="politica.html" target="_blank">Política de Privacidade</a> e os Termos de Uso.</span></label><button class="portal-button" type="submit">Criar minha conta →</button><div class="auth-feedback" id="register-feedback" role="alert"></div></form>
-</section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=9"></script><script src="auth.js?v=9"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#123f39">
+  <title>Área do usuário | Espaço Acolher</title>
+  <link rel="stylesheet" href="portal.css?v=10">
+</head>
+<body class="auth-page auth-v2">
+  <header class="portal-header">
+    <a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Área do usuário</small></div></a>
+    <a href="index.html">← Voltar ao site</a>
+  </header>
+
+  <main class="auth-shell">
+    <section class="auth-side" aria-label="Apresentação">
+      <div class="side-orbit orbit-one"></div><div class="side-orbit orbit-two"></div>
+      <div class="auth-side-content">
+        <span class="side-label">ESPAÇO ACOLHER</span>
+        <h1>Seu cuidado começa com um primeiro passo.</h1>
+        <p>Um ambiente reservado para solicitar atendimento e acompanhar cada etapa com clareza.</p>
+        <div class="side-points"><span>✓ Dados protegidos</span><span>✓ Atendimento individual</span><span>✓ Acompanhamento online</span></div>
+      </div>
+      <blockquote>“Um espaço de escuta, cuidado e respeito à sua história.”</blockquote>
+    </section>
+
+    <section class="auth-panel">
+      <form id="login-form" class="auth-form login-view">
+        <div class="form-heading"><span class="form-symbol">✦</span><p>ÁREA DO USUÁRIO</p><h2>Entre na sua conta</h2><span>Acesse suas solicitações e acompanhe os próximos passos.</span></div>
+        <label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="voce@email.com"></label>
+        <label>Senha<input required type="password" name="password" autocomplete="current-password" placeholder="Digite sua senha"></label>
+        <div class="login-options"><label class="remember"><input type="checkbox"><span>Lembrar de mim</span></label><button class="text-action" id="forgot" type="button">Esqueci minha senha</button></div>
+        <button class="portal-button" type="submit">Entrar na minha área <span>→</span></button>
+        <div class="auth-feedback" id="login-feedback" role="alert"></div>
+        <div class="auth-switch"><span>Primeiro acesso?</span><button data-tab="register" type="button">Criar minha conta</button></div>
+      </form>
+
+      <form id="register-form" class="auth-form register-view hidden" novalidate>
+        <div class="register-top"><button class="back-login" data-tab="login" type="button">← Voltar</button><span>CADASTRO DO PACIENTE</span></div>
+        <div class="register-progress" aria-label="Progresso do cadastro">
+          <div class="progress-line"><i id="register-progress-bar"></i></div>
+          <div class="progress-labels"><span class="active" data-progress="0"><b>1</b>Identificação</span><span data-progress="1"><b>2</b>Endereço</span><span data-progress="2"><b>3</b>Acesso</span></div>
+        </div>
+
+        <section class="register-step active" data-step="0">
+          <div class="step-heading"><p>ETAPA 1 DE 3</p><h2>Vamos começar por você.</h2><span>Informe seus dados de identificação e contato.</span></div>
+          <label>Nome completo<input required name="full_name" autocomplete="name" placeholder="Nome e sobrenome"></label>
+          <div class="form-grid"><label>CPF<input required name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00"></label><label>Celular com WhatsApp<input required name="phone" autocomplete="tel" inputmode="tel" placeholder="(19) 99999-9999"></label></div>
+        </section>
+
+        <section class="register-step" data-step="1">
+          <div class="step-heading"><p>ETAPA 2 DE 3</p><h2>Onde você está?</h2><span>Digite o CEP e nós preenchemos o endereço.</span></div>
+          <div class="cep-field"><label>CEP<input required name="cep" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label><span id="cep-status" aria-live="polite">O endereço será preenchido automaticamente.</span></div>
+          <label>Rua ou avenida<input required name="street" autocomplete="address-line1" placeholder="Logradouro"></label>
+          <div class="address-row"><label>Número<input required name="number" placeholder="Nº"></label><label>Complemento <small>(opcional)</small><input name="complement" autocomplete="address-line2" placeholder="Apto, bloco..."></label></div>
+          <div class="form-grid"><label>Bairro<input required name="neighborhood" placeholder="Bairro"></label><label>Cidade<input required name="city" list="cities-sp" autocomplete="address-level2" placeholder="Cidade"></label></div>
+          <label>Estado<select required name="state" autocomplete="address-level1"><option value="SP" selected>São Paulo</option><option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option><option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PR">Paraná</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option><option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option></select></label>
+          <datalist id="cities-sp"><option value="Rio Claro"><option value="Santa Gertrudes"><option value="Cordeirópolis"><option value="Limeira"><option value="Araras"><option value="Piracicaba"><option value="São Carlos"><option value="Campinas"></datalist>
+        </section>
+
+        <section class="register-step" data-step="2">
+          <div class="step-heading"><p>ETAPA 3 DE 3</p><h2>Crie seu acesso.</h2><span>Seu e-mail será usado para confirmar e recuperar a conta.</span></div>
+          <label>Nome de usuário<input required name="username" autocomplete="username" minlength="3" maxlength="24" pattern="[a-z0-9._-]+" placeholder="Ex.: joao.silva"><small>Letras minúsculas, números, ponto, hífen ou sublinhado.</small></label>
+          <label>E-mail válido<input required type="email" name="email" autocomplete="email" placeholder="voce@email.com"></label>
+          <label>Rede social <small>(opcional)</small><input name="social" placeholder="Ex.: @seuusuario"></label>
+          <div class="form-grid password-fields"><label>Crie uma senha<input required type="password" name="password" autocomplete="new-password" placeholder="Senha forte"></label><label>Repita a senha<input required type="password" name="password_confirmation" autocomplete="new-password" placeholder="Digite novamente"></label></div>
+          <div class="password-rules" id="password-rules"><span data-rule="length">8+ caracteres</span><span data-rule="upper">Maiúscula</span><span data-rule="lower">Minúscula</span><span data-rule="number">Número</span><span data-rule="symbol">Símbolo</span></div>
+          <label class="portal-consent"><input required type="checkbox" name="privacy"><span>Li e aceito a <a href="politica.html" target="_blank">Política de Privacidade</a> e os Termos de Uso.</span></label>
+        </section>
+
+        <div class="auth-feedback" id="register-feedback" role="alert"></div>
+        <div class="register-actions"><button id="register-back" class="step-back hidden" type="button">← Voltar</button><button id="register-next" class="portal-button" type="button">Continuar <span>→</span></button><button id="register-submit" class="portal-button hidden" type="submit">Criar minha conta <span>→</span></button></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=10"></script><script src="auth.js?v=10"></script>
+</body>
+</html>
