@@ -1,0 +1,3 @@
+window.SUPABASE_URL='https://lunnyaxxkineezrsclbx.supabase.co';
+window.SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1bm55YXh4a2luZWV6cnNjbGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3MTk3NzcsImV4cCI6MjEwNjI5NTc3N30.lrw6PNr2wnejJttIKGef5__v-pyKPNJI0gRXgLUyfxA';
+window.sb=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
