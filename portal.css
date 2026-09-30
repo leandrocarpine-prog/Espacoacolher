@@ -70,13 +70,14 @@ html,body{max-width:100%;overflow-x:hidden}
 
 /* A imagem comunica psicoterapia; o formulario continua sendo o foco */
 .auth-context-thumb{display:none}
-.auth-v2 .auth-side{background-image:linear-gradient(0deg,rgba(30,75,96,.18),rgba(255,255,255,.02)),url('assets/hero-terapia-v2.webp')!important;background-size:cover!important;background-position:center 58%!important}
+.auth-v2 .auth-side{background-image:linear-gradient(0deg,rgba(30,75,96,.14),rgba(255,255,255,.01)),url('assets/cadastro-acolhedor.webp')!important;background-size:cover!important;background-position:center!important}
 .auth-v2 .auth-side:before{display:none}
+.auth-v2 .auth-side:after{display:none!important}
 @media(max-width:600px){
   .auth-v2 .form-heading{display:grid;grid-template-columns:minmax(0,1fr) 92px;column-gap:14px;align-items:start}
   .auth-v2 .form-heading .form-symbol,.auth-v2 .form-heading p,.auth-v2 .form-heading h2,.auth-v2 .form-heading>span{grid-column:1}
   .auth-v2 .form-heading h2{font-size:29px;line-height:1.05}
-  .auth-v2 .auth-context-thumb{display:block;grid-column:2;grid-row:1/6;width:92px;height:122px;border-radius:18px;background:linear-gradient(0deg,rgba(36,86,108,.12),transparent),url('assets/hero-terapia-v2.webp') center/cover;box-shadow:0 15px 34px rgba(42,96,121,.16)}
+  .auth-v2 .auth-context-thumb{display:block;grid-column:2;grid-row:1/6;width:92px;height:122px;border-radius:18px;background:linear-gradient(0deg,rgba(36,86,108,.12),transparent),url('assets/cadastro-acolhedor.webp') center/cover;box-shadow:0 15px 34px rgba(42,96,121,.16)}
 }
 
 /* Transicoes e movimento do portal, preservando leveza e acessibilidade */
@@ -91,3 +92,64 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 @keyframes portal-orbit{from{border-radius:48% 52% 20px 48%;transform:scale(1)}to{border-radius:56% 44% 48% 20px;transform:scale(1.035)}}
 @keyframes portal-enter{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){body,.auth-form,.auth-v2 .auth-side:before,.auth-v2 .auth-side:after{animation:none!important;transition:none!important}}
+
+/* v36 — identidade única com visuais diferentes para cada contexto */
+.portal-header{height:82px;padding:0 max(3.5vw,26px);font-family:"Manrope",system-ui,sans-serif}
+.portal-brand b{font-family:"Plus Jakarta Sans",sans-serif;letter-spacing:-.02em}
+.portal-brand small{color:#6d8494}
+.auth-v2 .auth-panel{position:relative;overflow:hidden}
+.auth-v2 .auth-form{position:relative;z-index:1}
+.auth-v2 .auth-side-content{
+  left:6%;right:6%;bottom:6%;
+  background:rgba(248,252,254,.9);
+  border-color:rgba(255,255,255,.86);
+  backdrop-filter:blur(14px) saturate(130%);
+}
+.auth-v2 .auth-side h1{max-width:560px}
+.auth-v2 .auth-side p{max-width:570px;line-height:1.5}
+.auth-v2 .auth-panel:before{
+  content:"";position:absolute;width:260px;height:260px;left:-150px;top:18%;
+  border:1px solid rgba(76,145,173,.18);border-radius:50%;pointer-events:none;
+  animation:portal-drift 9s ease-in-out infinite alternate;
+}
+.intake-aside{position:relative;overflow:hidden}
+.intake-aside:after{
+  content:"";position:absolute;width:250px;height:250px;right:-155px;top:12%;
+  border:1px solid rgba(255,255,255,.16);border-radius:46% 54% 58% 42%;
+  pointer-events:none;animation:portal-drift 10s ease-in-out infinite alternate-reverse;
+}
+.intake-aside>*{position:relative;z-index:1}
+.user-sidebar{overflow:hidden}
+.user-sidebar:after{
+  content:"";position:absolute;width:220px;height:220px;left:-130px;bottom:12%;
+  border:1px solid rgba(255,255,255,.12);border-radius:50%;pointer-events:none;
+}
+.user-sidebar>*{position:relative;z-index:1}
+.policy-page{
+  min-height:100vh;font-family:"Manrope",system-ui,sans-serif;color:#172f42;
+  background:radial-gradient(circle at 88% 8%,rgba(177,216,233,.42),transparent 30%),linear-gradient(145deg,#f8fcfd,#edf5f9);
+}
+.policy-page main{
+  width:min(900px,calc(100% - 36px));margin:38px auto 70px;padding:clamp(28px,5vw,58px);
+  border:1px solid rgba(190,216,227,.78);border-radius:26px;background:rgba(255,255,255,.78);
+  box-shadow:0 28px 85px rgba(39,92,118,.12);backdrop-filter:blur(18px);
+}
+.policy-page .kicker{font-size:10px;letter-spacing:.17em;font-weight:800;color:#4388a5}
+.policy-page h1,.policy-page h2{font-family:"Plus Jakarta Sans",sans-serif;letter-spacing:-.04em}
+.policy-page h1{font-size:clamp(38px,6vw,64px);line-height:1;margin:12px 0 28px}
+.policy-page h2{font-size:18px;margin:28px 0 8px}
+.policy-page p{color:#607789;line-height:1.7}
+.policy-page .policy-alert{padding:18px 20px;border:1px solid #cfe2eb;border-radius:16px;background:#edf6fa;color:#365d70}
+@keyframes portal-drift{from{transform:translate3d(0,0,0) rotate(0)}to{transform:translate3d(18px,-14px,0) rotate(8deg)}}
+@media(max-width:900px){.portal-header{height:68px;padding:0 18px}.auth-v2 .auth-panel:before{display:none}}
+@media(max-width:900px){
+  .auth-v2 .register-view .register-top{
+    min-height:70px;padding:14px 16px;border:1px solid rgba(190,216,227,.76);border-radius:18px;
+    background:
+      linear-gradient(90deg,rgba(249,252,254,.98) 0 58%,rgba(249,252,254,.18) 82%),
+      url('assets/cadastro-acolhedor.webp') right 48%/48% auto no-repeat;
+    box-shadow:0 12px 32px rgba(40,94,121,.08);
+  }
+  .auth-v2 .register-view .register-top>span{padding:6px 8px;border-radius:999px;background:rgba(249,252,254,.82);backdrop-filter:blur(8px)}
+}
+@media(prefers-reduced-motion:reduce){.auth-v2 .auth-panel:before,.intake-aside:after{animation:none!important}}

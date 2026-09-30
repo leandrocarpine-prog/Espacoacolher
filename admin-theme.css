@@ -1,0 +1,81 @@
+:root {
+  --g: #2d708f;
+  --g2: #478da8;
+  --ink: #172f42;
+  --muted: #607789;
+  --bg: #f3f8fb;
+  --line: #d7e6ed;
+  --white: #fff;
+  --pale: #e4f1f6;
+  --red: #b34848;
+}
+
+body {
+  font-family: "Manrope", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(177, 216, 233, .28), transparent 28%),
+    linear-gradient(145deg, #f8fcfd, #edf5f9);
+}
+
+h1, h2, h3, .logo b {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  letter-spacing: -.035em;
+}
+
+.sidebar {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(202, 233, 244, .14), transparent 25%),
+    linear-gradient(175deg, #235f7b, #3c86a1);
+}
+
+.logo > span {
+  background: linear-gradient(145deg, #f8fcfd, #dcecf3);
+  color: #2d708f;
+  box-shadow: 0 10px 24px rgba(15, 53, 72, .18);
+}
+
+.logo small, .user small { color: #c4dce7; }
+.sidebar nav button { color: #c6dce6; }
+.sidebar nav button:hover, .sidebar nav button.active { background: rgba(255, 255, 255, .16); }
+.sidebar nav em { background: rgba(255, 255, 255, .17); }
+.sidebar-note { background: rgba(255, 255, 255, .09); border-color: rgba(255, 255, 255, .14); }
+.sidebar-note p { color: #c3dae4; }
+.user > span { background: #e4f1f6; color: #2d708f; }
+
+.welcome {
+  background:
+    radial-gradient(circle at 82% 16%, rgba(211, 237, 246, .18), transparent 32%),
+    linear-gradient(120deg, #286984, #4a94ad);
+}
+
+.welcome p, .welcome span { color: #d7eaf2; }
+.primary {
+  background: linear-gradient(135deg, #2c6e8d, #4b91ad);
+  box-shadow: 0 10px 24px rgba(44, 110, 141, .16);
+}
+.primary:hover { background: linear-gradient(135deg, #245e79, #3c829d); }
+
+.panel, .metric-grid article, .calendar-card {
+  background: rgba(255, 255, 255, .78);
+  border-color: #d5e5ec;
+  backdrop-filter: blur(14px);
+}
+
+.metric-grid i.green, .avatar, .status-pill { background: #e0eef4; color: #2d708f; }
+.kanban-column { background: #e8f2f6; }
+.bar i { background: linear-gradient(90deg, #2d708f, #66a7bf); }
+.toast { background: #245f7b; }
+dialog { font-family: "Manrope", system-ui, sans-serif; }
+dialog::backdrop { background: rgba(23, 47, 66, .48); }
+
+button, a, input, select, .metric-grid article, .panel {
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.primary:hover, .metric-grid article:hover, .panel:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  button, a, input, select, .metric-grid article, .panel {
+    transition: none !important;
+    transform: none !important;
+  }
+}
