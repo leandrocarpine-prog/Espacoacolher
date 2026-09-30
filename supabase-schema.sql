@@ -10,6 +10,7 @@ create type public.request_status as enum (
 create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text not null,
+  username text unique,
   rg text,
   address text,
   city text,
@@ -70,10 +71,11 @@ language plpgsql
 security definer set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, full_name, rg, address, city, phone, social, privacy_accepted_at)
+  insert into public.profiles (id, full_name, username, rg, address, city, phone, social, privacy_accepted_at)
   values (
     new.id,
     coalesce(new.raw_user_meta_data ->> 'full_name', ''),
+    new.raw_user_meta_data ->> 'username',
     new.raw_user_meta_data ->> 'rg',
     new.raw_user_meta_data ->> 'address',
     new.raw_user_meta_data ->> 'city',

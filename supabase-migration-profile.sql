@@ -1,4 +1,5 @@
 alter table public.profiles
+  add column if not exists username text,
   add column if not exists rg text,
   add column if not exists address text,
   add column if not exists city text,
@@ -13,10 +14,11 @@ language plpgsql
 security definer set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, full_name, rg, address, city, phone, social, privacy_accepted_at)
+  insert into public.profiles (id, full_name, username, rg, address, city, phone, social, privacy_accepted_at)
   values (
     new.id,
     coalesce(new.raw_user_meta_data ->> 'full_name', ''),
+    new.raw_user_meta_data ->> 'username',
     new.raw_user_meta_data ->> 'rg',
     new.raw_user_meta_data ->> 'address',
     new.raw_user_meta_data ->> 'city',
@@ -27,3 +29,5 @@ begin
   return new;
 end;
 $$;
+
+create unique index if not exists profiles_username_key on public.profiles (lower(username));
