@@ -40,3 +40,15 @@ document.querySelectorAll('[data-start-value]').forEach(button=>button.addEventL
 
 document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false})}));
 document.querySelector('#year').textContent=new Date().getFullYear();
+
+// Movimento sutil: responde ao cursor sem interferir com toque ou acessibilidade.
+const finePointer=matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+const hero=document.querySelector('.hero');
+const heroArt=document.querySelector('.hero-image');
+if(finePointer&&hero&&heroArt){
+  hero.addEventListener('pointermove',event=>{const box=hero.getBoundingClientRect(),x=(event.clientX-box.left)/box.width-.5,y=(event.clientY-box.top)/box.height-.5;heroArt.style.setProperty('--mx',`${x*22}px`);heroArt.style.setProperty('--my',`${y*18}px`);heroArt.style.setProperty('--mx-soft',`${x*-12}px`);heroArt.style.setProperty('--my-soft',`${y*-10}px`)},{passive:true});
+  hero.addEventListener('pointerleave',()=>['--mx','--my','--mx-soft','--my-soft'].forEach(name=>heroArt.style.setProperty(name,'0px')));
+}
+document.querySelectorAll('.button,.nav-cta').forEach(button=>button.addEventListener('pointermove',event=>{const box=button.getBoundingClientRect();button.style.setProperty('--pointer-x',`${event.clientX-box.left}px`);button.style.setProperty('--pointer-y',`${event.clientY-box.top}px`)}));
+document.querySelectorAll('.therapy-card').forEach(card=>{if(!finePointer)return;card.addEventListener('pointermove',event=>{const box=card.getBoundingClientRect(),x=(event.clientX-box.left)/box.width-.5,y=(event.clientY-box.top)/box.height-.5;card.style.setProperty('--rx',`${y*-3}deg`);card.style.setProperty('--ry',`${x*4}deg`)});card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')})});
+document.querySelectorAll('a[href]').forEach(link=>link.addEventListener('click',event=>{const url=new URL(link.href,location.href);if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||link.target==='_blank'||url.origin!==location.origin||url.hash&&url.pathname===location.pathname)return;event.preventDefault();document.body.classList.add('page-leaving');setTimeout(()=>location.href=url.href,190)}));

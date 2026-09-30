@@ -55,3 +55,16 @@ html,body{max-width:100%;overflow-x:hidden}
   .auth-v2 .register-actions{left:0;right:0;z-index:4;margin-left:-20px;margin-right:-20px;padding:22px 20px 8px}
   .auth-v2 .password-rules{display:flex;flex-wrap:wrap;gap:7px}
 }
+
+/* Transicoes e movimento do portal, preservando leveza e acessibilidade */
+body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;filter:blur(4px)}
+.auth-v2 .auth-side{--mx:0px;--my:0px}
+.auth-v2 .auth-side:before{transform:translate(calc(-50% + var(--mx)),calc(-50% + var(--my)));transition:transform .75s cubic-bezier(.2,.8,.2,1)}
+.auth-v2 .auth-side:after{animation:portal-orbit 10s ease-in-out infinite alternate}
+.auth-v2 .portal-button,.portal-nav-cta{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease}
+.auth-v2 input:focus-visible,.auth-v2 select:focus-visible,.auth-v2 button:focus-visible,.auth-v2 a:focus-visible{outline:3px solid rgba(45,112,143,.22);outline-offset:3px}
+.auth-v2 .portal-button:hover,.portal-nav-cta:hover{transform:translateY(-2px);box-shadow:0 17px 38px rgba(44,110,141,.25)}
+.auth-form{animation:portal-enter .55s ease both}.register-step.active{animation:stepIn .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes portal-orbit{from{border-radius:48% 52% 20px 48%;transform:scale(1)}to{border-radius:56% 44% 48% 20px;transform:scale(1.035)}}
+@keyframes portal-enter{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){body,.auth-form,.auth-v2 .auth-side:before,.auth-v2 .auth-side:after{animation:none!important;transition:none!important}}
