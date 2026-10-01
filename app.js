@@ -17,6 +17,20 @@ nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.c
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.03,rootMargin:'0px 0px 12% 0px'});
 document.querySelectorAll('.reveal').forEach(item=>observer.observe(item));
 
+// A atmosfera da navegação acompanha cada parte da página.
+const paletteSections=[...document.querySelectorAll('[data-palette]')];
+if(paletteSections.length){
+  const paletteObserver=new IntersectionObserver(entries=>{
+    const current=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(current){
+      const palette=current.target.dataset.palette;
+      document.body.dataset.palette=palette;
+      header.dataset.palette=palette;
+    }
+  },{threshold:[.22,.45,.68],rootMargin:'-18% 0px -42% 0px'});
+  paletteSections.forEach(section=>paletteObserver.observe(section));
+}
+
 const needs={
   ansiedade:{number:'01',kicker:'ANSIEDADE E SOBRECARGA',title:'Quando a mente não encontra pausa.',copy:'Preocupações constantes, crises, tensão, dificuldade para descansar ou a sensação de estar sempre no limite podem ser trabalhadas com cuidado e sem julgamentos.',items:['Ansiedade e medos','Estresse e esgotamento','Dificuldade para desacelerar']},
   neuro:{number:'02',kicker:'NEURODIVERGÊNCIAS',title:'Compreender seu modo de estar no mundo.',copy:'Um espaço para elaborar vivências relacionadas a TDAH, autismo e outras formas de neurodivergência, considerando sua história para além de rótulos ou respostas prontas.',items:['Identidade e autocompreensão','Rotina e sobrecarga','Relações e pertencimento']},

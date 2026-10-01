@@ -293,6 +293,36 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 @media(max-width:1000px){.professional-entry{grid-template-columns:1fr;padding-top:115px}.professional-entry-actions{grid-template-columns:1fr 1fr}.professional-option{grid-template-columns:45px 1fr}.professional-option h2{font-size:23px}}
 @media(max-width:720px){.professional-entry{padding:102px 18px 45px;gap:36px}.professional-entry-copy h1{font-size:42px}.professional-entry-copy>p:not(.eyebrow){font-size:15px}.professional-entry-actions{grid-template-columns:1fr}.professional-option{min-height:230px;padding:24px 21px;border-radius:22px}.professional-option>b{grid-column:1/-1}}
 
+/* v44 — cada trecho da página tem atmosfera própria durante a rolagem */
+.home-page,.home-page .site-header,.home-page main>section{transition:background-color .55s ease,background .55s ease,border-color .55s ease}
+.home-page .intro{background:
+  radial-gradient(circle at 9% 18%,rgba(238,194,157,.22),transparent 28%),
+  linear-gradient(145deg,#fffaf4,#f7efe5)}
+.home-page .needs{background:
+  radial-gradient(circle at 91% 8%,rgba(119,189,218,.23),transparent 30%),
+  linear-gradient(145deg,#f5fbfd,#e7f3f8)}
+.home-page .process{background:
+  radial-gradient(circle at 12% 88%,rgba(143,190,165,.24),transparent 29%),
+  linear-gradient(145deg,#f5faf6,#e6f2e9)}
+.home-page .professional{background:
+  radial-gradient(circle at 88% 22%,rgba(179,157,203,.22),transparent 28%),
+  linear-gradient(145deg,#faf8fc,#f0ebf5)}
+.home-page .portal-preview{background:
+  radial-gradient(circle at 12% 17%,rgba(90,170,197,.22),transparent 28%),
+  linear-gradient(145deg,#f1f9fb,#e4f1f5)}
+.home-page .faq{background:
+  radial-gradient(circle at 84% 78%,rgba(235,177,137,.2),transparent 28%),
+  linear-gradient(145deg,#fffaf5,#f7eee6)}
+.home-page[data-palette="warm"] .site-header{background:rgba(255,249,242,.93);border-color:#eadfd2}
+.home-page[data-palette="blue"] .site-header{background:rgba(242,250,253,.93);border-color:#d6e9f1}
+.home-page[data-palette="sage"] .site-header{background:rgba(244,250,246,.94);border-color:#d9e9dd}
+.home-page[data-palette="lilac"] .site-header{background:rgba(249,246,251,.94);border-color:#e4dbea}
+.home-page[data-palette="aqua"] .site-header{background:rgba(240,249,251,.94);border-color:#d3e7ed}
+.home-page[data-palette="peach"] .site-header{background:rgba(255,249,244,.94);border-color:#eddfd4}
+.home-page[data-palette="deep"] .site-header{background:rgba(238,248,250,.95);border-color:#d4e7ec}
+.home-page .intro-copy>.text-link{margin-top:27px;align-self:flex-start;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.62);border:1px solid rgba(180,145,118,.2)}
+@media(prefers-reduced-motion:reduce){.home-page,.home-page .site-header,.home-page main>section{transition:none}}
+
 /* v38 — páginas vivas: fluxo completo, movimento contextual e respostas ao toque */
 .home-page{height:auto;min-height:100vh;overflow-x:hidden;overflow-y:auto}
 .home-page main>.hero{height:min(900px,100svh);min-height:720px}

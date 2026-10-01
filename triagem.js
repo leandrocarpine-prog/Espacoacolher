@@ -24,8 +24,13 @@ form.elements.details.addEventListener('input',event=>document.querySelector('#d
 
 async function init(){
   if(!window.sb){showFeedback('Não foi possível iniciar o ambiente seguro. Atualize a página.');return}
-  const {data:{user}}=await window.sb.auth.getUser();if(!user)return location.replace(`login.html?cadastro=1&next=${encodeURIComponent('triagem.html')}`);currentUser=user;
-  const {data:profile}=await window.sb.from('profiles').select('city').eq('id',user.id).single();if(profile?.city)form.elements.city.value=profile.city;
+  const {data:{user}}=await window.sb.auth.getUser();
+  if(!user){
+    const localPreview=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&new URLSearchParams(location.search).has('preview');
+    if(!localPreview)return location.replace(`login.html?cadastro=1&next=${encodeURIComponent('triagem.html')}`);
+    currentUser={id:'visual-preview'};
+  }else currentUser=user;
+  const {data:profile}=await window.sb.from('profiles').select('city').eq('id',currentUser.id).maybeSingle();if(profile?.city)form.elements.city.value=profile.city;
   const initial=new URLSearchParams(location.search).get('para')||sessionStorage.getItem('espacoAcolherParaQuem');const map={mim:'Para mim',filho:'Filho(a)',familiar:'Familiar'};if(map[initial]){const field=form.querySelector(`[name="for_whom"][value="${map[initial]}"]`);if(field)field.checked=true}
 }
 

@@ -8,16 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="portal.css?v=42">
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="portal.css?v=44">
 </head>
-<body class="intake-page">
-  <header class="portal-header"><a class="portal-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Pré-triagem</small></div></a><div class="secure-label"><span>✓</span> Ambiente reservado</div></header>
+<body class="intake-page intake-v2">
+  <header class="site-header scrolled"><a class="brand" href="index.html"><span class="brand-mark">EA</span><span><b>Espaço Acolher</b><small>Psicologia e cuidado</small></span></a><button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button><nav id="main-nav"><a href="quem-somos.html">Quem somos</a><a href="terapia.html">Terapia</a><a href="login.html">Conta do paciente</a><a href="profissionais.html">Para profissionais</a><a class="nav-cta" href="usuario.html">Minha área <span>→</span></a></nav></header>
   <main class="intake-shell">
     <aside class="intake-aside">
-      <a href="usuario.html">← Voltar para minha área</a>
-      <div><p>PRIMEIRO PASSO</p><h1>Conte apenas o necessário, no seu tempo.</h1><span>Estas perguntas ajudam a compreender sua procura e verificar as possibilidades de atendimento.</span></div>
+      <div class="intake-aside-photo"><img src="assets/acolhimento-cadastro.png" alt="Ambiente acolhedor preparado para o início do atendimento"></div>
+      <a class="intake-area-back" href="usuario.html">← Voltar para minha área</a>
+      <div class="intake-aside-copy"><p>PRÉ-TRIAGEM ACOLHEDORA</p><h1>Um primeiro passo claro, no seu tempo.</h1><span>Seis etapas curtas para compreender sua procura, modalidade e disponibilidade. Você responde apenas o necessário.</span><div class="intake-context-tags"><i>Rio Claro e região</i><i>Presencial e online</i></div></div>
       <ol id="intake-steps"><li class="active"><b>1</b><span>Sobre você</span></li><li><b>2</b><span>O que está acontecendo</span></li><li><b>3</b><span>Um pouco mais</span></li><li><b>4</b><span>Preferências</span></li><li><b>5</b><span>Disponibilidade</span></li><li><b>6</b><span>Revisar e enviar</span></li></ol>
-      <small>Seus dados ficam vinculados à sua conta e não são publicados.</small>
+      <small class="intake-privacy">✓ Ambiente reservado · seus dados não são publicados</small>
     </aside>
     <section class="intake-card">
       <div class="intake-mobile-progress"><span id="mobile-step">Etapa 1 de 6</span><div><i id="mobile-progress"></i></div></div>
@@ -77,6 +79,6 @@
       <div class="intake-success hidden" id="intake-success"><span>✓</span><p>SOLICITAÇÃO RECEBIDA</p><h2>Obrigado por confiar este primeiro passo.</h2><div>Sua solicitação já está na sua área. Ela será analisada e você poderá acompanhar o andamento por lá.</div><a class="intake-next" href="usuario.html">Acompanhar solicitação <span>→</span></a></div>
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="triagem.js?v=20"></script>
+  <script src="site-page.js?v=44"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="triagem.js?v=44"></script>
 </body>
 </html>
