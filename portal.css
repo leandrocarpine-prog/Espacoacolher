@@ -173,3 +173,17 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 @keyframes user-gradient-flow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
 @media(max-width:900px){.auth-v2 .auth-side,.auth-v2 .auth-side-content{animation:none}}
 @media(prefers-reduced-motion:reduce){.auth-v2 .auth-side,.auth-v2 .auth-side-content,.auth-v2 .form-symbol,.auth-v2 .progress-line i,.user-welcome{animation:none!important}.user-grid article,.content-card,.intake-next,.intake-back,.intake-choices label>span,.reason-grid label>span{transition:none!important}}
+
+/* v41 — proporção única para cartões sobre fotografia */
+@media(min-width:901px){
+  .auth-v2 .auth-side-content{
+    left:5%;right:auto;bottom:5%;width:min(460px,88%);padding:22px 24px;
+    border:1px solid rgba(255,255,255,.78);border-radius:24px;
+    background:linear-gradient(145deg,rgba(247,252,254,.94),rgba(229,242,247,.91));
+    box-shadow:0 22px 58px rgba(29,76,98,.2);backdrop-filter:blur(16px) saturate(125%)
+  }
+  .auth-v2 .auth-side h1{font-size:26px;line-height:1.12;margin:11px 0 7px}
+  .auth-v2 .auth-side p{font-size:11px;line-height:1.5}
+  .auth-v2 .side-points{margin-top:13px;gap:6px}
+  .auth-v2 .side-points span{font-size:8px;padding:5px 8px;background:rgba(205,231,240,.82)}
+}

@@ -448,3 +448,17 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
   .home-page .social-copy h2{font-size:42px}
 }
 @media(prefers-reduced-motion:reduce){.intro-media>img,.intro-media-note i,.home-page .social-visual>img{animation:none!important}}
+
+/* v41 — cartões fotográficos seguem a mesma escala e o mesmo acabamento */
+@media(min-width:851px){
+  .home-page .hero-note{
+    width:min(460px,37vw);padding:24px 26px;border-radius:24px;
+    background:linear-gradient(145deg,rgba(247,252,254,.95),rgba(229,242,247,.92));
+    border-color:rgba(255,255,255,.78);box-shadow:0 22px 58px rgba(29,76,98,.2)
+  }
+  .home-page .hero-note b{font-size:25px}.home-page .hero-note p{font-size:13px}
+  .social-image-card{left:5%;right:auto;bottom:5%;width:min(460px,88%);padding:22px 24px;border-radius:24px;background:linear-gradient(145deg,rgba(247,252,254,.94),rgba(236,244,240,.91));box-shadow:0 22px 58px rgba(29,76,98,.2)}
+  .social-image-card strong{font-size:27px}
+  .glass-profile{left:5%;right:auto;bottom:5%;width:min(460px,88%);padding:22px 24px;border-radius:24px;background:linear-gradient(145deg,rgba(24,73,91,.96),rgba(51,128,151,.93));box-shadow:0 22px 58px rgba(18,58,75,.28)}
+  .glass-profile h2{font-size:23px!important}.glass-profile p{font-size:12px}.glass-profile ul{margin-top:14px}
+}
