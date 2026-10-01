@@ -5,13 +5,17 @@ Site e aplicação estática para captação e organização inicial de solicita
 ## Páginas
 
 - `index.html`: área pública e pré-triagem obrigatória em seis etapas.
-- `admin.html`: painel local com dashboard, solicitações, triagens, contatos e agenda.
+- `admin-login.html`: acesso administrativo protegido.
+- `admin.html`: dashboard conectado ao Supabase para solicitações, triagens, profissionais, contatos e agenda.
+- `profissionais.html`: entrada para profissionais cadastrados ou novos candidatos.
+- `profissional.html`: login e cadastro profissional.
+- `profissional-area.html`: acompanhamento do status do cadastro profissional.
 
 ## Privacidade e limites técnicos
 
-A pré-triagem não grava respostas no site: ela prepara uma mensagem que o visitante pode revisar e enviar pelo WhatsApp profissional. O painel administrativo usa apenas o armazenamento local do navegador e deixa essa limitação visível.
+A autenticação, os perfis, a pré-triagem e a área administrativa usam o projeto Supabase configurado. A senha nunca é armazenada no repositório. Este sistema organiza solicitações iniciais; não deve ser usado como prontuário eletrônico.
 
-Esta versão **não possui banco de dados, autenticação ou prontuário eletrônico**. Para tratar dados reais de forma centralizada, é necessário configurar um backend seguro, controle de acesso e requisitos de privacidade adequados.
+Depois do esquema principal, execute também `supabase-professionals.sql` no SQL Editor para ativar o cadastro profissional e as regras de acesso.
 
 ## Publicação
 

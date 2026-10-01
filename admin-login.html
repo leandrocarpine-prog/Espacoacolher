@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2d708f">
+  <title>Acesso administrativo | Espaço Acolher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin-login.css?v=1">
+</head>
+<body>
+  <header class="access-header">
+    <a class="access-brand" href="index.html"><span>EA</span><div><b>Espaço Acolher</b><small>Painel administrativo</small></div></a>
+    <a href="index.html">← Voltar ao site</a>
+  </header>
+  <main class="access-layout">
+    <section class="access-intro">
+      <p class="kicker">ÁREA RESTRITA</p>
+      <h1>Gestão segura dos atendimentos.</h1>
+      <p>Este acesso é exclusivo do administrador autorizado. Solicitações, triagens e cadastros profissionais ficam protegidos por autenticação.</p>
+      <div class="access-points"><span>Dados centralizados</span><span>Acesso verificado</span><span>Sessão protegida</span></div>
+    </section>
+    <section class="access-card" aria-labelledby="access-title">
+      <div class="lock-mark" aria-hidden="true">🔒</div>
+      <p>PAINEL ADMINISTRATIVO</p>
+      <h2 id="access-title">Entre para continuar</h2>
+      <form id="admin-login-form">
+        <label>Usuário<input name="username" autocomplete="username" autocapitalize="none" required placeholder="Seu usuário"></label>
+        <label>Senha<input name="password" type="password" autocomplete="current-password" required placeholder="Sua senha"></label>
+        <button type="submit">Entrar no painel <span>→</span></button>
+        <div id="admin-login-feedback" class="feedback" role="status"></div>
+      </form>
+      <small>O acesso só é liberado quando a conta também possui permissão de administrador.</small>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js?v=20"></script>
+  <script src="admin-auth.js?v=1"></script>
+</body>
+</html>

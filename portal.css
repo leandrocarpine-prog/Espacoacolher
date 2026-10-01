@@ -65,6 +65,14 @@ html,body{max-width:100%;overflow-x:hidden}
   .auth-v2 .form-symbol{animation:symbol-breathe 3.8s ease-in-out infinite}
 }
 
+.password-strength{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:10px;margin:8px 0 3px;color:#6a7c87;font-size:11px;font-weight:700}
+.password-strength>div{height:6px;overflow:hidden;border-radius:999px;background:#dfe8ec}
+.password-strength i{display:block;width:0;height:100%;border-radius:inherit;background:#a8b6bd;transition:width .25s ease,background .25s ease}
+.password-strength.weak{color:#b24b4b}.password-strength.weak i{width:33%;background:#d55d5d}
+.password-strength.medium{color:#9a6b27}.password-strength.medium i{width:66%;background:#d99b42}
+.password-strength.strong{color:#28775d}.password-strength.strong i{width:100%;background:#3f9a77}
+@media(max-width:600px){.password-strength{grid-template-columns:74px 1fr;font-size:10px}}
+
 @keyframes mobile-orbit{from{transform:translate(0,0) rotate(0)}to{transform:translate(-14px,14px) rotate(9deg)}}
 @keyframes symbol-breathe{0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(75,145,173,0)}50%{transform:translateY(-4px);box-shadow:0 12px 30px rgba(75,145,173,.18)}}
 
@@ -186,4 +194,20 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
   .auth-v2 .auth-side p{font-size:11px;line-height:1.5}
   .auth-v2 .side-points{margin-top:13px;gap:6px}
   .auth-v2 .side-points span{font-size:8px;padding:5px 8px;background:rgba(205,231,240,.82)}
+}
+
+/* v42 — alinhamento único para caixas de seleção e seus textos */
+.auth-v2 label.portal-consent,.intake-card label.intake-consent{
+  display:grid!important;grid-template-columns:20px minmax(0,1fr)!important;align-items:center!important;
+  column-gap:10px!important;row-gap:0!important;margin:18px 0!important;line-height:1.5!important;text-align:left
+}
+.auth-v2 .portal-consent input[type="checkbox"],.intake-card .intake-consent input[type="checkbox"],.auth-v2 .remember input[type="checkbox"]{
+  display:block;width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;
+  margin:0!important;padding:0!important;align-self:center;accent-color:#2d708f;box-shadow:none
+}
+.auth-v2 .portal-consent>span,.intake-card .intake-consent>span{display:block;min-width:0;font-size:12px;font-weight:500;color:#536d7d}
+.auth-v2 label.remember{display:flex!important;align-items:center!important;gap:9px!important;line-height:1.35}
+@media(max-width:600px){
+  .auth-v2 label.portal-consent,.intake-card label.intake-consent{grid-template-columns:22px minmax(0,1fr)!important;column-gap:9px!important;align-items:start!important}
+  .auth-v2 .portal-consent input[type="checkbox"],.intake-card .intake-consent input[type="checkbox"]{margin-top:1px!important}
 }

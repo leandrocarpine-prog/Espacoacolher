@@ -1,0 +1,27 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#5f7d70"><title>Área profissional | Espaço Acolher</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="profissional.css?v=1"></head><body>
+<header class="professional-header"><a href="index.html" class="professional-brand"><span>EA</span><div><b>Espaço Acolher</b><small>Área profissional</small></div></a><a href="profissionais.html">← Voltar</a></header>
+<main class="professional-auth-shell">
+  <section class="professional-auth-image" style="background-image:linear-gradient(0deg,rgba(18,57,74,.45),rgba(18,57,74,.06)),url('assets/escuta-profissional.webp')"><div><small>REDE DE CUIDADO</small><h1>Profissionais que acolhem com responsabilidade.</h1><p>Um ambiente reservado para cadastro, análise e acesso profissional.</p></div></section>
+  <section class="professional-auth-panel">
+    <div class="professional-tabs"><button class="active" data-view="login">Já sou profissional</button><button data-view="register">Novo cadastro</button></div>
+    <form id="professional-login">
+      <div class="form-heading"><p>ACESSO PROFISSIONAL</p><h2>Bem-vindo de volta</h2><span>Entre com os dados da sua conta profissional.</span></div>
+      <label>E-mail profissional<input name="email" type="email" autocomplete="email" required placeholder="voce@email.com"></label>
+      <label>Senha<input name="password" type="password" autocomplete="current-password" required placeholder="Digite sua senha"></label>
+      <button type="submit" class="professional-button">Entrar na minha área <span>→</span></button><div class="feedback" id="professional-login-feedback" role="status"></div>
+    </form>
+    <form id="professional-register" class="hidden">
+      <div class="form-heading"><p>NOVO PROFISSIONAL</p><h2>Envie seu cadastro</h2><span>Os dados serão analisados antes da liberação do acesso.</span></div>
+      <div class="form-grid"><label>Nome completo<input name="full_name" autocomplete="name" required minlength="5" placeholder="Nome e sobrenome"></label><label>CRP<input name="crp" required placeholder="Ex.: 06/000000"></label></div>
+      <div class="form-grid"><label>Celular / WhatsApp<input name="phone" inputmode="tel" autocomplete="tel" required placeholder="(19) 99999-9999"></label><label>Cidade<input name="city" autocomplete="address-level2" required value="Rio Claro"></label></div>
+      <label>Área de atuação<input name="specialties" required placeholder="Ex.: Psicologia clínica, neuropsicologia"></label>
+      <label>Apresentação profissional <small>Conte brevemente sobre sua formação e experiência.</small><textarea name="presentation" rows="3" maxlength="600" required></textarea></label>
+      <label>E-mail profissional<input name="email" type="email" autocomplete="email" required placeholder="voce@email.com"></label>
+      <div class="form-grid"><label>Crie uma senha<input name="password" type="password" autocomplete="new-password" required minlength="8"></label><label>Repita a senha<input name="password_confirmation" type="password" autocomplete="new-password" required></label></div>
+      <div class="password-meter" id="professional-password-meter"><i></i><span>Use 8 caracteres, maiúscula, minúscula, número e símbolo.</span></div>
+      <label class="consent"><input name="terms" type="checkbox" required><span>Li e aceito a <a href="politica.html" target="_blank">Política de Privacidade</a> e autorizo a análise dos dados profissionais informados.</span></label>
+      <button type="submit" class="professional-button">Enviar cadastro para análise <span>→</span></button><div class="feedback" id="professional-register-feedback" role="status"></div>
+    </form>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="profissional.js?v=1"></script></body></html>

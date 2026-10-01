@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="portal.css?v=41">
+  <link rel="stylesheet" href="portal.css?v=42">
 </head>
 <body class="auth-page auth-v2">
   <header class="portal-header">
@@ -69,6 +69,7 @@
           <label>Rede social <small>(opcional)</small><input name="social" placeholder="Ex.: @seuusuario"></label>
           <div class="form-grid password-fields"><label>Crie uma senha<input required type="password" name="password" autocomplete="new-password" placeholder="Senha forte"></label><label>Repita a senha<input required type="password" name="password_confirmation" autocomplete="new-password" placeholder="Digite novamente"></label></div>
           <div class="password-rules" id="password-rules"><span data-rule="length">8+ caracteres</span><span data-rule="upper">Maiúscula</span><span data-rule="lower">Minúscula</span><span data-rule="number">Número</span><span data-rule="symbol">Símbolo</span></div>
+          <div class="password-strength" id="password-strength" aria-live="polite"><div><i></i></div><span>Digite uma senha para avaliar a força.</span></div>
           <label class="portal-consent"><input required type="checkbox" name="privacy"><span>Li e aceito a <a href="politica.html" target="_blank">Política de Privacidade</a> e os Termos de Uso.</span></label>
         </section>
 
@@ -78,6 +79,6 @@
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="auth.js?v=38"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="auth.js?v=42"></script>
 </body>
 </html>
