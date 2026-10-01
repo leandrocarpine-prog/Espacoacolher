@@ -81,9 +81,15 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   translate:-88px 0;
   opacity:0;
   filter:blur(5px) saturate(.88);
-  transition:translate 880ms var(--motion-ease),opacity 760ms ease,filter 880ms var(--motion-ease),box-shadow .32s ease,border-color .32s ease;
+  transition:translate 1350ms var(--motion-ease),opacity 1100ms ease,filter 1250ms var(--motion-ease),box-shadow .32s ease,border-color .32s ease;
 }
 .motion-ready .therapy-card.motion-reveal:nth-child(even){translate:88px 0}
+.motion-ready .therapy-card.motion-reveal:nth-child(1){transition-delay:0ms}
+.motion-ready .therapy-card.motion-reveal:nth-child(2){transition-delay:120ms}
+.motion-ready .therapy-card.motion-reveal:nth-child(3){transition-delay:240ms}
+.motion-ready .therapy-card.motion-reveal:nth-child(4){transition-delay:80ms}
+.motion-ready .therapy-card.motion-reveal:nth-child(5){transition-delay:200ms}
+.motion-ready .therapy-card.motion-reveal:nth-child(6){transition-delay:320ms}
 .motion-ready .therapy-card.motion-reveal.is-inview{
   translate:0 0;
   opacity:1;
@@ -149,7 +155,7 @@ body.motion-scrolled .site-header,body.motion-scrolled .portal-header{backdrop-f
   .motion-ready .intro .intro-copy.motion-reveal{transform:translate3d(0,18px,0) scale(.99);filter:blur(3px);transition-duration:720ms}
   .motion-ready .intro .intro-media.motion-reveal.is-inview,
   .motion-ready .intro .intro-copy.motion-reveal.is-inview{transform:none;filter:none}
-  .motion-ready .therapy-card.motion-reveal{translate:-46px 0;transition-duration:680ms}
+  .motion-ready .therapy-card.motion-reveal{translate:-46px 0;transition-duration:950ms}
   .motion-ready .therapy-card.motion-reveal:nth-child(even){translate:46px 0}
   .motion-ready .therapy-card.motion-reveal.is-inview{translate:0 0}
   .motion-ready .process-grid article.motion-reveal,
