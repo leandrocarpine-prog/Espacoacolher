@@ -6,9 +6,20 @@
 
   const revealSelectors=[
     'main section:not(.hero)>*',
+    '.hero-image',
+    '.hero-copy>*',
+    '.intro-copy>*',
+    '.social-copy>*',
+    '.process-head>*',
+    '.professional-copy>*',
+    '.portal-copy>*',
+    '.faq-heading>*',
     '.section-heading',
     '.screen-copy>*',
     '.screen-visual',
+    '.therapy-card',
+    '.process-grid article',
+    '.social-facts>div',
     '.auth-form>*',
     '.intake-step.active>*',
     '.user-view.active>*',
@@ -32,8 +43,11 @@
       if(entry.isIntersecting){entry.target.classList.add('is-inview');revealObserver.unobserve(entry.target)}
     }),{threshold:.08,rootMargin:'0px 0px -4% 0px'});
     revealItems.forEach(item=>revealObserver.observe(item));
-    // Nunca deixa conteúdo invisível quando a página abre diretamente por uma âncora.
-    setTimeout(()=>revealItems.forEach(item=>item.classList.add('is-inview')),1200);
+    // Libera apenas o que já está visível na abertura. O restante continua respondendo à rolagem.
+    setTimeout(()=>revealItems.forEach(item=>{
+      const box=item.getBoundingClientRect();
+      if(box.top<innerHeight&&box.bottom>0)item.classList.add('is-inview');
+    }),1200);
   }
 
   const sections=[...document.querySelectorAll('main>section,[data-palette]')];

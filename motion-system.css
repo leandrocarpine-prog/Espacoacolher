@@ -22,6 +22,85 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready .motion-reveal.motion-from-right{transform:translate3d(34px,0,0) scale(.985)}
 .motion-ready .motion-reveal.is-inview{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none}
 
+/* Entrada editorial da abertura: foto e texto se encontram em fade. */
+.motion-ready .intro .intro-media.motion-reveal{
+  opacity:0;
+  transform:translate3d(-24px,18px,0) scale(1.045);
+  filter:blur(7px) saturate(.82);
+  transition-duration:1s;
+}
+.motion-ready .intro .intro-copy.motion-reveal{
+  opacity:0;
+  transform:translate3d(30px,16px,0);
+  filter:blur(6px);
+  transition-duration:1s;
+  transition-delay:140ms;
+}
+.motion-ready .intro .intro-media.motion-reveal.is-inview,
+.motion-ready .intro .intro-copy.motion-reveal.is-inview{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:none;
+}
+.intro-media:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(115deg,rgba(255,255,255,.2),transparent 38%,rgba(174,220,235,.13));
+  opacity:0;
+  transition:opacity 1.15s var(--motion-ease);
+}
+.intro-media.is-inview:after{opacity:1}
+
+/* O mesmo acabamento de entrada é usado nos blocos fotográficos do site inteiro. */
+.motion-ready :is(.hero-image,.screen-visual,.social-visual,.professional-portrait).motion-reveal{
+  opacity:0;
+  scale:1.045;
+  filter:blur(7px) saturate(.82);
+  transition:opacity 1s var(--motion-ease),scale 1.15s var(--motion-ease),filter 1s var(--motion-ease);
+}
+.motion-ready :is(.hero-image,.screen-visual,.social-visual,.professional-portrait).motion-reveal.is-inview{
+  opacity:1;scale:1;filter:none;
+}
+
+/* Títulos e textos entram em sequência, em vez de permanecerem estáticos. */
+.motion-ready :is(.hero-copy,.intro-copy,.social-copy,.process-head,.professional-copy,.portal-copy,.faq-heading)>.motion-reveal{
+  translate:0 24px;
+  opacity:0;
+  filter:blur(3px);
+  transition:translate 720ms var(--motion-ease),opacity 650ms ease,filter 720ms var(--motion-ease);
+}
+.motion-ready :is(.hero-copy,.intro-copy,.social-copy,.process-head,.professional-copy,.portal-copy,.faq-heading)>.motion-reveal.is-inview{
+  translate:0 0;opacity:1;filter:none;
+}
+
+/* Cartões alternam as laterais e se encontram no centro durante a rolagem. */
+.motion-ready .therapy-card.motion-reveal{
+  translate:-88px 0;
+  opacity:0;
+  filter:blur(5px) saturate(.88);
+  transition:translate 880ms var(--motion-ease),opacity 760ms ease,filter 880ms var(--motion-ease),box-shadow .32s ease,border-color .32s ease;
+}
+.motion-ready .therapy-card.motion-reveal:nth-child(even){translate:88px 0}
+.motion-ready .therapy-card.motion-reveal.is-inview{
+  translate:0 0;
+  opacity:1;
+  filter:none;
+}
+.motion-ready .process-grid article.motion-reveal,
+.motion-ready .social-facts>div.motion-reveal{
+  translate:-72px 0;
+  opacity:0;
+  filter:blur(4px);
+  transition:translate 820ms var(--motion-ease),opacity 720ms ease,filter 820ms var(--motion-ease),box-shadow .32s ease;
+}
+.motion-ready .process-grid article.motion-reveal:nth-child(even),
+.motion-ready .social-facts>div.motion-reveal:nth-child(even){translate:72px 0}
+.motion-ready .process-grid article.motion-reveal.is-inview,
+.motion-ready .social-facts>div.motion-reveal.is-inview{translate:0 0;opacity:1;filter:none}
+
 .motion-interactive{
   --motion-x:50%;--motion-y:50%;
   transition:transform var(--motion-fast) var(--motion-ease),box-shadow .3s ease,filter .3s ease,border-color .3s ease!important;
@@ -66,6 +145,19 @@ body.motion-scrolled .site-header,body.motion-scrolled .portal-header{backdrop-f
 @media(max-width:700px){
   .motion-ready .motion-reveal{transform:translate3d(0,18px,0) scale(.99);filter:blur(2px);transition-duration:580ms}
   .motion-ready .motion-reveal.is-inview{transform:none;filter:none}
+  .motion-ready .intro .intro-media.motion-reveal,
+  .motion-ready .intro .intro-copy.motion-reveal{transform:translate3d(0,18px,0) scale(.99);filter:blur(3px);transition-duration:720ms}
+  .motion-ready .intro .intro-media.motion-reveal.is-inview,
+  .motion-ready .intro .intro-copy.motion-reveal.is-inview{transform:none;filter:none}
+  .motion-ready .therapy-card.motion-reveal{translate:-46px 0;transition-duration:680ms}
+  .motion-ready .therapy-card.motion-reveal:nth-child(even){translate:46px 0}
+  .motion-ready .therapy-card.motion-reveal.is-inview{translate:0 0}
+  .motion-ready .process-grid article.motion-reveal,
+  .motion-ready .social-facts>div.motion-reveal{translate:-42px 0}
+  .motion-ready .process-grid article.motion-reveal:nth-child(even),
+  .motion-ready .social-facts>div.motion-reveal:nth-child(even){translate:42px 0}
+  .motion-ready .process-grid article.motion-reveal.is-inview,
+  .motion-ready .social-facts>div.motion-reveal.is-inview{translate:0 0}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
