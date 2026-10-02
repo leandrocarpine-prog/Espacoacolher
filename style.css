@@ -537,7 +537,11 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
     radial-gradient(circle at 7% 12%,rgba(255,176,128,.38),transparent 25%),
     radial-gradient(circle at 91% 14%,rgba(144,112,207,.26),transparent 28%),
     radial-gradient(circle at 52% 105%,rgba(68,175,170,.32),transparent 34%),
-    linear-gradient(145deg,#fff4e9 0%,#eef5ff 48%,#f2ebfb 100%);
+    linear-gradient(145deg,rgba(255,244,233,.84) 0%,rgba(238,245,255,.86) 48%,rgba(242,235,251,.85) 100%),
+    url('assets/acolhimento-cadastro.png');
+  background-size:auto,auto,auto,cover,cover;
+  background-position:center,center,center,center,center calc(50% + var(--process-y,0px));
+  background-repeat:no-repeat;
 }
 .home-page .process:before,.home-page .process:after{
   content:"";position:absolute;border-radius:50%;pointer-events:none;border:1px solid rgba(70,119,154,.18);
@@ -560,3 +564,9 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
 @keyframes process-orbit{from{translate:0 -8px;scale:.96}to{translate:12px 14px;scale:1.05}}
 
 @media(prefers-reduced-motion:reduce){.home-page .process:before,.home-page .process:after{animation:none!important}}
+
+/* v43 — respiro da capa: nenhum texto invade a divisão com a fotografia */
+@media(min-width:851px){
+  .home-page .hero-copy{width:calc(45vw - 34px);max-width:690px;padding-right:24px;box-sizing:border-box}
+  .home-page .hero-lead{width:100%;max-width:100%;overflow-wrap:break-word}
+}

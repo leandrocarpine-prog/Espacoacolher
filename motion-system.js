@@ -15,6 +15,8 @@
     '.portal-copy>*',
     '.faq-heading>*',
     '.section-heading',
+    '.section-heading>*',
+    '.form-heading>*',
     '.screen-copy>*',
     '.screen-visual',
     '.therapy-card',
@@ -29,19 +31,29 @@
     '.profile-card',
     '.admin-main article'
   ];
-  const revealItems=[...new Set(revealSelectors.flatMap(selector=>[...document.querySelectorAll(selector)]))]
+  let revealItems=[...new Set(revealSelectors.flatMap(selector=>[...document.querySelectorAll(selector)]))]
     .filter(item=>!item.closest('[hidden]')&&!item.classList.contains('motion-reveal'));
-  revealItems.forEach((item,index)=>{
-    item.classList.add('motion-reveal');
-    item.style.setProperty('--motion-delay',`${Math.min(index%6,4)*55}ms`);
+  revealItems.forEach(item=>item.classList.add('motion-reveal'));
+  // Se um bloco contém elementos animados, anima os filhos para preservar a ordem visual.
+  revealItems=revealItems.filter(item=>{
+    if(item.querySelector('.motion-reveal')){item.classList.remove('motion-reveal');return false}
+    return true;
   });
+  const revealGroups=new Map();
+  revealItems.forEach(item=>{
+    const group=item.closest('section,form,.screen-copy,.auth-form,.admin-main')||document.body;
+    if(!revealGroups.has(group))revealGroups.set(group,[]);
+    revealGroups.get(group).push(item);
+  });
+  revealGroups.forEach(items=>items.sort((a,b)=>a.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1)
+    .forEach((item,index)=>item.style.setProperty('--motion-delay',`${Math.min(index,8)*105}ms`)));
 
   if(reduced){
     revealItems.forEach(item=>item.classList.add('is-inview'));
   }else{
     const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      if(entry.isIntersecting){entry.target.classList.add('is-inview');revealObserver.unobserve(entry.target)}
-    }),{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+      entry.target.classList.toggle('is-inview',entry.isIntersecting);
+    }),{threshold:.08,rootMargin:'-3% 0px -4% 0px'});
     revealItems.forEach(item=>revealObserver.observe(item));
     // Libera apenas o que já está visível na abertura. O restante continua respondendo à rolagem.
     setTimeout(()=>revealItems.forEach(item=>{
@@ -82,12 +94,20 @@
     card.addEventListener('pointerleave',()=>{card.style.setProperty('--motion-rx','0deg');card.style.setProperty('--motion-ry','0deg')});
   });
 
+  const parallaxSections=[...document.querySelectorAll('.process')];
   let ticking=false;
   const updateScroll=()=>{
     if(ticking)return;ticking=true;
     requestAnimationFrame(()=>{
       document.body.classList.toggle('motion-scrolled',scrollY>24);
       document.documentElement.style.setProperty('--motion-scroll',String(scrollY));
+      if(!reduced)parallaxSections.forEach(section=>{
+        const box=section.getBoundingClientRect();
+        if(box.bottom>0&&box.top<innerHeight){
+          const shift=Math.max(-34,Math.min(34,(box.top-innerHeight*.45)*-.055));
+          section.style.setProperty('--process-y',`${shift}px`);
+        }
+      });
       ticking=false;
     });
   };

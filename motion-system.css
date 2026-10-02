@@ -24,22 +24,26 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 
 /* Entrada editorial da abertura: foto e texto se encontram em fade. */
 .motion-ready .intro .intro-media.motion-reveal{
-  opacity:0;
-  transform:translate3d(-24px,18px,0) scale(1.045);
-  filter:blur(7px) saturate(.82);
-  transition-duration:1s;
+  opacity:.3;
+  transform:translate3d(-18px,10px,0) scale(1.035);
+  clip-path:inset(0 100% 0 0 round 34px 110px 34px 34px);
+  filter:saturate(.78);
+  transition:clip-path 1450ms var(--motion-ease),opacity 900ms ease,transform 1450ms var(--motion-ease),filter 1100ms ease;
+  transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready .intro .intro-copy.motion-reveal{
   opacity:0;
-  transform:translate3d(30px,16px,0);
-  filter:blur(6px);
-  transition-duration:1s;
-  transition-delay:140ms;
+  transform:translate3d(0,48px,0) scale(.975);
+  clip-path:inset(100% 0 0 0 round 34px);
+  filter:blur(4px);
+  transition:clip-path 1250ms var(--motion-ease),opacity 900ms ease,transform 1250ms var(--motion-ease),filter 900ms ease;
+  transition-delay:var(--motion-delay,140ms);
 }
 .motion-ready .intro .intro-media.motion-reveal.is-inview,
 .motion-ready .intro .intro-copy.motion-reveal.is-inview{
   opacity:1;
   transform:translate3d(0,0,0) scale(1);
+  clip-path:inset(0 0 0 0 round 34px);
   filter:none;
 }
 .intro-media:after{
@@ -60,6 +64,7 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   scale:1.045;
   filter:blur(7px) saturate(.82);
   transition:opacity 1s var(--motion-ease),scale 1.15s var(--motion-ease),filter 1s var(--motion-ease);
+  transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready :is(.hero-image,.screen-visual,.social-visual,.professional-portrait).motion-reveal.is-inview{
   opacity:1;scale:1;filter:none;
@@ -71,6 +76,7 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   opacity:0;
   filter:blur(3px);
   transition:translate 720ms var(--motion-ease),opacity 650ms ease,filter 720ms var(--motion-ease);
+  transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready :is(.hero-copy,.intro-copy,.social-copy,.process-head,.professional-copy,.portal-copy,.faq-heading)>.motion-reveal.is-inview{
   translate:0 0;opacity:1;filter:none;
@@ -82,14 +88,9 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   opacity:0;
   filter:blur(5px) saturate(.88);
   transition:translate 1350ms var(--motion-ease),opacity 1100ms ease,filter 1250ms var(--motion-ease),box-shadow .32s ease,border-color .32s ease;
+  transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready .therapy-card.motion-reveal:nth-child(even){translate:88px 0}
-.motion-ready .therapy-card.motion-reveal:nth-child(1){transition-delay:0ms}
-.motion-ready .therapy-card.motion-reveal:nth-child(2){transition-delay:120ms}
-.motion-ready .therapy-card.motion-reveal:nth-child(3){transition-delay:240ms}
-.motion-ready .therapy-card.motion-reveal:nth-child(4){transition-delay:80ms}
-.motion-ready .therapy-card.motion-reveal:nth-child(5){transition-delay:200ms}
-.motion-ready .therapy-card.motion-reveal:nth-child(6){transition-delay:320ms}
 .motion-ready .therapy-card.motion-reveal.is-inview{
   translate:0 0;
   opacity:1;
@@ -101,6 +102,7 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   opacity:0;
   filter:blur(4px);
   transition:translate 820ms var(--motion-ease),opacity 720ms ease,filter 820ms var(--motion-ease),box-shadow .32s ease;
+  transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready .process-grid article.motion-reveal:nth-child(even),
 .motion-ready .social-facts>div.motion-reveal:nth-child(even){translate:72px 0}
