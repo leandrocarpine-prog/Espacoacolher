@@ -1,10 +1,11 @@
 const statusNames={nova:'Nova',em_analise:'Em análise',contato_realizado:'Contato realizado',agendada:'Agendada',em_atendimento:'Em atendimento',lista_espera:'Lista de espera',encaminhada:'Encaminhada',encerrada:'Encerrada'};
 const statusOrder=Object.keys(statusNames);
-let leads=[],appointments=[],professionals=[],calendarDate=new Date(),adminProfile;
+let leads=[],appointments=[],professionals=[],calendarDate=new Date(),adminProfile,realtimeChannel,audioContext,refreshTimer;
+const pendingSignupAlerts=new Map();
 const esc=(value='')=>String(value).replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const initials=name=>String(name||'Pessoa').split(' ').filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 const profileOf=lead=>lead.profiles||{};
-const toast=message=>{const el=document.querySelector('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2400)};
+const toast=(message,important=false)=>{const el=document.querySelector('#toast');el.textContent=message;el.classList.toggle('important',important);el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>{el.classList.remove('show','important')},important?6500:2400)};
 const formatDate=value=>new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(value)).replace('.','');
 const empty=(title,text)=>`<div class="none"><b>${title}</b>${text}</div>`;
 const person=lead=>{const p=profileOf(lead);return `<div class="person"><span class="avatar">${initials(p.full_name)}</span><div><b>${esc(p.full_name||'Paciente')}</b><small>${esc(p.city||lead.city||'Cidade não informada')}</small></div></div>`};
@@ -20,7 +21,53 @@ async function init(){
   const name=profile.full_name||'Leandro';
   document.querySelector('#admin-name').textContent=name;document.querySelector('#admin-first-name').textContent=name.split(' ')[0];document.querySelector('#admin-avatar').textContent=initials(name);
   document.querySelector('#today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
-  await loadData();document.querySelector('#admin-loading').remove();
+  await loadData();subscribeRealtime();updateNotificationButton();document.querySelector('#admin-loading').remove();
+}
+
+function updateNotificationButton(){
+  const button=document.querySelector('#enable-notifications'),label=document.querySelector('#notification-label');
+  if(!button||!label)return;
+  const supported='Notification' in window;
+  const enabled=supported&&Notification.permission==='granted'&&localStorage.getItem('ea-admin-alerts')==='on';
+  button.classList.toggle('active',enabled);button.classList.toggle('blocked',supported&&Notification.permission==='denied');
+  label.textContent=!supported?'Alertas indisponíveis':Notification.permission==='denied'?'Alertas bloqueados':enabled?'Alertas ativos':'Ativar alertas';
+}
+function playAlertSound(){
+  if(localStorage.getItem('ea-admin-alerts')!=='on')return;
+  try{audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();const oscillator=audioContext.createOscillator(),gain=audioContext.createGain();oscillator.type='sine';oscillator.frequency.setValueAtTime(660,audioContext.currentTime);oscillator.frequency.exponentialRampToValueAtTime(880,audioContext.currentTime+.18);gain.gain.setValueAtTime(.0001,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.16,audioContext.currentTime+.025);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+.38);oscillator.connect(gain);gain.connect(audioContext.destination);oscillator.start();oscillator.stop(audioContext.currentTime+.4)}catch(error){console.warn('Som de alerta indisponível.',error)}
+}
+function alertAdmin(title,body,tag){
+  toast(`${title} — ${body}`,true);playAlertSound();
+  if('Notification' in window&&Notification.permission==='granted'&&localStorage.getItem('ea-admin-alerts')==='on'){
+    try{new Notification(title,{body,tag:`ea-${tag||Date.now()}`,icon:'assets/hero-consultorio.png',badge:'assets/hero-consultorio.png',renotify:true})}catch(error){console.warn('Notificação do sistema indisponível.',error)}
+  }
+}
+function queueRefresh(){clearTimeout(refreshTimer);refreshTimer=setTimeout(loadData,500)}
+function handleProfileInsert(payload){
+  const item=payload.new||{},key=item.id||crypto.randomUUID();
+  const timer=setTimeout(()=>{pendingSignupAlerts.delete(key);alertAdmin('Novo cadastro recebido',`${item.full_name||'Um novo paciente'} acabou de criar uma conta.`,'cadastro');queueRefresh()},900);
+  pendingSignupAlerts.set(key,timer);
+}
+function handleProfessionalInsert(payload){
+  const item=payload.new||{},key=item.user_id;if(key&&pendingSignupAlerts.has(key)){clearTimeout(pendingSignupAlerts.get(key));pendingSignupAlerts.delete(key)}
+  alertAdmin('Novo profissional para analisar',`${item.full_name||'Um profissional'} enviou o cadastro e aguarda validação.`,'profissional');queueRefresh();
+}
+function handleIntakeInsert(payload){const item=payload.new||{};alertAdmin('Nova pré-triagem recebida',`Chegou uma nova solicitação${item.city?` de ${item.city}`:''}.`,'triagem');queueRefresh()}
+function subscribeRealtime(){
+  if(realtimeChannel)window.sb.removeChannel(realtimeChannel);
+  realtimeChannel=window.sb.channel('admin-live-alerts')
+    .on('postgres_changes',{event:'INSERT',schema:'public',table:'profiles'},handleProfileInsert)
+    .on('postgres_changes',{event:'INSERT',schema:'public',table:'professional_applications'},handleProfessionalInsert)
+    .on('postgres_changes',{event:'INSERT',schema:'public',table:'intake_requests'},handleIntakeInsert)
+    .subscribe(status=>{if(status==='CHANNEL_ERROR')toast('Os alertas em tempo real perderam a conexão. Tentando reconectar.',true)});
+}
+async function enableNotifications(){
+  if(!('Notification' in window))return toast('Este navegador não permite notificações do sistema.',true);
+  const permission=await Notification.requestPermission();
+  if(permission!=='granted'){localStorage.removeItem('ea-admin-alerts');updateNotificationButton();return toast('Autorize as notificações nas configurações do navegador.',true)}
+  localStorage.setItem('ea-admin-alerts','on');
+  try{audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();await audioContext.resume()}catch(error){}
+  updateNotificationButton();playAlertSound();toast('Alertas ativados. Você será avisado sobre novos cadastros.',true);
 }
 
 async function loadData(){
@@ -68,4 +115,5 @@ document.querySelector('#lead-search').addEventListener('input',renderLeads);doc
 document.querySelectorAll('.sidebar nav button').forEach(button=>button.addEventListener('click',()=>openPage(button.dataset.page)));document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>openPage(button.dataset.go)));
 function openPage(id){document.querySelectorAll('.sidebar nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelector('#page-title').textContent=document.querySelector(`.sidebar nav button[data-page="${id}"] span`).textContent;document.querySelector('.sidebar').classList.remove('open')}
 document.querySelector('#prev-month').addEventListener('click',()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);renderAgenda()});document.querySelector('#next-month').addEventListener('click',()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);renderAgenda()});document.querySelector('.mobile-menu').addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));document.querySelector('#refresh-data').addEventListener('click',loadData);document.querySelector('#admin-logout').addEventListener('click',async()=>{await window.sb.auth.signOut();location.replace('admin-login.html')});
+document.querySelector('#enable-notifications').addEventListener('click',enableNotifications);
 init();
