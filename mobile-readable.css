@@ -1,0 +1,19 @@
+/* Escala móvel legível em todo o Espaço Acolher. */
+@media (max-width:700px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{font-size:18px}
+  body h1:not(#mobile-type-lock){font-size:clamp(42px,11.5vw,54px)!important;line-height:1.04!important;letter-spacing:-.045em!important}
+  body h2:not(#mobile-type-lock){font-size:clamp(32px,9vw,43px)!important;line-height:1.08!important;letter-spacing:-.035em!important}
+  body h3:not(#mobile-type-lock){font-size:clamp(23px,6.4vw,30px)!important;line-height:1.14!important;letter-spacing:-.025em!important}
+  body main p:not(#mobile-type-lock),body main li:not(#mobile-type-lock),body main dd:not(#mobile-type-lock),body main summary:not(#mobile-type-lock),body main blockquote:not(#mobile-type-lock){font-size:17px!important;line-height:1.58!important}
+  body label:not(#mobile-type-lock),body main small:not(#mobile-type-lock),body main dt:not(#mobile-type-lock),body .eyebrow:not(#mobile-type-lock){font-size:15px!important;line-height:1.45!important}
+  body input:not([type="checkbox"]):not([type="radio"]),body select,body textarea{font-size:17px!important;line-height:1.45!important;min-height:52px}
+  body button,body .button,body .screen-button,body .portal-button,body .professional-button,body .nav-cta{font-size:17px!important;line-height:1.25!important;min-height:52px}
+  body .site-header nav>a{font-size:18px!important;line-height:1.35!important}
+  body .therapy-path h3:not(#mobile-type-lock){font-size:21px!important;line-height:1.12!important}
+  body .therapy-path p:not(#mobile-type-lock){font-size:15px!important;line-height:1.42!important}
+  body .path-number,body .option-number,body .process-number{font-size:13px!important}
+  body .auth-feedback,body .password-meter span,body .dialog-note,body .profile-card dd,body .status-hero p{font-size:15px!important;line-height:1.5!important}
+  body .site-footer .footer-main a,body .site-footer .footer-main span,body .site-footer .footer-main p{font-size:20px!important}
+  body .site-footer .footer-main>div>b,body .site-footer .footer-bottom{font-size:15px!important}
+}
