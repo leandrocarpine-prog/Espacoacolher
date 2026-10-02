@@ -60,6 +60,8 @@ document.querySelectorAll('[data-start-value]').forEach(button=>button.addEventL
 
 document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false})}));
 document.querySelector('#year').textContent=new Date().getFullYear();
+const homeFooter=document.querySelector('footer');
+if(homeFooter){homeFooter.classList.add('site-footer');const footerObserver=new IntersectionObserver(entries=>entries.forEach(entry=>homeFooter.classList.toggle('footer-visible',entry.isIntersecting)),{threshold:.18});footerObserver.observe(homeFooter)}
 
 // Movimento sutil: responde ao cursor sem interferir com toque ou acessibilidade.
 const finePointer=matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches;

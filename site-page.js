@@ -1,5 +1,7 @@
 const menu=document.querySelector('.menu-button'),navigation=document.querySelector('#main-nav');
 document.querySelectorAll('.current-year').forEach(year=>year.textContent=new Date().getFullYear());
+const pageFooter=document.querySelector('.site-footer');
+if(pageFooter){const footerObserver=new IntersectionObserver(entries=>entries.forEach(entry=>pageFooter.classList.toggle('footer-visible',entry.isIntersecting)),{threshold:.18});footerObserver.observe(pageFooter)}
 const restorePage=()=>document.body.classList.remove('page-leaving');
 restorePage();
 addEventListener('pageshow',restorePage);
