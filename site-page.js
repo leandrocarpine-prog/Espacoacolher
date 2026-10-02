@@ -1,4 +1,5 @@
 const menu=document.querySelector('.menu-button'),navigation=document.querySelector('#main-nav');
+document.querySelectorAll('.current-year').forEach(year=>year.textContent=new Date().getFullYear());
 const restorePage=()=>document.body.classList.remove('page-leaving');
 restorePage();
 addEventListener('pageshow',restorePage);

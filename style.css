@@ -570,3 +570,11 @@ body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;f
   .home-page .hero-copy{width:calc(45vw - 34px);max-width:690px;padding-right:24px;box-sizing:border-box}
   .home-page .hero-lead{width:100%;max-width:100%;overflow-wrap:break-word}
 }
+
+/* v44 — rodapé institucional nas páginas públicas internas */
+.site-footer{position:relative;z-index:2;overflow:hidden;background:radial-gradient(circle at 8% 12%,rgba(86,169,159,.2),transparent 28%),radial-gradient(circle at 92% 90%,rgba(230,125,91,.14),transparent 25%),linear-gradient(135deg,#092f34,#123f48 58%,#244f50)}
+.site-footer:before{content:"";position:absolute;width:310px;height:310px;right:-150px;top:-170px;border:1px solid rgba(255,255,255,.08);border-radius:50%;box-shadow:0 0 0 46px rgba(255,255,255,.025);pointer-events:none}
+.site-footer .footer-main,.site-footer .footer-bottom{position:relative;z-index:1}
+.site-footer .footer-main a{transition:color .25s ease,transform .25s ease}.site-footer .footer-main>div:not(.footer-brand) a:hover{transform:translateX(4px)}
+.screen-page:has(> .site-footer){height:auto;min-height:100vh;overflow:auto}.screen-page:has(> .site-footer) .info-screen,.screen-page:has(> .site-footer) .professional-entry{min-height:100vh;height:auto}
+@media(max-width:560px){.site-footer{padding:38px 20px 20px}.site-footer .footer-main{grid-template-columns:1fr 1fr;gap:25px 22px;padding-bottom:30px}.site-footer .footer-brand{grid-column:1/-1}.site-footer .footer-brand p{margin-top:13px}.site-footer .footer-bottom{font-size:9px}}
