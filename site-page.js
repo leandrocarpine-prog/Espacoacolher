@@ -1,4 +1,8 @@
 const menu=document.querySelector('.menu-button'),navigation=document.querySelector('#main-nav');
+const restorePage=()=>document.body.classList.remove('page-leaving');
+restorePage();
+addEventListener('pageshow',restorePage);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)restorePage()});
 menu?.addEventListener('click',()=>{const open=navigation.classList.toggle('open');menu.classList.toggle('active',open);menu.setAttribute('aria-expanded',String(open))});
 
 const finePointer=matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
