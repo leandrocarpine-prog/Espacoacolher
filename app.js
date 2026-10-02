@@ -4,6 +4,12 @@ const nav=document.querySelector('#main-nav');
 const dialog=document.querySelector('#start-dialog');
 const dialogContinue=document.querySelector('#dialog-continue');
 
+// Garante que a página nunca volte do histórico presa no estado de saída.
+const restorePage=()=>document.body.classList.remove('page-leaving');
+restorePage();
+addEventListener('pageshow',restorePage);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)restorePage()});
+
 const progressBar=document.querySelector('.page-progress i');
 function updateScrollState(){
   header.classList.toggle('scrolled',scrollY>20);

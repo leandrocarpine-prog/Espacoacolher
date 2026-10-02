@@ -119,7 +119,7 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 
 /* Movimento leve e interacoes: o layout responde sem pesar no celular */
-body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;filter:blur(4px)}
+body{transition:opacity .24s ease}body.page-leaving{opacity:0;filter:none!important}
 .site-header{transition:height .3s ease,border-color .3s ease,box-shadow .3s ease,background .3s ease}
 .site-header nav>a:not(.nav-cta){position:relative}
 .site-header nav>a:not(.nav-cta):after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;border-radius:2px;background:#3c84a1;transform:scaleX(0);transform-origin:right;transition:transform .25s ease}

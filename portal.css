@@ -89,7 +89,7 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 
 /* Transicoes e movimento do portal, preservando leveza e acessibilidade */
-body{transition:opacity .24s ease,filter .24s ease}body.page-leaving{opacity:0;filter:blur(4px)}
+body{transition:opacity .24s ease}body.page-leaving{opacity:0;filter:none!important}
 .auth-v2 .auth-side{--mx:0px;--my:0px}
 .auth-v2 .auth-side:before{transform:translate(calc(-50% + var(--mx)),calc(-50% + var(--my)));transition:transform .75s cubic-bezier(.2,.8,.2,1)}
 .auth-v2 .auth-side:after{animation:portal-orbit 10s ease-in-out infinite alternate}

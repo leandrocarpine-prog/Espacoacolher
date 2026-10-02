@@ -13,8 +13,8 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready .motion-reveal{
   opacity:0;
   transform:translate3d(0,28px,0) scale(.985);
-  filter:blur(4px);
-  transition:opacity var(--motion-slow) var(--motion-ease),transform var(--motion-slow) var(--motion-ease),filter var(--motion-slow) var(--motion-ease);
+  filter:none;
+  transition:opacity var(--motion-slow) var(--motion-ease),transform var(--motion-slow) var(--motion-ease);
   transition-delay:var(--motion-delay,0ms);
   will-change:opacity,transform;
 }
@@ -35,8 +35,8 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
   opacity:0;
   transform:translate3d(0,48px,0) scale(.975);
   clip-path:inset(100% 0 0 0 round 34px);
-  filter:blur(4px);
-  transition:clip-path 1250ms var(--motion-ease),opacity 900ms ease,transform 1250ms var(--motion-ease),filter 900ms ease;
+  filter:none;
+  transition:clip-path 1250ms var(--motion-ease),opacity 900ms ease,transform 1250ms var(--motion-ease);
   transition-delay:var(--motion-delay,140ms);
 }
 .motion-ready .intro .intro-media.motion-reveal.is-inview,
@@ -62,7 +62,7 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready :is(.hero-image,.screen-visual,.social-visual,.professional-portrait).motion-reveal{
   opacity:0;
   scale:1.045;
-  filter:blur(7px) saturate(.82);
+  filter:saturate(.92);
   transition:opacity 1s var(--motion-ease),scale 1.15s var(--motion-ease),filter 1s var(--motion-ease);
   transition-delay:var(--motion-delay,0ms);
 }
@@ -74,8 +74,8 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready :is(.hero-copy,.intro-copy,.social-copy,.process-head,.professional-copy,.portal-copy,.faq-heading)>.motion-reveal{
   translate:0 24px;
   opacity:0;
-  filter:blur(3px);
-  transition:translate 720ms var(--motion-ease),opacity 650ms ease,filter 720ms var(--motion-ease);
+  filter:none;
+  transition:translate 720ms var(--motion-ease),opacity 650ms ease;
   transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready :is(.hero-copy,.intro-copy,.social-copy,.process-head,.professional-copy,.portal-copy,.faq-heading)>.motion-reveal.is-inview{
@@ -86,7 +86,7 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready .therapy-card.motion-reveal{
   translate:-88px 0;
   opacity:0;
-  filter:blur(5px) saturate(.88);
+  filter:saturate(.94);
   transition:translate 1350ms var(--motion-ease),opacity 1100ms ease,filter 1250ms var(--motion-ease),box-shadow .32s ease,border-color .32s ease;
   transition-delay:var(--motion-delay,0ms);
 }
@@ -100,8 +100,8 @@ body.motion-enter{animation:motion-page-enter .55s var(--motion-ease) both}
 .motion-ready .social-facts>div.motion-reveal{
   translate:-72px 0;
   opacity:0;
-  filter:blur(4px);
-  transition:translate 820ms var(--motion-ease),opacity 720ms ease,filter 820ms var(--motion-ease),box-shadow .32s ease;
+  filter:none;
+  transition:translate 820ms var(--motion-ease),opacity 720ms ease,box-shadow .32s ease;
   transition-delay:var(--motion-delay,0ms);
 }
 .motion-ready .process-grid article.motion-reveal:nth-child(even),
