@@ -4,12 +4,6 @@ const nav=document.querySelector('#main-nav');
 const dialog=document.querySelector('#start-dialog');
 const dialogContinue=document.querySelector('#dialog-continue');
 
-// Garante que a página nunca volte do histórico presa no estado de saída.
-const restorePage=()=>document.body.classList.remove('page-leaving');
-restorePage();
-addEventListener('pageshow',restorePage);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)restorePage()});
-
 const progressBar=document.querySelector('.page-progress i');
 function updateScrollState(){
   header.classList.toggle('scrolled',scrollY>20);
@@ -79,4 +73,3 @@ if(finePointer&&hero&&heroArt){
 }
 document.querySelectorAll('.button,.nav-cta').forEach(button=>button.addEventListener('pointermove',event=>{const box=button.getBoundingClientRect();button.style.setProperty('--pointer-x',`${event.clientX-box.left}px`);button.style.setProperty('--pointer-y',`${event.clientY-box.top}px`)}));
 document.querySelectorAll('.therapy-card').forEach(card=>{if(!finePointer)return;card.addEventListener('pointermove',event=>{const box=card.getBoundingClientRect(),x=(event.clientX-box.left)/box.width-.5,y=(event.clientY-box.top)/box.height-.5;card.style.setProperty('--rx',`${y*-3}deg`);card.style.setProperty('--ry',`${x*4}deg`)});card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')})});
-document.querySelectorAll('a[href]').forEach(link=>link.addEventListener('click',event=>{const url=new URL(link.href,location.href);if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||link.target==='_blank'||url.origin!==location.origin||url.hash&&url.pathname===location.pathname)return;event.preventDefault();document.body.classList.add('page-leaving');setTimeout(()=>location.href=url.href,190)}));
