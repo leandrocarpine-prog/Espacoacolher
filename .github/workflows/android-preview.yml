@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['acolher-app/**', '.github/workflows/android-preview.yml']
+    paths: ['acolher-app/android/**', '.github/workflows/android-preview.yml']
 permissions:
   contents: write
 jobs:
