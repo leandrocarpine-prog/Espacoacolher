@@ -1,12 +1,12 @@
 const form=document.querySelector('#admin-login-form');
 const feedback=document.querySelector('#admin-login-feedback');
-const adminEmail=username=>`${username.trim().toLowerCase()}@admin.espacoacolher.app`;
+const adminEmail=username=>{const login=username.trim().toLowerCase();return login.includes('@')?login:`${login}@admin.espacoacolher.app`};
 
 async function redirectIfAdmin(){
   const {data:{user}}=await window.sb.auth.getUser();
   if(!user)return;
   const {data:profile}=await window.sb.from('profiles').select('role').eq('id',user.id).maybeSingle();
-  if(profile?.role==='admin')location.replace('admin.html');
+  if(profile?.role==='admin')location.replace('acolher-app/');
 }
 
 form.addEventListener('submit',async event=>{
@@ -19,7 +19,7 @@ form.addEventListener('submit',async event=>{
   if(profileError||profile?.role!=='admin'){
     await window.sb.auth.signOut();button.disabled=false;feedback.textContent='Esta conta não possui permissão administrativa.';feedback.className='feedback';return;
   }
-  location.replace('admin.html');
+  location.replace('acolher-app/');
 });
 
 redirectIfAdmin();
