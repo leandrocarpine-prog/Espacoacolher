@@ -17,7 +17,7 @@
       <div class="form-grid"><label>Nome completo<input name="full_name" autocomplete="name" required minlength="5" placeholder="Nome e sobrenome"></label><label>CRP<input name="crp" required placeholder="Ex.: 06/000000"></label></div>
       <div class="form-grid"><label>Celular / WhatsApp<input name="phone" inputmode="tel" autocomplete="tel" required placeholder="(19) 99999-9999"></label><label>Cidade<input name="city" autocomplete="address-level2" required value="Rio Claro"></label></div>
       <label>Área de atuação<input name="specialties" required placeholder="Ex.: Psicologia clínica, neuropsicologia"></label>
-      <label>Apresentação profissional <small>Conte brevemente sobre sua formação e experiência.</small><textarea name="presentation" rows="3" maxlength="600" required></textarea></label>
+      <label>Apresentação profissional <small>Conte brevemente sobre sua formação e experiência.</small><textarea name="presentation" rows="3" minlength="20" maxlength="600" required></textarea></label>
       <label>E-mail profissional<input name="email" type="email" autocomplete="email" required placeholder="voce@email.com"></label>
       <div class="form-grid"><label>Crie uma senha<input name="password" type="password" autocomplete="new-password" required minlength="8"></label><label>Repita a senha<input name="password_confirmation" type="password" autocomplete="new-password" required></label></div>
       <div class="password-meter" id="professional-password-meter"><i></i><span>Use 8 caracteres, maiúscula, minúscula, número e símbolo.</span></div>

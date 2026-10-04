@@ -42,7 +42,7 @@ form.addEventListener('submit',async event=>{
   if(!Number.isFinite(age)||age<0||age>120)return showFeedback('Confira a data de nascimento informada.');
   submitButton.disabled=true;submitButton.innerHTML='Enviando com segurança…';
   try{
-  const {error}=await window.sb.from('intake_requests').insert({user_id:currentUser.id,for_whom:values.for_whom,age,city:values.city.trim(),reason:values.reason,details:values.details?.trim()||null,modality:values.modality,preferred_period:values.preferred_period,preferred_days:values.preferred_days.trim(),interest:values.interest,desired_start:values.desired_start});
+  const {error}=await window.sb.from('intake_requests').insert({user_id:currentUser.id,for_whom:values.for_whom,age,city:values.city.trim(),reason:values.reason,details:values.details?.trim()||null,modality:values.modality,preferred_period:values.preferred_period,preferred_days:values.preferred_days.trim(),interest:values.interest,desired_start:values.desired_start,consent_accepted:true});
   submitButton.disabled=false;submitButton.innerHTML='Enviar solicitação <span>→</span>';
   if(error)throw error;
   form.classList.add('hidden');document.querySelector('.intake-mobile-progress').classList.add('hidden');document.querySelector('#intake-success').classList.remove('hidden');document.querySelector('#intake-success').focus();sessionStorage.removeItem('espacoAcolherParaQuem');

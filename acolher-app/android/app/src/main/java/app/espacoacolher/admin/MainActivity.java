@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
     try(java.io.OutputStream stream=connection.getOutputStream()){stream.write(body);}
     success=connection.getResponseCode()==200;
    }catch(Exception ignored){}finally{if(connection!=null)connection.disconnect();}
-   if("register".equals(action))getSharedPreferences("push",MODE_PRIVATE).edit().putBoolean("enabled",success).apply();
+   if("register".equals(action))getSharedPreferences("push",MODE_PRIVATE).edit().putBoolean("enabled",success).remove("pending_token").apply();
    final boolean done=success;
    runOnUiThread(()->{if(!isFinishing()&&!isDestroyed())reply.postMessage(done&&"register".equals(action)?"{\"registered\":true}":"{\"registered\":false,\"error\":\"server\"}");});
   });

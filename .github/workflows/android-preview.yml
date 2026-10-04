@@ -22,6 +22,11 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
+      - name: Manter a mesma assinatura de avaliação
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: espaco-acolher-debug-signing-v1
       - name: Compilar e verificar aplicativo
         working-directory: acolher-app/android
         run: gradle :app:assembleDebug :app:lintDebug --no-daemon
@@ -35,4 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaco Acolher Android - notificacoes ${GITHUB_RUN_NUMBER}" --notes "Versao 0.2.0 com Firebase. Entre como administrador e abra Gestao > Ativar notificacoes neste celular. Requer internet e permissao Android. Entrega no aparelho ainda precisa ser confirmada. APK de avaliacao; atualizacao pode exigir reinstalacao." --prerelease --target "$GITHUB_SHA"
+          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaco Acolher Android 0.3.0" --notes "Versao 0.3.0 com notificacoes Firebase e assinatura de avaliacao persistente. Se uma versao antiga recusar a instalacao, desinstale-a uma unica vez antes de instalar esta. Entre como administrador e toque em Mais > Ativar notificacoes neste celular." --prerelease --target "$GITHUB_SHA"

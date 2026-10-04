@@ -16,6 +16,10 @@ public class AcolherMessagingService extends FirebaseMessagingService {
   channel.setDescription("Avisos administrativos do Espaço Acolher");
   context.getSystemService(NotificationManager.class).createNotificationChannel(channel);
  }
+ @Override public void onNewToken(String token) {
+  super.onNewToken(token);
+  getSharedPreferences("push",MODE_PRIVATE).edit().putString("pending_token",token).apply();
+ }
  @Override public void onMessageReceived(RemoteMessage message) {
   if(!getSharedPreferences("push",MODE_PRIVATE).getBoolean("enabled",false))return;
   createChannel(this);

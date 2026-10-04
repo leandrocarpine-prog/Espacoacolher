@@ -15,8 +15,8 @@ do $$begin
   if sqlerrm not like 'Email verification is managed%' then raise;end if;
  end;
  begin
-  insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start)
-  select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','Relato fictício exclusivamente para verificar o fluxo.','Online','Flexível','Teste','Teste','Teste' from acolher_flow_fixture;
+  insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start,consent_accepted)
+  select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','Relato fictício exclusivamente para verificar o fluxo.','Online','Flexível','Segunda depois das 18h','Quero conhecer todas as possibilidades','Ainda estou pesquisando',true from acolher_flow_fixture;
   raise exception 'FAIL: unconfirmed account submitted an intake';
  exception when insufficient_privilege then null;
  when raise_exception then if sqlerrm not like 'Confirm your email first%' then raise;end if;
@@ -29,15 +29,15 @@ do $$begin
  if not public.has_verified_email() then raise exception 'FAIL: verified account blocked';end if;
  if not exists(select 1 from public.profiles where id=(select id from acolher_flow_fixture) and email_verified_at is not null) then raise exception 'FAIL: profile verification not synchronized';end if;
  begin
-  insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start)
-  select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','','Online','Flexível','Teste','Teste','Teste' from acolher_flow_fixture;
+  insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start,consent_accepted)
+  select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','','Online','Flexível','Segunda depois das 18h','Quero conhecer todas as possibilidades','Ainda estou pesquisando',true from acolher_flow_fixture;
   raise exception 'FAIL: empty story accepted';
  exception when raise_exception then
   if sqlerrm not like 'Explain the reason%' then raise;end if;
  end;
 end$$;
-insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start)
-select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','Relato fictício exclusivamente para verificar o fluxo.','Online','Flexível','Teste','Teste','Teste' from acolher_flow_fixture;
+insert into public.intake_requests(user_id,for_whom,age,city,reason,details,modality,preferred_period,preferred_days,interest,desired_start,consent_accepted)
+select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','Relato fictício exclusivamente para verificar o fluxo.','Online','Flexível','Segunda depois das 18h','Quero conhecer todas as possibilidades','Ainda estou pesquisando',true from acolher_flow_fixture;
 reset role;
 do $$begin
  if not exists(select 1 from public.push_outbox where kind='patient' and source_id=(select id from acolher_flow_fixture)) then raise exception 'FAIL: registration notification missing';end if;
