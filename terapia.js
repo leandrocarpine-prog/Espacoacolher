@@ -1,14 +1,15 @@
 (()=>{
   const mobile=matchMedia('(max-width:700px)');
-  let observer,snapTimer,pages=[];
+  let observer,snapTimer,pages=[],settling=false;
   const settle=()=>{
-    if(!mobile.matches||!pages.length)return;
+    if(!mobile.matches||!pages.length||settling)return;
     const target=pages.reduce((best,page)=>Math.abs(page.getBoundingClientRect().top-66)<Math.abs(best.getBoundingClientRect().top-66)?page:best,pages[0]);
-    if(Math.abs(target.getBoundingClientRect().top-66)>7)target.scrollIntoView({behavior:'smooth',block:'start'});
+    if(Math.abs(target.getBoundingClientRect().top-66)>7){settling=true;target.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{settling=false},850)}
   };
-  const scheduleSettle=()=>{clearTimeout(snapTimer);snapTimer=setTimeout(settle,150)};
+  const scheduleSettle=()=>{if(settling)return;clearTimeout(snapTimer);snapTimer=setTimeout(settle,150)};
   const setup=()=>{
     observer?.disconnect();
+    settling=false;
     removeEventListener('scroll',scheduleSettle);
     document.querySelectorAll('.snap-page').forEach(item=>item.classList.remove('snap-page','snap-active'));
     if(!mobile.matches)return;
