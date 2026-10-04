@@ -25,7 +25,7 @@ async function load(){
  document.querySelector('#message').textContent='Atualizando…';
  const results=await Promise.all([sb.from('profiles').select('*').eq('role','usuario').order('created_at',{ascending:false}),sb.from('intake_requests').select('*,profiles(full_name,phone,city)').order('created_at',{ascending:false}),sb.from('professional_applications').select('*').order('created_at',{ascending:false})]);
  const errors=results.filter(r=>r.error);document.querySelector('#message').textContent=errors.length?'Algumas informações não puderam ser atualizadas. Toque em ↻ para tentar novamente.':'';
- if(!results[0].error)patients=results[0].data||[];if(!results[1].error)requests=results[1].data||[];if(!results[2].error)professionals=results[2].data||[];render();
+ if(!results[0].error)patients=results[0].data||[];if(!results[1].error)requests=results[1].data||[];if(!results[2].error)professionals=results[2].data||[];const professionalIds=new Set(professionals.map(p=>p.user_id));patients=patients.filter(p=>!professionalIds.has(p.id));render();
 }
 function render(){
  let html='';const pending=requests.filter(r=>r.status==='nova'),pendingPro=professionals.filter(p=>p.status==='pendente');

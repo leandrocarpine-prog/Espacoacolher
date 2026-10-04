@@ -19,6 +19,7 @@ do $$begin
   select id,'Para mim',30,'Cidade fictícia','Teste de fluxo','Relato fictício exclusivamente para verificar o fluxo.','Online','Flexível','Teste','Teste','Teste' from acolher_flow_fixture;
   raise exception 'FAIL: unconfirmed account submitted an intake';
  exception when insufficient_privilege then null;
+ when raise_exception then if sqlerrm not like 'Confirm your email first%' then raise;end if;
  end;
 end$$;
 reset role;

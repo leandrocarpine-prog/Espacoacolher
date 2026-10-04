@@ -17,7 +17,7 @@ loginForm.addEventListener('submit',async event=>{
  }catch(error){feedback('#login-feedback',error.message==='Invalid login credentials'?'E-mail ou senha incorretos. Confirme também se sua conta já foi ativada.':error.message==='Email not confirmed'?'Confirme seu e-mail antes de entrar. Você pode reenviar a ativação abaixo.':'Não foi possível entrar. Confira sua conexão e tente novamente.');}
  finally{button.disabled=false;}
 });
-document.querySelector('#forgot').addEventListener('click',async()=>{const email=loginForm.elements.email.value;if(!email)return feedback('#login-feedback','Informe seu e-mail primeiro.');const {error}=await window.sb.auth.resetPasswordForEmail(email,{redirectTo:new URL('login.html',location.href).href});feedback('#login-feedback',error?error.message:'Enviamos as instruções para o seu e-mail.',error?'error':'success')});
+document.querySelector('#forgot').addEventListener('click',async event=>{const email=loginForm.elements.email.value.trim();if(!loginForm.elements.email.checkValidity()){loginForm.elements.email.reportValidity();return;}const button=event.currentTarget;if(button.disabled)return;button.disabled=true;try{const {error}=await window.sb.auth.resetPasswordForEmail(email,{redirectTo:new URL('recuperar-senha.html',location.href).href});if(error)throw error;feedback('#login-feedback','Solicitação aceita. Verifique seu e-mail e o spam.','success');}catch{feedback('#login-feedback','Não foi possível solicitar a recuperação. Tente novamente.');}finally{button.disabled=false;}});
 
 registerForm.addEventListener('submit',async event=>{
  event.preventDefault();if(submitButton.disabled||!validateStep())return;

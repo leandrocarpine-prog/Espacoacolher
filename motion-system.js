@@ -1,4 +1,6 @@
 (()=>{
+  if(!('IntersectionObserver' in window))return;
+  try{
   const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
   const finePointer=matchMedia('(pointer:fine)').matches;
   document.documentElement.classList.add('motion-ready');
@@ -112,4 +114,5 @@
     });
   };
   addEventListener('scroll',updateScroll,{passive:true});updateScroll();
+  }catch{document.documentElement.classList.remove('motion-ready');document.querySelectorAll('.motion-reveal').forEach(item=>item.classList.add('is-inview'));}
 })();
