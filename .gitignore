@@ -1,0 +1,9 @@
+# Private notification credentials never belong in the site or APK.
+*service-account*.json
+espaco-acolher-c9623-*.json
+.env
+.env.*
+!.env.example
+**/build/
+**/.gradle/
+**/local.properties

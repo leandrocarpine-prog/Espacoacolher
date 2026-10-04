@@ -41,9 +41,11 @@ Deno.serve(async req=>{
    let failed=false;
    for(const device of targets){
     try{
+     const {data:receipt,error:receiptError}=await db.from('push_deliveries').select('event_id').eq('event_id',event.id).eq('token',device.token).maybeSingle();
+     if(receiptError)throw Error('receipt unavailable');if(receipt)continue;
      const access=await googleToken();
      const response=await fetch('https://fcm.googleapis.com/v1/projects/espaco-acolher-c9623/messages:send',{method:'POST',headers:{Authorization:'Bearer '+access,'Content-Type':'application/json'},body:JSON.stringify({message:{token:device.token,notification:{title:'Espaço Acolher',body:event.kind==='professional'?'Novo cadastro profissional para analisar.':event.kind==='intake'?'Nova solicitação recebida.':'Novo cadastro de paciente recebido.'},data:{event_id:event.id,kind:event.kind},android:{priority:'high',notification:{channel_id:'acolher_cadastros',tag:event.id}}}})});
-     if(!response.ok){const err=await response.json();if(err.error?.details?.some((d:{errorCode:string})=>d.errorCode==='UNREGISTERED')){await db.from('admin_push_devices').delete().eq('token',device.token)}else failed=true}else sent++;
+     if(!response.ok){const err=await response.json();failed=true;if(err.error?.details?.some((d:{errorCode:string})=>d.errorCode==='UNREGISTERED')){await db.from('admin_push_devices').delete().eq('token',device.token)}}else{const {error:receiptWrite}=await db.from('push_deliveries').upsert({event_id:event.id,token:device.token});if(receiptWrite)throw Error('receipt persistence');sent++}
     }catch{failed=true}
    }
    await db.from('push_outbox').update({state:failed?'pending':'sent',last_error:failed?'Delivery failed; retry scheduled':null,updated_at:new Date().toISOString()}).eq('id',event.id);

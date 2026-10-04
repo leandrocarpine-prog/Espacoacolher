@@ -3,10 +3,14 @@ create extension if not exists pg_net with schema extensions;
 create extension if not exists pg_cron;
 create table if not exists public.admin_push_devices(token text primary key,user_id uuid not null references public.profiles(id) on delete cascade,updated_at timestamptz not null default now());
 create table if not exists public.push_outbox(id uuid primary key default gen_random_uuid(),kind text not null,source_id uuid not null,state text not null default 'pending',last_error text,updated_at timestamptz not null default now(),created_at timestamptz not null default now(),unique(kind,source_id));
+create table if not exists public.push_deliveries(event_id uuid references public.push_outbox(id) on delete cascade,token text not null,created_at timestamptz not null default now(),primary key(event_id,token));
 alter table public.admin_push_devices enable row level security;
 alter table public.push_outbox enable row level security;
+alter table public.push_deliveries enable row level security;
 revoke all on public.admin_push_devices,public.push_outbox from anon,authenticated;
+revoke all on public.push_deliveries from anon,authenticated;
 grant all on public.admin_push_devices,public.push_outbox to service_role;
+grant all on public.push_deliveries to service_role;
 create or replace function public.claim_push_events() returns setof public.push_outbox language sql security definer set search_path='' as $$
  update public.push_outbox set state='sending',updated_at=now() where id in(select id from public.push_outbox where state='pending' or (state='sending' and updated_at<now()-interval '5 minutes') order by created_at limit 20 for update skip locked) returning *;
 $$;

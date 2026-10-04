@@ -1,16 +1,17 @@
 // Android-only bridge restricted to this site's origin and administrative session.
 (() => {
- let lastStatus='Toque para permitir avisos de novos cadastros.',waiting=false;
+ let lastStatus='Toque para permitir avisos de novos cadastros.',waiting=false,timeout;
  const native=()=>window.AcolherPush;
  function show(){const el=document.querySelector('#push-status');if(el)el.textContent=lastStatus;const b=document.querySelector('#enable-push');if(b)b.disabled=waiting;}
  async function register(){
   if(!native()){lastStatus='Para receber avisos com o app fechado, instale a versão Android com notificações.';show();return;}
   const {data:{session}}=await sb.auth.getSession();if(!session)return;
   waiting=true;lastStatus='Conectando notificações…';show();
+  clearTimeout(timeout);timeout=setTimeout(()=>{waiting=false;lastStatus='A ativação demorou mais que o esperado. Tente novamente.';show();},25000);
   native().postMessage(JSON.stringify({action:'register',access_token:session.access_token}));
  }
  if(native())native().onmessage=e=>{
-  try {const result=JSON.parse(e.data);waiting=false;
+  try {const result=JSON.parse(e.data);waiting=false;clearTimeout(timeout);
    if(result.registered){localStorage.setItem('acolher-push-optin','1');lastStatus='Este celular está registrado para avisos, inclusive com o app fechado.';}
    else lastStatus=result.error==='permission'?'Permita notificações nas configurações do Android e tente novamente.':'Não foi possível ativar. Tente novamente com conexão à internet.';
    show();
