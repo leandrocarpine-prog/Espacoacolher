@@ -24,6 +24,9 @@
   .therapy-page .site-footer{display:flex;flex-direction:column;justify-content:flex-start;height:auto!important;min-height:calc(100svh - 66px)!important;max-height:none!important;overflow:visible;padding:30px 18px 22px!important}.therapy-page .site-footer .footer-main{width:100%;grid-template-columns:1fr;gap:18px;padding-bottom:22px}.therapy-page .site-footer .footer-brand{grid-column:auto}.therapy-page .site-footer .footer-brand p{margin-top:12px}.therapy-page .site-footer .footer-bottom{width:100%;font-size:15px}
   .snap-page{scroll-margin-top:66px;opacity:.68;transform:translate3d(0,22px,0) scale(.99);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}.snap-page.snap-active{opacity:1;transform:none}.snap-page.snap-active :is(h1,h2,h3,.eyebrow,.button){animation:snapContent .55s cubic-bezier(.22,1,.36,1) both}
 }
+@media(max-width:700px){
+  html{scroll-padding-top:0}.therapy-page .site-header{position:absolute!important}.therapy-intro{height:calc(100svh - 66px)!important;min-height:calc(100svh - 66px)!important}.therapy-paths,.therapy-journey,.therapy-modalities,.therapy-final{height:100svh!important;min-height:100svh!important}.snap-page{scroll-margin-top:0}
+}
 @keyframes snapContent{from{opacity:.25;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes pathCardIn{from{opacity:0;transform:translate3d(var(--card-x,-22px),18px,0) scale(.96)}to{opacity:1;transform:none}}
 @media(max-width:430px) and (max-height:740px){.therapy-intro-card h1{font-size:36px!important}.therapy-intro-card>p:not(.eyebrow){font-size:12px}.therapy-photo-note{display:none}.journey-copy,.modalities-copy{padding:18px!important}.journey-copy .eyebrow,.modalities-copy .eyebrow{margin-bottom:10px}.journey-copy h2,.modalities-copy h2{font-size:29px!important}.journey-copy ol{margin:9px 0}.journey-copy li{padding:6px 9px}.journey-copy .button{margin-top:0}}
