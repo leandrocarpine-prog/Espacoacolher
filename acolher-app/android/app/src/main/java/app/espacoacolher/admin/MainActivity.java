@@ -14,11 +14,26 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.webkit.WebViewCompat;
+import androidx.webkit.WebViewFeature;
+import androidx.webkit.JavaScriptReplyProxy;
+import com.google.firebase.messaging.FirebaseMessaging;
+import java.util.Collections;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import org.json.JSONObject;
 
 public class MainActivity extends Activity {
  private WebView web;
  private LinearLayout root;
  private View errorView;
+ private JavaScriptReplyProxy pushReply;
+ private String pendingAccess;
+ private final java.util.concurrent.ExecutorService pushWorker=java.util.concurrent.Executors.newSingleThreadExecutor();
  private static final String HOME = "https://leandrocarpine-prog.github.io/Espacoacolher/acolher-app/";
  @Override public void onCreate(Bundle state) {
   super.onCreate(state);
@@ -27,6 +42,32 @@ public class MainActivity extends Activity {
   web = new WebView(this);
   WebSettings settings = web.getSettings(); settings.setJavaScriptEnabled(true); settings.setDomStorageEnabled(true); settings.setAllowFileAccess(false); settings.setAllowContentAccess(false); settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW); settings.setTextZoom(100); settings.setSupportMultipleWindows(false);
   web.setBackgroundColor(Color.rgb(245,249,251));
+  AcolherMessagingService.createChannel(this);
+  if(WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
+   WebViewCompat.addWebMessageListener(web,"AcolherPush",Collections.singleton("https://leandrocarpine-prog.github.io"),(view,message,origin,mainFrame,reply)->{
+    if(!mainFrame||view.getUrl()==null||!view.getUrl().startsWith(HOME))return;
+    try {
+     JSONObject request=new JSONObject(message.getData());String access=request.optString("access_token");
+     if(access.length()<20||access.length()>8192)return;
+     String action=request.optString("action");
+     if("unregister".equals(action)) {
+      getSharedPreferences("push",MODE_PRIVATE).edit().putBoolean("enabled",false).apply();
+      FirebaseMessaging.getInstance().setAutoInitEnabled(false);
+      FirebaseMessaging.getInstance().getToken().addOnCompleteListener(token->{
+       if(token.isSuccessful())sendRegistration("unregister",access,token.getResult(),reply);
+       FirebaseMessaging.getInstance().deleteToken();
+      });
+      return;
+     }
+     if(!"register".equals(action))return;
+     pushReply=reply;pendingAccess=access;
+     if(Build.VERSION.SDK_INT>=33&&checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED) {
+      requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},101);return;
+     }
+     registerPush();
+    }catch(Exception ignored){reply.postMessage("{\"registered\":false,\"error\":\"request\"}");}
+   });
+  }
   web.setWebViewClient(new WebViewClient() {
    @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
     Uri url = request.getUrl();
@@ -42,6 +83,36 @@ public class MainActivity extends Activity {
   root.addView(web,new LinearLayout.LayoutParams(-1,0,1)); setContentView(root);
   if(state==null || web.restoreState(state)==null)web.loadUrl(HOME);
  }
+ private void registerPush() {
+  final String access=pendingAccess;final JavaScriptReplyProxy reply=pushReply;pendingAccess=null;pushReply=null;
+  if(access==null||reply==null)return;
+  if(!getSystemService(android.app.NotificationManager.class).areNotificationsEnabled()) {reply.postMessage("{\"registered\":false,\"error\":\"permission\"}");return;}
+  FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+  FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task->{
+   if(task.isSuccessful())sendRegistration("register",access,task.getResult(),reply);
+   else reply.postMessage("{\"registered\":false,\"error\":\"token\"}");
+  });
+ }
+ private void sendRegistration(String action,String access,String token,JavaScriptReplyProxy reply) {
+  pushWorker.execute(()->{
+   boolean success=false;HttpURLConnection connection=null;
+   try {
+    connection=(HttpURLConnection)new URL("https://lunnyaxxkineezrsclbx.supabase.co/functions/v1/acolher-push").openConnection();
+    connection.setRequestMethod("POST");connection.setConnectTimeout(10000);connection.setReadTimeout(10000);connection.setDoOutput(true);
+    connection.setRequestProperty("Authorization","Bearer "+access);connection.setRequestProperty("Content-Type","application/json");
+    byte[] body=new JSONObject().put("action",action).put("token",token).toString().getBytes(StandardCharsets.UTF_8);
+    try(java.io.OutputStream stream=connection.getOutputStream()){stream.write(body);}
+    success=connection.getResponseCode()==200;
+   }catch(Exception ignored){}finally{if(connection!=null)connection.disconnect();}
+   if("register".equals(action))getSharedPreferences("push",MODE_PRIVATE).edit().putBoolean("enabled",success).apply();
+   final boolean done=success;
+   runOnUiThread(()->{if(!isFinishing()&&!isDestroyed())reply.postMessage(done&&"register".equals(action)?"{\"registered\":true}":"{\"registered\":false,\"error\":\"server\"}");});
+  });
+ }
+ @Override public void onRequestPermissionsResult(int code,String[] permissions,int[] results) {
+  super.onRequestPermissionsResult(code,permissions,results);
+  if(code==101)registerPush();
+ }
  private void showError() {
   if(errorView!=null)return;
   LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(40,100,40,40);
@@ -53,5 +124,5 @@ public class MainActivity extends Activity {
  @Override protected void onSaveInstanceState(Bundle state){super.onSaveInstanceState(state);web.saveState(state);}
  @Override protected void onPause(){super.onPause();web.onPause();}
  @Override protected void onResume(){super.onResume();if(web!=null)web.onResume();}
- @Override protected void onDestroy(){web.destroy();super.onDestroy();}
+ @Override protected void onDestroy(){pendingAccess=null;pushReply=null;pushWorker.shutdown();web.destroy();super.onDestroy();}
 }

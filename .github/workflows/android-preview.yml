@@ -35,4 +35,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaço Acolher Android · avaliação ${GITHUB_RUN_NUMBER}" --notes "Primeira versão Android administrativa. Requer login de administrador e internet. Notificações com o app fechado ainda não disponíveis. APK de avaliação assinado com chave de desenvolvimento; versões posteriores poderão exigir reinstalação." --prerelease --target "$GITHUB_SHA"
+          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaco Acolher Android - notificacoes ${GITHUB_RUN_NUMBER}" --notes "Versao 0.2.0 com Firebase. Entre como administrador e abra Gestao > Ativar notificacoes neste celular. Requer internet e permissao Android. Entrega no aparelho ainda precisa ser confirmada. APK de avaliacao; atualizacao pode exigir reinstalacao." --prerelease --target "$GITHUB_SHA"
