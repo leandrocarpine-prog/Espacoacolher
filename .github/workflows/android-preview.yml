@@ -40,4 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaco Acolher Android 0.3.0" --notes "Versao 0.3.0 com notificacoes Firebase e assinatura de avaliacao persistente. Se uma versao antiga recusar a instalacao, desinstale-a uma unica vez antes de instalar esta. Entre como administrador e toque em Mais > Ativar notificacoes neste celular." --prerelease --target "$GITHUB_SHA"
+          gh release create "android-preview-${GITHUB_RUN_NUMBER}" Espaco-Acolher-Android.apk --title "Espaco Acolher Android 0.4.0" --notes "Versao 0.4.0 com nova interface executiva, transicoes fluidas e notificacoes Firebase. Se uma versao antiga recusar a instalacao, desinstale-a uma unica vez antes de instalar esta. Entre como administrador e toque em Gestao > Ativar notificacoes neste celular." --prerelease --target "$GITHUB_SHA"
