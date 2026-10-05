@@ -2,8 +2,10 @@ const loginForm=document.querySelector('#login-form'),registerForm=document.quer
 const feedback=(id,message,type='error')=>{const box=document.querySelector(id);box.textContent=message;box.className=`auth-feedback ${type}`};
 function showView(name){loginForm.classList.toggle('hidden',name!=='login');registerForm.classList.toggle('hidden',name!=='register');if(name==='register'){currentStep=0;updateStep();setTimeout(()=>registerForm.querySelector('input')?.focus(),250)}}
 document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();showView(button.dataset.tab)}));
-const params=new URLSearchParams(location.search);if(params.get('cadastro')==='1')showView('register');
-window.sb.auth.getSession().then(async({data})=>{if(data.session)location.replace(await window.acolherDestination(params.get('next')))}).catch(()=>feedback('#login-feedback','Não foi possível verificar o acesso. Tente novamente.'));
+const params=new URLSearchParams(location.search),patientRegistrationIntent=params.get('cadastro')==='1';
+const publicSignupClient=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'ea-public-patient-signup'}});
+if(patientRegistrationIntent)showView('register');
+else window.sb.auth.getSession().then(async({data})=>{if(data.session)location.replace(await window.acolherDestination(params.get('next')))}).catch(()=>feedback('#login-feedback','Não foi possível verificar o acesso. Tente novamente.'));
 
 function updateStep(){steps.forEach((step,index)=>step.classList.toggle('active',index===currentStep));progressLabels.forEach((label,index)=>label.classList.toggle('active',index<=currentStep));progressBar.style.width=`${(currentStep+1)/steps.length*100}%`;backButton.classList.toggle('hidden',currentStep===0);nextButton.classList.toggle('hidden',currentStep===steps.length-1);submitButton.classList.toggle('hidden',currentStep!==steps.length-1);feedback('#register-feedback','');registerForm.scrollIntoView({behavior:'smooth',block:'start'})}
 function validateStep(){const fields=[...steps[currentStep].querySelectorAll('[required]')];for(const field of fields){if(!field.checkValidity()){field.reportValidity();return false}}if(currentStep===0){const name=registerForm.elements.full_name.value.trim().replace(/\s+/g,' '),cpf=registerForm.elements.cpf.value.replace(/\D/g,''),phone=registerForm.elements.phone.value.replace(/\D/g,'');if(name.split(' ').length<2)return feedback('#register-feedback','Informe nome e sobrenome.'),false;if(!validCPF(cpf))return feedback('#register-feedback','Informe um CPF válido.'),false;if(!/^\d{10,11}$/.test(phone)||/^(\d)\1+$/.test(phone))return feedback('#register-feedback','Informe um celular válido, com DDD.'),false}if(currentStep===1&&registerForm.elements.cep.dataset.valid!=='true')return feedback('#register-feedback','Consulte um CEP válido antes de continuar.'),false;return true}
@@ -28,9 +30,9 @@ registerForm.addEventListener('submit',async event=>{
  const address=`${data.street}, ${data.number}${data.complement?` - ${data.complement}`:''}, ${data.neighborhood}`;
  submitButton.disabled=true;feedback('#register-feedback','Criando sua conta segura…','success');
  try {
-  const {data:result,error}=await window.sb.auth.signUp({email,password:data.password,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href,data:{full_name:data.full_name.trim(),username:data.username,rg:data.cpf,cep:data.cep,address,street:data.street,address_number:data.number,address_complement:data.complement||null,neighborhood:data.neighborhood,city:data.city,state:data.state,phone:data.phone,social:data.social||null,privacy_accepted:true}}});
+  const {data:result,error}=await publicSignupClient.auth.signUp({email,password:data.password,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href,data:{full_name:data.full_name.trim(),username:data.username,rg:data.cpf,cep:data.cep,address,street:data.street,address_number:data.number,address_complement:data.complement||null,neighborhood:data.neighborhood,city:data.city,state:data.state,phone:data.phone,social:data.social||null,privacy_accepted:true}}});
   if(error)throw error;
-  if(result.session){await window.sb.auth.signOut({scope:'local'});return feedback('#register-feedback','O servidor não exigiu a confirmação do e-mail. A configuração de ativação precisa ser revisada antes de continuar.');}
+  if(result.session){await publicSignupClient.auth.signOut({scope:'local'});return feedback('#register-feedback','O servidor não exigiu a confirmação do e-mail. A configuração de ativação precisa ser revisada antes de continuar.');}
   steps.forEach(step=>step.classList.remove('active'));
   document.querySelector('.register-progress').classList.add('hidden');document.querySelector('.register-actions').classList.add('hidden');registerForm.querySelector('.register-top').classList.add('hidden');
   registerForm.insertAdjacentHTML('afterbegin','<div class="activation-success"><span>✓</span><p>CADASTRO RECEBIDO — AGUARDANDO CONFIRMAÇÃO</p><h2>Confirme seu e-mail</h2><div>Verifique a caixa de entrada e o spam de <b>'+window.acolherSafety.escape(email)+'</b>. Se já existir uma conta, use entrar ou reenviar ativação. Após confirmar, informe para quem é o atendimento e um pouco da sua história na solicitação.</div><button class="portal-button" type="button" data-tab="login">Ir para entrar ou reenviar ativação</button></div>');
@@ -42,7 +44,7 @@ document.querySelector('#resend-activation').addEventListener('click',async even
  const email=loginForm.elements.email.value.trim().toLowerCase();
  if(!loginForm.elements.email.checkValidity()){loginForm.elements.email.reportValidity();return;}
  const button=event.currentTarget;button.disabled=true;
- try{const {error}=await window.sb.auth.resend({type:'signup',email,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href}});
+ try{const {error}=await publicSignupClient.auth.resend({type:'signup',email,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href}});
  if(error)throw error;feedback('#login-feedback','Solicitação de reenvio aceita. Verifique a caixa de entrada e o spam; a conta precisa estar aguardando confirmação.','success');
  }catch{feedback('#login-feedback','Não foi possível reenviar a ativação. O serviço de e-mail pode estar indisponível ou limitado. Tente novamente mais tarde.');}
  finally{button.disabled=false;}
