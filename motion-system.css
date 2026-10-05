@@ -173,3 +173,5 @@ body.motion-scrolled .site-header,body.motion-scrolled .portal-header{backdrop-f
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
   .motion-reveal{opacity:1!important;transform:none!important;filter:none!important}
 }
+
+@media(max-width:700px){.motion-ready .process-grid article.motion-reveal,.motion-ready .process-grid article.motion-reveal:nth-child(even),.motion-ready .social-facts>div.motion-reveal,.motion-ready .social-facts>div.motion-reveal:nth-child(even){translate:0 0!important;transform:none!important;opacity:1!important;transition:none!important;will-change:auto!important}.home-page .process{background-attachment:scroll!important;background-position:center!important}}
