@@ -688,3 +688,31 @@ body{opacity:1;filter:none}
 
 /* v57 — apresentação explícita do serviço */
 @media(max-width:560px){.home-page .hero-copy:before{display:none!important}.home-page .hero-purpose{display:grid;gap:8px;margin:22px 0 2px}.home-page .hero-purpose span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(34,112,143,.12);font-size:13px;font-weight:700;color:#244f60}.home-page .hero-purpose b{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#163f51;color:#fff;font-size:10px;letter-spacing:.05em}.home-page .hero h1{max-width:11ch!important}.home-page .hero-lead strong{color:#173e50;font-weight:800}.home-page .hero-image{height:210px!important}}
+
+/* v58 — reestruturação visual integral da home mobile */
+@media(max-width:560px){
+.home-page main>.hero{padding:78px 18px 0!important;background:radial-gradient(circle at 90% 8%,#ffd1ad 0,transparent 27%),radial-gradient(circle at 3% 70%,#a9e8e4 0,transparent 31%),linear-gradient(155deg,#fff9ef 0%,#eefaff 48%,#eeeaff 100%)!important}
+.home-page .hero h1{font-size:clamp(42px,12vw,55px)!important;line-height:.96!important;max-width:12ch!important;color:#12364a!important}
+.home-page .hero-lead{font-size:17px!important;color:#496a79!important}
+.home-page .hero-reassurance{margin:18px 0 0;padding:15px 17px;border-left:4px solid #e76f51;border-radius:0 16px 16px 0;background:rgba(255,255,255,.76);font-weight:700;line-height:1.45;color:#385b69}
+.home-page .hero-image{height:225px!important;margin-top:28px!important}
+.home-page .welcome-map{padding:44px 18px!important;background:#123f50!important;color:#fff!important}
+.home-page .welcome-head h2{font-size:39px!important;line-height:1.02!important;color:#fff!important}
+.home-page .welcome-head>p:last-child{color:#cfe3e8!important;line-height:1.55!important}
+.home-page .welcome-head .eyebrow{color:#ffb895!important}
+.home-page .welcome-paths{display:grid!important;gap:10px!important;margin-top:25px!important}
+.home-page .welcome-paths a{position:relative;display:grid;gap:5px;padding:19px 46px 19px 18px;border-radius:21px;text-decoration:none;color:#17394a;background:#fff1e8;box-shadow:0 10px 28px rgba(0,0,0,.1)}
+.home-page .welcome-paths a:nth-child(2){background:#dff5f6}.home-page .welcome-paths a:nth-child(3){background:#eee8fb}.home-page .welcome-paths a:nth-child(4){background:#ffe6d7}.home-page .welcome-paths a:nth-child(5){background:#e1f2e5}.home-page .welcome-paths a:nth-child(6){background:#e7efff}
+.home-page .welcome-paths b{font-size:18px}.home-page .welcome-paths span{font-size:13px;line-height:1.45;color:#56717c}.home-page .welcome-paths i{position:absolute;right:18px;top:50%;translate:0 -50%;font-style:normal;font-size:22px;color:#b75d43}
+.home-page .what-happens{padding:46px 18px!important;background:#fff7ef!important}
+.home-page .what-copy h2{font-size:39px!important;color:#153b4c!important}.home-page .what-copy>p:last-child{line-height:1.6;color:#5b7480}
+.home-page .what-steps{display:grid;gap:11px;margin:26px 0}
+.home-page .what-steps article{padding:21px;border-radius:22px;background:#fff;box-shadow:0 12px 30px rgba(35,79,95,.08)}
+.home-page .what-steps article:nth-child(2){background:#e6f7f7}.home-page .what-steps article:nth-child(3){background:#eeeafa}
+.home-page .what-steps em{display:block;margin-bottom:12px;font-style:normal;font-size:12px;font-weight:800;letter-spacing:.12em;color:#d26749}.home-page .what-steps b{font-size:19px;color:#173b4b}.home-page .what-steps p{margin:7px 0 0;font-size:14px;line-height:1.5;color:#607782}
+.home-page .what-happens>.button{width:100%;justify-content:center;background:linear-gradient(135deg,#dc6548,#ef8b61)!important;color:#fff!important}
+.home-page .intro{padding:42px 18px!important;background:linear-gradient(150deg,#e5f6f5,#f3edff)!important;color:#173b4b!important}.home-page .intro-copy{padding:25px!important;border-radius:26px!important;background:#fff!important;box-shadow:0 16px 42px rgba(31,78,96,.1)!important}.home-page .intro-copy h2{color:#173b4b!important}.home-page .intro-copy>p{color:#5b7480!important}.home-page .intro-copy .eyebrow{color:#b65a41!important}
+.home-page .needs{background:#fffaf4!important}.home-page .therapy-card:nth-child(3n+1){background:#ffeadf!important}.home-page .therapy-card:nth-child(3n+2){background:#def4f5!important}.home-page .therapy-card:nth-child(3n){background:#ede7fa!important}
+.home-page .social-care{background:#f0a982!important}.home-page .social-copy{background:#f0a982!important}
+.home-page .process{background:linear-gradient(180deg,#f4efff,#eefafa)!important}
+}
