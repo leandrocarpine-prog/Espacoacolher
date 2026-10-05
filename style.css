@@ -599,3 +599,25 @@ body{opacity:1;filter:none}
     min-height:0;
   }
 }
+
+
+/* v53 — mobile compacto: elimina respiros vazios entre blocos */
+@media(max-width:560px){
+  .home-page .section{padding-top:42px!important;padding-bottom:42px!important}
+  .home-page .needs{padding-top:42px!important;padding-bottom:42px!important}
+  .home-page .therapy-grid{gap:14px!important}
+  .home-page .therapy-card,
+  .home-page .therapy-card.featured{min-height:0!important}
+  .home-page .therapy-card-image{height:155px!important}
+  .home-page .therapy-card-body{min-height:0!important;padding:20px 20px 22px!important}
+  .home-page .therapy-card button,
+  .home-page .therapy-card.featured button{margin-top:18px!important;padding-top:0!important}
+  .home-page .social-care{min-height:0!important}
+  .home-page .social-visual{min-height:0!important;height:340px!important}
+  .home-page .social-copy{padding:42px 20px 48px!important}
+  .home-page .social-copy h2{margin-bottom:16px!important}
+  .home-page .social-copy>p:not(.eyebrow){margin:0 0 24px!important}
+  .home-page .social-facts{margin-bottom:24px!important}
+  .home-page .process{padding-top:48px!important;padding-bottom:48px!important}
+  .home-page .process-head{margin-bottom:28px!important}
+}
