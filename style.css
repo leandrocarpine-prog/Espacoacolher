@@ -624,3 +624,64 @@ body{opacity:1;filter:none}
 
 /* v54 — remove espaço vazio sem conteúdo no mobile */
 @media(max-width:560px){.home-page .intro{padding-top:18px!important;padding-bottom:18px!important;gap:0!important}.home-page .intro-copy{padding-top:0!important;padding-bottom:0!important}.home-page .intro+.social-care,.home-page .intro+.needs{margin-top:0!important}.home-page .therapy-grid{row-gap:8px!important}.home-page .therapy-card{margin-bottom:0!important}.home-page main>section{margin-top:0!important;margin-bottom:0!important}}
+
+/* v56 — revisão completa do mobile: apresentação, contraste, ritmo e zero áreas mortas */
+@media(max-width:560px){
+  body.home-page{background:#fffaf4!important}
+  .home-page main>.hero{
+    min-height:auto!important;padding:92px 18px 0!important;
+    background:radial-gradient(circle at 92% 10%,rgba(255,183,143,.52),transparent 27%),radial-gradient(circle at 5% 80%,rgba(98,205,211,.35),transparent 29%),linear-gradient(155deg,#fff8ed 0%,#eef9fb 48%,#eef0ff 100%)!important;
+  }
+  .home-page .hero-copy{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+  .home-page .hero-copy:before{content:"ESPAÇO ACOLHER";display:inline-flex;margin:0 0 18px;padding:8px 12px;border-radius:999px;background:#113f52;color:#fff;font-size:10px;font-weight:800;letter-spacing:.16em}
+  .home-page .hero .eyebrow{color:#b9573d!important;margin-bottom:16px!important}
+  .home-page .hero h1{font-size:clamp(43px,12.5vw,56px)!important;line-height:.96!important;letter-spacing:-.055em!important;max-width:10ch!important;color:#102f45!important}
+  .home-page .hero-lead{margin:20px 0 0!important;max-width:32ch!important;font-size:17px!important;line-height:1.5!important;color:#526f80!important}
+  .home-page .hero-actions{display:grid!important;gap:9px!important;margin-top:26px!important}
+  .home-page .button-light{width:100%!important;min-height:60px!important;background:linear-gradient(135deg,#df6848,#ef8c62)!important;color:#fff!important;box-shadow:0 16px 35px rgba(190,84,54,.22)!important}
+  .home-page .text-link.light{color:#176f8d!important;padding:9px 2px!important}
+  .home-page .hero-trust{margin-top:20px!important;padding:17px 0 22px!important;border-top:1px solid rgba(32,106,130,.16)!important;color:#587383!important}
+  .home-page .hero-image{position:relative!important;inset:auto!important;width:calc(100% + 36px)!important;height:235px!important;margin:0 -18px!important;opacity:1!important;border-radius:30px 30px 0 0!important;overflow:hidden!important}
+  .home-page .hero-image img{display:block!important;object-fit:cover!important;object-position:center 55%!important}
+  .home-page .hero-image-shade{background:linear-gradient(0deg,rgba(13,57,70,.24),transparent 58%)!important}
+
+  .home-page .intro{display:block!important;padding:0 18px 30px!important;background:#103f50!important;color:#fff!important}
+  .home-page .intro-media{display:none!important}
+  .home-page .intro-copy{padding:30px 22px!important;margin:0!important;border:0!important;border-radius:0 0 28px 28px!important;background:#103f50!important;box-shadow:none!important}
+  .home-page .intro-copy .eyebrow{color:#91d9dd!important}
+  .home-page .intro-copy h2{font-size:35px!important;line-height:1.04!important;color:#fff!important}
+  .home-page .intro-copy>p{margin:18px 0 20px!important;font-size:16px!important;line-height:1.55!important;color:#d8eaed!important}
+  .home-page .intro-copy .text-link{color:#ffd1bb!important}
+
+  .home-page .needs{padding:42px 18px!important;background:linear-gradient(145deg,#f0fbfa 0%,#fff5ed 52%,#f2efff 100%)!important}
+  .home-page .needs .section-heading{margin-bottom:24px!important}
+  .home-page .needs .eyebrow{color:#b9573d!important}
+  .home-page .therapy-grid{gap:12px!important}
+  .home-page .therapy-card{min-height:0!important;padding:22px!important;border:0!important;box-shadow:0 14px 34px rgba(28,74,94,.09)!important}
+  .home-page .therapy-card:nth-child(3n+1){background:#fff0e6!important}
+  .home-page .therapy-card:nth-child(3n+2){background:#e5f6f7!important}
+  .home-page .therapy-card:nth-child(3n){background:#f0ebfb!important}
+  .home-page .therapy-card.featured{background:linear-gradient(145deg,#174f61,#287f8f)!important;color:#fff!important}
+  .home-page .therapy-card h3{margin-top:20px!important}
+  .home-page .therapy-card button{margin-top:16px!important}
+
+  .home-page .social-care{display:block!important;min-height:0!important;background:#f2ad87!important}
+  .home-page .social-visual{height:300px!important;min-height:0!important}
+  .home-page .social-copy{padding:38px 20px 44px!important;background:#f2ad87!important;color:#173b49!important}
+  .home-page .social-copy .eyebrow{color:#93462f!important}
+  .home-page .social-copy h2{color:#173b49!important}
+  .home-page .social-copy>p:not(.eyebrow),.home-page .social-facts p{color:#4f6870!important}
+
+  .home-page .process{padding:42px 18px!important;background:#fffaf4!important}
+  .home-page .process-head{display:block!important;margin-bottom:24px!important}
+  .home-page .process-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;border:0!important}
+  .home-page .process-grid article{min-height:0!important;padding:24px!important;border:0!important;border-radius:24px!important}
+  .home-page .process-grid article:nth-child(1){background:#ffe9dc!important}
+  .home-page .process-grid article:nth-child(2){background:#def3f7!important}
+  .home-page .process-grid article:nth-child(3){background:#eee7fa!important}
+  .home-page .process-grid article:nth-child(4){background:#e8f4e8!important}
+  .home-page .process-icon{margin:24px 0 18px!important}
+
+  .home-page main>section{margin:0!important}
+  .home-page .section{min-height:0!important}
+}
