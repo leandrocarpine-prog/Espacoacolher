@@ -716,3 +716,6 @@ body{opacity:1;filter:none}
 .home-page .social-care{background:#f0a982!important}.home-page .social-copy{background:#f0a982!important}
 .home-page .process{background:linear-gradient(180deg,#f4efff,#eefafa)!important}
 }
+
+/* v60 — propósito do Espaço Acolher visível na primeira tela */
+@media(max-width:560px){.home-page .purpose-line{display:flex;align-items:center;gap:7px;overflow-x:auto;margin:20px -4px 2px;padding:4px 4px 10px;scrollbar-width:none}.home-page .purpose-line::-webkit-scrollbar{display:none}.home-page .purpose-line b{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#fff;color:#173f50;border:1px solid rgba(31,104,129,.13);font-size:12px;box-shadow:0 7px 20px rgba(30,83,104,.07)}.home-page .purpose-line span{flex:0 0 auto;color:#d9694c;font-weight:800}.home-page .hero-reassurance{background:#fff!important;border-left-color:#e36d4e!important}.home-page .hero-actions{margin-top:20px!important}}
