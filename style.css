@@ -685,3 +685,6 @@ body{opacity:1;filter:none}
   .home-page main>section{margin:0!important}
   .home-page .section{min-height:0!important}
 }
+
+/* v57 — apresentação explícita do serviço */
+@media(max-width:560px){.home-page .hero-copy:before{display:none!important}.home-page .hero-purpose{display:grid;gap:8px;margin:22px 0 2px}.home-page .hero-purpose span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(34,112,143,.12);font-size:13px;font-weight:700;color:#244f60}.home-page .hero-purpose b{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#163f51;color:#fff;font-size:10px;letter-spacing:.05em}.home-page .hero h1{max-width:11ch!important}.home-page .hero-lead strong{color:#173e50;font-weight:800}.home-page .hero-image{height:210px!important}}
