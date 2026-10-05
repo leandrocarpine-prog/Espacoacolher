@@ -1,0 +1,39 @@
+/* Mantém textos e campos nítidos mesmo em navegadores móveis com GPU limitada. */
+.auth-v2.auth-crisp,
+.auth-v2.auth-crisp.motion-enter{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  animation:none!important;
+}
+.auth-v2.auth-crisp .auth-shell,
+.auth-v2.auth-crisp .auth-side-content{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.auth-v2.auth-crisp .auth-side-content{
+  animation:none!important;
+  transform:none!important;
+  will-change:auto!important;
+  background:linear-gradient(145deg,rgba(249,253,254,.97),rgba(231,243,248,.97));
+}
+.auth-v2.auth-crisp .auth-form,
+.auth-v2.auth-crisp .register-step.active,
+.auth-v2.auth-crisp .motion-reveal,
+.auth-v2.auth-crisp .motion-reveal.is-inview{
+  opacity:1!important;
+  transform:none!important;
+  translate:none!important;
+  filter:none!important;
+  animation:none!important;
+  transition-property:border-color,box-shadow,background-color,color!important;
+  transition-delay:0ms!important;
+  will-change:auto!important;
+}
+.auth-v2.auth-crisp input,
+.auth-v2.auth-crisp select,
+.auth-v2.auth-crisp button,
+.auth-v2.auth-crisp a{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
