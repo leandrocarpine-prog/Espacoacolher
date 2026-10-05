@@ -54,7 +54,7 @@
     revealItems.forEach(item=>item.classList.add('is-inview'));
   }else{
     const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      entry.target.classList.toggle('is-inview',entry.isIntersecting);
+      if(entry.isIntersecting)entry.target.classList.add('is-inview');
     }),{threshold:.08,rootMargin:'-3% 0px -4% 0px'});
     revealItems.forEach(item=>revealObserver.observe(item));
     // Libera apenas o que já está visível na abertura. O restante continua respondendo à rolagem.
