@@ -582,3 +582,20 @@ body{opacity:1;filter:none}
 @keyframes footer-atmosphere{from{background-position:0 0,100% 100%,0 0}to{background-position:7% 5%,93% 94%,0 0}}@keyframes footer-orbit{from{transform:translate3d(-8px,5px,0) scale(.96)}to{transform:translate3d(18px,-12px,0) scale(1.08)}}
 @media(max-width:560px){.site-footer{padding:30px 18px 22px}.site-footer .footer-main{display:grid;grid-template-columns:1fr;gap:18px;padding-bottom:22px}.site-footer .footer-brand{grid-column:auto;padding-bottom:6px}.site-footer .footer-brand p{margin-top:12px;font-size:18px;line-height:1.5}.site-footer .footer-brand .brand b{font-size:22px}.site-footer .footer-brand .brand small{font-size:13px}.site-footer .footer-main>div:not(.footer-brand){display:grid;grid-template-columns:1fr;gap:9px}.site-footer .footer-main>div>b{font-size:15px;margin:0 0 3px}.site-footer .footer-main a,.site-footer .footer-main span,.site-footer .footer-main p{font-size:20px;line-height:1.35}.site-footer .footer-main>div:not(.footer-brand)>a{min-height:52px;padding:13px 16px;display:flex;align-items:center;border:1px solid rgba(255,255,255,.15);border-radius:15px;background:rgba(255,255,255,.08);color:#f2fbf9}.site-footer .footer-main>div:nth-child(3)>a:first-of-type{background:linear-gradient(135deg,rgba(78,170,156,.38),rgba(255,255,255,.09));border-color:rgba(143,209,201,.34)}.site-footer .footer-main>div:nth-child(3)>a:nth-of-type(2){background:linear-gradient(135deg,rgba(228,121,91,.3),rgba(255,255,255,.08));border-color:rgba(238,151,125,.3)}.site-footer .footer-main>div:not(.footer-brand)>span,.site-footer .footer-main>div:not(.footer-brand)>p{padding:8px 3px;margin:0}.site-footer .footer-bottom{font-size:15px;line-height:1.5;padding-top:16px;gap:7px}}
 @media(prefers-reduced-motion:reduce){.site-footer,.site-footer:after{animation:none!important}.site-footer .footer-main>div,.site-footer .footer-bottom{opacity:1!important;transform:none!important;transition:none!important}}
+
+
+/* v52 — correção mobile: remove o grande vazio antes da introdução */
+@media(max-width:560px){
+  .home-page main>section.intro{
+    display:block;
+    padding:34px 18px 54px;
+    min-height:0;
+  }
+  .home-page .intro-media{
+    display:none !important;
+  }
+  .home-page .intro-copy{
+    margin:0;
+    min-height:0;
+  }
+}
