@@ -763,3 +763,38 @@ body{opacity:1;filter:none}
  .home-page .process-grid article:nth-child(3){background:#e5dcf6!important}
  .home-page .process-grid article:nth-child(4){background:#f8e4a9!important}
 }
+
+/* v63 — troca total de identidade cromática */
+:root{
+ --ea-night:#26304a;--ea-plum:#65456f;--ea-berry:#b9506f;--ea-rose:#e7838f;
+ --ea-peach:#f2a879;--ea-gold:#e8b94f;--ea-mint:#79b9a7;--ea-aqua:#78bfc4;
+ --ea-lilac:#b5a4dc;--ea-paper:#fff9f2;--ea-white:#fffdf9;
+}
+body.home-page{background:var(--ea-paper)!important;color:var(--ea-night)!important}
+.home-page .site-header{background:rgba(255,249,242,.96)!important;border-bottom:1px solid rgba(101,69,111,.12)!important}
+.home-page .brand-mark{background:linear-gradient(145deg,var(--ea-berry),var(--ea-plum))!important}
+.home-page .brand b{color:var(--ea-night)!important}.home-page .brand small{color:#8d6471!important}
+.home-page .menu-button span{background:var(--ea-night)!important}
+.home-page .button,.home-page .nav-cta,.home-page .button-light{background:linear-gradient(135deg,var(--ea-berry),var(--ea-peach))!important;color:#fff!important;box-shadow:0 15px 32px rgba(185,80,111,.22)!important}
+.home-page .text-link,.home-page .text-link.light{color:var(--ea-plum)!important}
+.home-page .eyebrow,.home-page .hero .eyebrow{color:var(--ea-berry)!important}.home-page .eyebrow span{background:var(--ea-berry)!important}
+.home-page footer{background:var(--ea-night)!important}
+@media(max-width:560px){
+ .home-page main>.hero{background:radial-gradient(circle at 91% 7%,rgba(232,185,79,.48),transparent 25%),radial-gradient(circle at 2% 70%,rgba(121,185,167,.42),transparent 29%),linear-gradient(145deg,#fff4e7 0%,#fbe9ed 47%,#eee9f8 100%)!important}
+ .home-page .hero h1{color:var(--ea-night)!important}.home-page .hero-lead{color:#626a7d!important}.home-page .hero-lead strong{color:var(--ea-plum)!important}
+ .home-page .hero-reassurance{background:#fff7ec!important;border-left:4px solid var(--ea-berry)!important;color:#5d5366!important}
+ .home-page .purpose-line b{background:#fff!important;color:var(--ea-plum)!important;border-color:rgba(101,69,111,.14)!important}.home-page .purpose-line span{color:var(--ea-berry)!important}
+ .home-page .welcome-map{background:linear-gradient(150deg,#493753 0%,#684b73 55%,#3f6970 100%)!important}
+ .home-page .welcome-head .eyebrow{color:#ffc58f!important}.home-page .welcome-head>p:last-child{color:#f1e9f3!important}
+ .home-page .welcome-paths a:nth-child(1){background:#ffdcd7!important}.home-page .welcome-paths a:nth-child(2){background:#d9eee7!important}.home-page .welcome-paths a:nth-child(3){background:#e8def7!important}.home-page .welcome-paths a:nth-child(4){background:#ffe9b9!important}.home-page .welcome-paths a:nth-child(5){background:#d9ece8!important}.home-page .welcome-paths a:nth-child(6){background:#eadff0!important}
+ .home-page .welcome-paths a{color:var(--ea-night)!important}.home-page .welcome-paths i{color:var(--ea-berry)!important}
+ .home-page .what-happens{background:linear-gradient(160deg,#fff5e8,#f8edf2)!important}.home-page .what-copy h2{color:var(--ea-night)!important}
+ .home-page .what-steps article:nth-child(1){background:#ffe0d7!important}.home-page .what-steps article:nth-child(2){background:#dceee8!important}.home-page .what-steps article:nth-child(3){background:#e8dff5!important}
+ .home-page .intro{background:linear-gradient(145deg,#e2f0eb,#eee5f6)!important}.home-page .intro-copy h2{color:var(--ea-night)!important}
+ .home-page .needs{background:linear-gradient(145deg,#fff0df,#fff9f0 45%,#f2e9f6)!important}
+ .home-page .therapy-card:nth-child(3n+1){background:#ffded6!important}.home-page .therapy-card:nth-child(3n+2){background:#d9eee8!important}.home-page .therapy-card:nth-child(3n){background:#e9dff5!important}
+ .home-page .therapy-card.featured{background:linear-gradient(145deg,#5f4269,#a64f6b)!important}
+ .home-page .social-care,.home-page .social-copy{background:#f2b27f!important}
+ .home-page .process{background:linear-gradient(160deg,#eee6f6,#e1f0eb)!important}
+ .home-page .process-grid article:nth-child(1){background:#ffddd5!important}.home-page .process-grid article:nth-child(2){background:#d8ece7!important}.home-page .process-grid article:nth-child(3){background:#e7ddf4!important}.home-page .process-grid article:nth-child(4){background:#ffe8b7!important}
+}
