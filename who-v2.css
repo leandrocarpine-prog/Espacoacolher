@@ -1,0 +1,25 @@
+.who-page-v2 .photo-visual:after{background:linear-gradient(0deg,rgba(13,49,64,.52),transparent 68%)}
+.who-page-v2 .about-card{left:5%;right:5%;bottom:5%;width:auto;max-width:760px;padding:25px 27px 21px;border-radius:26px;background:linear-gradient(145deg,rgba(18,62,81,.96),rgba(38,119,143,.94));box-shadow:0 25px 70px rgba(11,45,60,.33);transform:none!important;color:#fff}
+.who-page-v2 .about-card:hover{box-shadow:0 32px 82px rgba(11,45,60,.42)}
+.who-page-v2 .about-card-head>small{color:#bfe9f2;font-size:9px;letter-spacing:.18em;font-weight:800}
+.who-page-v2 .about-card-head h2{font:700 27px/1.14 "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.04em;color:#fff;margin:8px 0 9px}
+.who-page-v2 .about-card-head p{max-width:660px;margin:0;color:#e2f1f4;font-size:13px;line-height:1.55}
+.who-page-v2 .about-steps{list-style:none;padding:0;margin:20px 0 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.who-page-v2 .about-steps li{display:grid;grid-template-columns:31px 1fr;gap:9px;align-items:start;padding:12px;border:1px solid rgba(255,255,255,.15);border-radius:15px;background:rgba(255,255,255,.08)}
+.who-page-v2 .about-steps li>b{display:grid;place-items:center;width:31px;height:31px;border-radius:10px;background:#dff3f1;color:#1d6678;font-size:10px}
+.who-page-v2 .about-steps li>span{display:grid;gap:3px}.who-page-v2 .about-steps strong{color:#fff;font-size:12px}.who-page-v2 .about-steps small{color:#cce4e9;font-size:10px;line-height:1.35;letter-spacing:0}
+.who-page-v2 .about-responsible{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)}
+.who-page-v2 .about-responsible span{color:#aedae3;font-size:9px;text-transform:uppercase;letter-spacing:.14em}.who-page-v2 .about-responsible strong{color:#fff;font-size:11px;text-align:right}
+@media(max-width:1000px){.who-page-v2 .about-card{padding:22px}.who-page-v2 .about-steps{grid-template-columns:1fr}.who-page-v2 .about-steps li{grid-template-columns:32px 1fr}.who-page-v2 .about-steps small{font-size:11px}}
+@media(max-width:720px){
+  .who-page-v2 .info-screen{height:auto;min-height:100vh;display:grid;grid-template-columns:1fr;padding-top:70px}
+  .who-page-v2 .screen-copy{padding:55px 20px 48px}
+  .who-page-v2 .photo-visual{min-height:720px;display:flex;align-items:flex-end;padding:20px}
+  .who-page-v2 .photo-visual img{object-position:center 45%}
+  .who-page-v2 .about-card{position:relative;left:auto;right:auto;bottom:auto;width:100%;max-width:none;margin:0;padding:22px 19px;border-radius:23px}
+  .who-page-v2 .about-card-head h2{font-size:27px!important}.who-page-v2 .about-card-head p{font-size:15px!important;line-height:1.5!important}
+  .who-page-v2 .about-steps{margin:17px 0 15px;gap:7px}.who-page-v2 .about-steps strong{font-size:14px}.who-page-v2 .about-steps small{font-size:13px;line-height:1.35}
+  .who-page-v2 .about-responsible{align-items:flex-start;flex-direction:column;gap:5px}.who-page-v2 .about-responsible strong{text-align:left;font-size:13px}
+}
+@media(max-width:420px){.who-page-v2 .photo-visual{min-height:760px;padding:14px}.who-page-v2 .about-card{padding:20px 16px}.who-page-v2 .about-steps li{padding:10px}}
+@media(prefers-reduced-motion:reduce){.who-page-v2 .about-card{animation:none!important;transition:none!important}}
