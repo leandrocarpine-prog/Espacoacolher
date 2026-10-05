@@ -719,3 +719,47 @@ body{opacity:1;filter:none}
 
 /* v60 — propósito do Espaço Acolher visível na primeira tela */
 @media(max-width:560px){.home-page .purpose-line{display:flex;align-items:center;gap:7px;overflow-x:auto;margin:20px -4px 2px;padding:4px 4px 10px;scrollbar-width:none}.home-page .purpose-line::-webkit-scrollbar{display:none}.home-page .purpose-line b{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#fff;color:#173f50;border:1px solid rgba(31,104,129,.13);font-size:12px;box-shadow:0 7px 20px rgba(30,83,104,.07)}.home-page .purpose-line span{flex:0 0 auto;color:#d9694c;font-weight:800}.home-page .hero-reassurance{background:#fff!important;border-left-color:#e36d4e!important}.home-page .hero-actions{margin-top:20px!important}}
+
+/* v62 — nova paleta global: mais viva, acolhedora e contrastada */
+:root{
+ --acolher-ink:#17324a;--acolher-petrol:#14566b;--acolher-teal:#2f9c95;
+ --acolher-coral:#e76f51;--acolher-apricot:#f3ad72;--acolher-yellow:#f4c95d;
+ --acolher-lilac:#8d78c7;--acolher-sage:#83aa8b;--acolher-cream:#fff7ea;
+}
+.home-page{background:var(--acolher-cream)!important;color:var(--acolher-ink)!important}
+.home-page .site-header{background:rgba(255,250,242,.94)!important;border-bottom-color:rgba(23,50,74,.1)!important}
+.home-page .brand-mark{background:linear-gradient(145deg,var(--acolher-coral),var(--acolher-apricot))!important;color:#fff!important}
+.home-page .brand b{color:var(--acolher-ink)!important}
+.home-page .brand small{color:#8d604f!important}
+.home-page .button,.home-page .nav-cta{background:linear-gradient(135deg,var(--acolher-coral),#ef8b62)!important;color:#fff!important}
+.home-page .text-link{color:var(--acolher-petrol)!important}
+.home-page .eyebrow{color:#b9553c!important}
+.home-page .eyebrow span{background:var(--acolher-coral)!important}
+.home-page .intro{background:linear-gradient(145deg,#dff4ee,#efe8fb)!important}
+.home-page .needs{background:linear-gradient(145deg,#fff2df,#fffaf1 48%,#e7f4f2)!important}
+.home-page .social-care,.home-page .social-copy{background:#f3b07f!important}
+.home-page .process{background:linear-gradient(160deg,#ebe5f8,#e0f3f0)!important}
+.home-page footer{background:#173b4b!important;color:#eef9f7!important}
+@media(max-width:560px){
+ .home-page main>.hero{background:radial-gradient(circle at 88% 6%,rgba(244,201,93,.62),transparent 24%),radial-gradient(circle at 2% 72%,rgba(47,156,149,.38),transparent 29%),linear-gradient(150deg,#fff2df 0%,#edf8f4 45%,#eee8fb 100%)!important}
+ .home-page .hero h1{color:#17324a!important}
+ .home-page .hero-reassurance{background:#fff8ed!important;border-left-color:var(--acolher-coral)!important}
+ .home-page .welcome-map{background:linear-gradient(155deg,#164f63,#176c72)!important}
+ .home-page .welcome-paths a:nth-child(1){background:#ffe0cd!important}
+ .home-page .welcome-paths a:nth-child(2){background:#cfeee8!important}
+ .home-page .welcome-paths a:nth-child(3){background:#e3dafa!important}
+ .home-page .welcome-paths a:nth-child(4){background:#f9e3a8!important}
+ .home-page .welcome-paths a:nth-child(5){background:#d7ead9!important}
+ .home-page .welcome-paths a:nth-child(6){background:#dce9fa!important}
+ .home-page .what-happens{background:#fff4df!important}
+ .home-page .what-steps article:nth-child(1){background:#ffe4d4!important}
+ .home-page .what-steps article:nth-child(2){background:#d9f0ea!important}
+ .home-page .what-steps article:nth-child(3){background:#e8e0f8!important}
+ .home-page .therapy-card:nth-child(3n+1){background:#ffe2d1!important}
+ .home-page .therapy-card:nth-child(3n+2){background:#d8efea!important}
+ .home-page .therapy-card:nth-child(3n){background:#e7def8!important}
+ .home-page .process-grid article:nth-child(1){background:#ffe0cf!important}
+ .home-page .process-grid article:nth-child(2){background:#d4eeea!important}
+ .home-page .process-grid article:nth-child(3){background:#e5dcf6!important}
+ .home-page .process-grid article:nth-child(4){background:#f8e4a9!important}
+}
