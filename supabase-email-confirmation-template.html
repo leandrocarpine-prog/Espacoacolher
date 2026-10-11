@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;background:#edf5f9;font-family:Arial,sans-serif;color:#173247">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#edf5f9;padding:28px 12px"><tr><td align="center">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#ffffff;border:1px solid #d3e4eb;border-radius:22px;overflow:hidden">
+      <tr><td style="padding:28px 32px;background:linear-gradient(135deg,#2c6e8d,#4b91ad);color:#ffffff">
+        <div style="font-size:12px;letter-spacing:2px;font-weight:bold">ESPAÇO ACOLHER</div>
+        <div style="font-size:28px;line-height:1.2;font-weight:bold;margin-top:10px">Confirme seu e-mail</div>
+      </td></tr>
+      <tr><td style="padding:32px">
+        <p style="font-size:18px;margin:0 0 14px">Olá, {{ .Data.full_name }}.</p>
+        <p style="font-size:15px;line-height:1.65;color:#607789;margin:0 0 22px">Recebemos seu cadastro no Espaço Acolher. Para proteger seus dados, o acesso só será liberado depois que você confirmar este endereço de e-mail.</p>
+        <p style="text-align:center;margin:26px 0"><a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#2d708f;color:#ffffff;text-decoration:none;font-weight:bold;padding:15px 24px;border-radius:12px">Confirmar e ativar minha conta</a></p>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f2f8fa;border-radius:14px;margin:24px 0"><tr><td style="padding:18px">
+          <div style="font-size:12px;color:#3f87a4;font-weight:bold;letter-spacing:1px">SEU ACESSO</div>
+          <div style="font-size:14px;margin-top:8px"><b>Usuário:</b> {{ .Data.username }}</div>
+          <div style="font-size:13px;color:#607789;margin-top:5px">Use a senha que você criou. Por segurança, ela nunca é enviada por e-mail.</div>
+        </td></tr></table>
+        <div style="font-size:14px;font-weight:bold;margin-bottom:10px">Depois de ativar:</div>
+        <ol style="padding-left:20px;color:#607789;font-size:14px;line-height:1.7;margin-top:0">
+          <li>Entre na sua conta.</li>
+          <li>Abra sua primeira solicitação de atendimento.</li>
+          <li>Informe para quem é o atendimento e o assunto principal.</li>
+          <li>Conte brevemente, com suas próprias palavras, o motivo da procura.</li>
+          <li>Revise, envie e acompanhe as atualizações em “Minha área”.</li>
+        </ol>
+        <p style="font-size:13px;line-height:1.55;color:#607789;margin:24px 0 0">Se o botão não abrir, copie este endereço no navegador:<br><a href="{{ .ConfirmationURL }}" style="color:#2d708f;word-break:break-all">{{ .ConfirmationURL }}</a></p>
+      </td></tr>
+      <tr><td style="padding:20px 32px;background:#f7fafb;color:#718795;font-size:12px;line-height:1.5">Espaço Acolher · Psicologia e cuidado<br>Este e-mail foi enviado porque um cadastro foi criado com este endereço.</td></tr>
+    </table>
+  </td></tr></table>
+</body>
+</html>

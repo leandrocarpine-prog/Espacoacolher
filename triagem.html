@@ -9,12 +9,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=51">
-  <link rel="stylesheet" href="portal.css?v=46">
+  <link rel="stylesheet" href="portal.css?v=47">
   <link rel="stylesheet" href="motion-system.css?v=3">
   <link rel="stylesheet" href="mobile-readable.css?v=1">
 </head>
 <body class="intake-page intake-v2">
   <header class="site-header scrolled"><a class="brand" href="index.html"><span class="brand-mark">EA</span><span><b>Espaço Acolher</b><small>Psicologia e cuidado</small></span></a><button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button><nav id="main-nav"><a href="quem-somos.html">Quem somos</a><a href="terapia.html">Terapia</a><a href="login.html">Conta do paciente</a><a href="profissionais.html">Para profissionais</a><a class="nav-cta" href="usuario.html">Minha área <span>→</span></a></nav></header>
+  <section class="first-login-guide hidden" id="first-login-guide" role="dialog" aria-modal="true" aria-labelledby="first-login-title">
+    <div class="first-login-card">
+      <span class="first-login-mark">EA</span>
+      <p>PRIMEIRO ACESSO</p>
+      <h2 id="first-login-title">Bem-vindo ao Espaço Acolher.</h2>
+      <div class="first-login-intro">Para pedir atendimento, você precisa abrir uma solicitação. É simples e leva poucos minutos:</div>
+      <ol>
+        <li><b>1</b><span><strong>Informe para quem é o atendimento</strong> e a cidade.</span></li>
+        <li><b>2</b><span><strong>Escolha o assunto principal</strong> que mais se aproxima do momento.</span></li>
+        <li><b>3</b><span><strong>Conte brevemente o motivo</strong> com suas próprias palavras. Não é preciso ter diagnóstico.</span></li>
+        <li><b>4</b><span><strong>Revise e envie.</strong> Depois, acompanhe as atualizações em “Minha área”.</span></li>
+      </ol>
+      <div class="first-login-note"><b>Seu relato será preservado como você escreveu.</b> Ele não será reescrito ou julgado por inteligência artificial.</div>
+      <button class="intake-next" id="start-first-request" type="button">Começar minha solicitação <span>→</span></button>
+    </div>
+  </section>
   <main class="intake-shell">
     <aside class="intake-aside">
       <div class="intake-aside-photo"><img src="assets/acolhimento-cadastro.png" alt="Ambiente acolhedor preparado para o início do atendimento"></div>
@@ -81,7 +97,7 @@
       <div class="intake-success hidden" id="intake-success"><span>✓</span><p>SOLICITAÇÃO RECEBIDA</p><h2>Obrigado por confiar este primeiro passo.</h2><div>Sua solicitação já está na sua área. Ela será analisada e você poderá acompanhar o andamento por lá.</div><a class="intake-next" href="usuario.html">Acompanhar solicitação <span>→</span></a></div>
     </section>
   </main>
-  <script src="site-page.js?v=44"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="form-safety.js?v=1"></script><script src="triagem.js?v=46"></script>
+  <script src="site-page.js?v=44"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="form-safety.js?v=1"></script><script src="triagem.js?v=47"></script>
   <script src="motion-system.js?v=1"></script>
 </body>
 </html>

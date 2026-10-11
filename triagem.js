@@ -7,6 +7,14 @@ const submitButton=document.querySelector('#intake-submit');
 const feedback=document.querySelector('#intake-feedback');
 let currentStep=0,currentUser;
 
+function showFirstLoginGuide(user){
+  const guide=document.querySelector('#first-login-guide'),button=document.querySelector('#start-first-request');
+  if(!guide||!button||!user||localStorage.getItem(`acolher-first-request-guide-${user.id}`)==='seen')return;
+  guide.classList.remove('hidden');document.body.classList.add('dialog-open');
+  button.focus();
+  button.addEventListener('click',()=>{localStorage.setItem(`acolher-first-request-guide-${user.id}`,'seen');guide.classList.add('hidden');document.body.classList.remove('dialog-open');document.querySelector('.intake-step.active input')?.focus()},{once:true});
+}
+
 function showFeedback(message=''){feedback.textContent=message;feedback.classList.toggle('visible',Boolean(message))}
 function updateStep(){
   steps.forEach((step,index)=>step.classList.toggle('active',index===currentStep));
@@ -30,7 +38,7 @@ async function init(){
     const localPreview=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&new URLSearchParams(location.search).has('preview');
     if(!localPreview)return location.replace(`login.html?cadastro=1&next=${encodeURIComponent('triagem.html')}`);
     currentUser={id:'visual-preview'};
-  }else currentUser=user;
+  }else {currentUser=user;showFirstLoginGuide(user)}
   const {data:profile}=await window.sb.from('profiles').select('city').eq('id',currentUser.id).maybeSingle();if(profile?.city)form.elements.city.value=profile.city;
   const initial=new URLSearchParams(location.search).get('para')||sessionStorage.getItem('espacoAcolherParaQuem');const map={mim:'Para mim',filho:'Filho(a)',familiar:'Familiar'};if(map[initial]){const field=form.querySelector(`[name="for_whom"][value="${map[initial]}"]`);if(field)field.checked=true}
 }
