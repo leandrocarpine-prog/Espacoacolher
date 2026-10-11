@@ -15,7 +15,9 @@
     label{display:block;font-weight:700;margin:22px 0 8px}
     input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:14px;font:14px/1.45 monospace;background:#f8fbfc;color:var(--ink)}
     textarea{min-height:270px;resize:vertical}
-    button{width:100%;border:0;border-radius:12px;padding:15px;margin-top:10px;background:var(--blue);color:#fff;font-weight:700;font-size:16px}
+    button,.action{display:block;width:100%;border:0;border-radius:12px;padding:15px;margin-top:10px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;text-align:center;text-decoration:none}
+    .action{background:#173247;margin-top:18px}
+    .steps{background:#f2f8fa;border-radius:14px;padding:16px 18px;margin:18px 0;color:#425f72;line-height:1.6}
     .status{min-height:24px;margin:12px 0 0;text-align:center;color:#18774a;font-weight:700}
   </style>
 </head>
@@ -23,6 +25,7 @@
   <main>
     <h1>E-mail de ativação</h1>
     <p>Use os botões abaixo para copiar e colar no modelo <strong>Confirm signup</strong> do Supabase.</p>
+    <div class="steps"><strong>Como fazer no celular:</strong><br>1. Copie o assunto.<br>2. Copie o modelo completo.<br>3. Toque em “Abrir Supabase”.<br>4. Cole nos dois campos e salve.</div>
 
     <label for="subject">Assunto</label>
     <input id="subject" readonly value="Ative sua conta | Espaço Acolher">
@@ -64,6 +67,7 @@
 </body>
 </html></textarea>
     <button type="button" data-copy="body">Copiar modelo completo</button>
+    <a class="action" href="https://supabase.com/dashboard/project/lunnyaxxkineezrsclbx/auth/templates">Abrir Supabase para colar e salvar →</a>
     <div class="status" role="status" aria-live="polite"></div>
   </main>
   <script>
