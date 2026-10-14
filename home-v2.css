@@ -162,3 +162,63 @@ body.home-v2 footer{display:block}
   .home-v2.home-motion .reveal,.home-v2.home-motion .reveal:not(.visible){opacity:1!important;transform:none!important;transition:none!important}
   .home-v2 *{animation:none!important;scroll-behavior:auto!important}
 }
+
+/* Correção de contraste: preservar a composição e tornar textos e ações legíveis. */
+body.home-page.home-v2 {
+  --h-copy: #344957;
+}
+body.home-page.home-v2 .therapy-card.featured {
+  background: linear-gradient(145deg, #5f4269, #86405e) !important;
+  color: #fff !important;
+}
+body.home-page.home-v2 .therapy-card.featured h3,
+body.home-page.home-v2 .therapy-card.featured button,
+body.home-page.home-v2 .therapy-card.featured button b {
+  color: #fff !important;
+}
+body.home-page.home-v2 .therapy-card.featured p {
+  color: #fbeef5 !important;
+}
+body.home-page.home-v2 .therapy-card.featured button {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+body.home-page.home-v2 .therapy-card:not(.featured) h3 {
+  color: #15374a !important;
+}
+body.home-page.home-v2 .therapy-card:not(.featured) p,
+body.home-page.home-v2 .social-copy > p:not(.eyebrow),
+body.home-page.home-v2 .social-facts p {
+  color: #344957 !important;
+}
+body.home-page.home-v2 .therapy-card:not(.featured) button {
+  color: #164e66 !important;
+}
+body.home-page.home-v2 .eyebrow,
+body.home-page.home-v2 .hero .eyebrow {
+  color: #813950 !important;
+}
+body.home-page.home-v2 .button,
+body.home-page.home-v2 .nav-cta,
+body.home-page.home-v2 .button-light,
+body.home-page.home-v2 .mobile-action button {
+  background: linear-gradient(135deg, #65456f, #8b3f60) !important;
+  color: #fff !important;
+}
+body.home-page.home-v2 .final-cta h2 {
+  color: #fff !important;
+}
+body.home-page.home-v2 .final-cta > p,
+body.home-page.home-v2 .final-cta .eyebrow {
+  color: #f3f7fa !important;
+}
+body.home-page.home-v2 footer .brand b,
+body.home-page.home-v2 footer .brand small {
+  color: #fff !important;
+}
+body.home-page.home-v2 footer .footer-main a,
+body.home-page.home-v2 footer .footer-main span,
+body.home-page.home-v2 footer .footer-main p,
+body.home-page.home-v2 footer .footer-bottom {
+  color: #e4edf1;
+}
