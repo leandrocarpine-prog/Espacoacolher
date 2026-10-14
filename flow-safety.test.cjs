@@ -11,7 +11,7 @@ assert.equal(safety.storyValid('x'.repeat(2001)),false);
 async function route(user,role='usuario',application=null){
  let signedOut=false;
  const db={auth:{getUser:async()=>({data:{user},error:null}),signOut:async()=>{signedOut=true}},from(table){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:table==='profiles'?{role}:application,error:null})};return q}};
- const c=vm.createContext({window:{sb:db}});vm.runInContext(fs.readFileSync('access-routing.js','utf8'),c);
+ const c=vm.createContext({window:{sb:db,acolherEnsureInitialIntake:async()=>false}});vm.runInContext(fs.readFileSync('access-routing.js','utf8'),c);
  return {value:await c.window.acolherDestination('triagem.html'),signedOut};
 }
 (async()=>{
@@ -25,3 +25,4 @@ async function route(user,role='usuario',application=null){
  assert.match(fs.readFileSync('usuario.js','utf8'),/acolherSafety.escape\(item.reason\)/);
  console.log('PASS: unconfirmed access denied, confirmed routing, safe destinations, required story, HTML escaping.');
 })().catch(e=>{console.error(e);process.exitCode=1});
+

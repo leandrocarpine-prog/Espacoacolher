@@ -9,6 +9,8 @@ window.acolherDestination=async function(fallback='usuario.html'){
  const {data:application,error:applicationError}=await window.sb.from('professional_applications').select('id').eq('user_id',user.id).maybeSingle();
  if(applicationError)throw Error('Não foi possível verificar o cadastro profissional. Tente novamente.');
  if(application)return 'acolher-app/';
+ if(typeof window.acolherEnsureInitialIntake==='function'&&await window.acolherEnsureInitialIntake(user))return 'usuario.html';
  // Only allow known patient destinations, never an arbitrary URL from the query string.
  return ['usuario.html','triagem.html','questionario.html'].includes(fallback)?fallback:'usuario.html';
 };
+

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="portal.css?v=47"><link rel="stylesheet" href="password-toggle.css?v=1">
+  <link rel="stylesheet" href="portal.css?v=48"><link rel="stylesheet" href="password-toggle.css?v=1">
   <link rel="stylesheet" href="motion-system.css?v=3">
   <link rel="stylesheet" href="mobile-readable.css?v=1">
   <link rel="stylesheet" href="auth-crisp.css?v=1">
@@ -56,10 +56,15 @@
         </section>
 
         <section class="register-step" data-step="1">
-          <div class="step-heading"><p>ETAPA 2 DE 4</p><h2>Conte um pouco sobre sua procura.</h2><span>Não precisa ter tudo organizado. Queremos apenas compreender o que motivou você a buscar atendimento.</span></div>
+          <div class="step-heading"><p>ETAPA 2 DE 4</p><h2>Conte um pouco sobre sua procura.</h2><span>Não precisa ter tudo organizado. Queremos compreender sua procura e suas preferências. Você responde uma única vez, aqui no cadastro.</span></div>
           <fieldset class="registration-choice"><legend>Para quem é o atendimento?</legend><div class="registration-options"><label><input required type="radio" name="registration_for_whom" value="Para mim"><span>Para mim</span></label><label><input required type="radio" name="registration_for_whom" value="Filho(a)"><span>Para meu filho ou filha</span></label><label><input required type="radio" name="registration_for_whom" value="Familiar"><span>Para outra pessoa</span></label></div></fieldset>
           <label>Qual assunto mais se aproxima do momento atual?<select required name="registration_reason"><option value="">Selecione uma opção</option><option>Ansiedade, medos ou crises</option><option>Desânimo, tristeza ou depressão</option><option>TDAH, autismo ou neurodivergência</option><option>Relacionamentos e conflitos</option><option>Luto, perdas ou mudanças</option><option>Autoconhecimento</option><option>Outro motivo</option></select></label>
           <label class="registration-story">Conte brevemente o que motivou sua procura<textarea required name="registration_details" minlength="30" maxlength="1200" rows="6" placeholder="Escreva com suas próprias palavras. Você pode contar o que vem acontecendo e como isso tem afetado você ou a pessoa que busca atendimento."></textarea><small><span id="registration-details-count">0</span>/1200 · mínimo de 30 caracteres</small></label>
+
+          <label>Data de nascimento de quem será atendido<input required type="date" name="registration_birth_date" autocomplete="bday"></label>
+          <div class="form-grid"><label>Modalidade<select required name="registration_modality"><option value="">Selecione</option><option>Presencial em Rio Claro</option><option>Online</option><option>Sem preferência</option></select></label><label>Melhor período<select required name="registration_preferred_period"><option value="">Selecione</option><option>Manhã</option><option>Tarde</option><option>Noite</option><option>Flexível</option></select></label></div>
+          <label>Dias e horários possíveis<input required name="registration_preferred_days" minlength="2" maxlength="300" placeholder="Ex.: segunda e quarta depois das 18h"></label>
+          <div class="form-grid"><label>Condição de atendimento<select required name="registration_interest"><option value="">Selecione</option><option>Atendimento com valor social</option><option>Atendimento particular</option><option>Quero conhecer todas as possibilidades</option></select></label><label>Quando pretende começar?<select required name="registration_desired_start"><option value="">Selecione</option><option>O quanto antes</option><option>Nas próximas semanas</option><option>Ainda estou pesquisando</option></select></label></div>
           <div class="registration-note"><b>Seu relato será preservado.</b><span>Não usamos IA para reescrever, diagnosticar ou julgar o que você contou.</span></div>
         </section>
 
@@ -86,12 +91,13 @@
         </section>
 
         <div class="auth-feedback" id="register-feedback" role="alert"></div>
-        <div class="register-actions"><button id="register-back" class="step-back hidden" type="button">← Voltar</button><button id="register-next" class="portal-button" type="button">Continuar <span>→</span></button><button id="register-submit" class="portal-button hidden" type="submit">Criar minha conta <span>→</span></button></div>
+        <div class="register-actions"><button id="register-back" class="step-back hidden" type="button">← Voltar</button><button id="register-next" class="portal-button" type="button">Continuar <span>→</span></button><button id="register-submit" class="portal-button hidden" type="submit">Criar conta e enviar respostas <span>→</span></button></div>
       </form>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="access-routing.js?v=1"></script><script src="form-safety.js?v=1"></script><script src="auth.js?v=36"></script><script src="password-toggle.js?v=1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js?v=20"></script><script src="patient-intake.js?v=1"></script><script src="access-routing.js?v=2"></script><script src="form-safety.js?v=1"></script><script src="auth.js?v=37"></script><script src="password-toggle.js?v=1"></script>
   <script src="motion-system.js?v=1"></script>
 </body>
 </html>
+

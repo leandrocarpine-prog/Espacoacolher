@@ -6,6 +6,7 @@ const nextButton=document.querySelector('#intake-next');
 const submitButton=document.querySelector('#intake-submit');
 const feedback=document.querySelector('#intake-feedback');
 let currentStep=0,currentUser;
+const registrationSteps=new Set();
 
 function showFirstLoginGuide(user){
   const guide=document.querySelector('#first-login-guide'),button=document.querySelector('#start-first-request');
@@ -27,7 +28,7 @@ function updateStep(){
 function validateStep(){const required=[...steps[currentStep].querySelectorAll('[required]')];for(const field of required){if(!field.checkValidity()){field.reportValidity();showFeedback('Confira os campos desta etapa para continuar.');return false}}if(currentStep===2&&!window.acolherSafety.storyValid(form.elements.details.value)){showFeedback('Explique brevemente o motivo da procura, com pelo menos 20 caracteres.');return false}return true}
 function selectedText(name){const selected=form.querySelector(`[name="${name}"]:checked`);return selected?.value||form.elements[name]?.value||'Não informado'}
 function buildReview(){const rows=[['Atendimento',selectedText('for_whom')],['Cidade',form.elements.city.value],['Motivo principal',selectedText('reason')],['Um pouco da sua história',form.elements.details.value.trim()],['Modalidade',selectedText('modality')],['Melhor período',selectedText('preferred_period')],['Disponibilidade',form.elements.preferred_days.value],['Condição',form.elements.interest.value]];document.querySelector('#review-box').innerHTML=rows.map(([label,value])=>`<div><span>${label}</span><b>${window.acolherSafety.escape(value)}</b></div>`).join('')}
-nextButton.addEventListener('click',()=>{if(!validateStep())return;currentStep++;updateStep()});backButton.addEventListener('click',()=>{if(currentStep>0){currentStep--;updateStep()}});
+nextButton.addEventListener('click',()=>{if(!validateStep())return;do{currentStep++}while(registrationSteps.has(currentStep));updateStep()});backButton.addEventListener('click',()=>{if(currentStep>0){do{currentStep--}while(registrationSteps.has(currentStep));updateStep()}});
 form.elements.details.addEventListener('input',event=>document.querySelector('#details-count').textContent=event.target.value.length);
 
 async function init(){
@@ -38,9 +39,13 @@ async function init(){
     const localPreview=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&new URLSearchParams(location.search).has('preview');
     if(!localPreview)return location.replace(`login.html?cadastro=1&next=${encodeURIComponent('triagem.html')}`);
     currentUser={id:'visual-preview'};
-  }else {currentUser=user;showFirstLoginGuide(user)}
-  const {data:profile}=await window.sb.from('profiles').select('city').eq('id',currentUser.id).maybeSingle();if(profile?.city)form.elements.city.value=profile.city;
-  const initial=new URLSearchParams(location.search).get('para')||sessionStorage.getItem('espacoAcolherParaQuem');const map={mim:'Para mim',filho:'Filho(a)',familiar:'Familiar'};if(map[initial]){const field=form.querySelector(`[name="for_whom"][value="${map[initial]}"]`);if(field)field.checked=true}
+  }else {currentUser=user;const destination=await window.acolherDestination('triagem.html');if(destination!=='triagem.html'){location.replace(destination);return;}showFirstLoginGuide(user)}
+  const {data:profile,error:profileError}=await window.sb.from('profiles').select('city,registration_for_whom,registration_reason,registration_details').eq('id',currentUser.id).maybeSingle();if(profileError)throw profileError;if(profile?.city)form.elements.city.value=profile.city;
+  const previous={...(user?.user_metadata||{}),...(profile||{})};
+  for(const [name,key] of [['for_whom','registration_for_whom'],['reason','registration_reason']]){const field=[...form.querySelectorAll(`[name="${name}"]`)].find(item=>item.value===previous[key]);if(field){field.checked=true;if(name==='reason')registrationSteps.add(1);else{field.closest('.intake-choices').classList.add('hidden');steps[0].querySelector('h2').textContent='Complete as informações do atendimento.';steps[0].querySelector('.intake-heading>span').textContent='As respostas do cadastro já foram aproveitadas. Informe apenas o que falta.';}}}
+  if(window.acolherSafety.storyValid(previous.registration_details||'')){form.elements.details.value=previous.registration_details;document.querySelector('#details-count').textContent=previous.registration_details.length;registrationSteps.add(2);}
+
+  const initial=new URLSearchParams(location.search).get('para')||sessionStorage.getItem('espacoAcolherParaQuem');const map={mim:'Para mim',filho:'Filho(a)',familiar:'Familiar'};if(!previous.registration_for_whom&&map[initial]){const field=form.querySelector(`[name="for_whom"][value="${map[initial]}"]`);if(field)field.checked=true}
 }
 
 form.addEventListener('submit',async event=>{
@@ -50,12 +55,14 @@ form.addEventListener('submit',async event=>{
   if(!Number.isFinite(age)||age<0||age>120)return showFeedback('Confira a data de nascimento informada.');
   submitButton.disabled=true;submitButton.innerHTML='Enviando com segurança…';
   try{
-  const {error}=await window.sb.from('intake_requests').insert({user_id:currentUser.id,for_whom:values.for_whom,age,city:values.city.trim(),reason:values.reason,details:values.details?.trim()||null,modality:values.modality,preferred_period:values.preferred_period,preferred_days:values.preferred_days.trim(),interest:values.interest,desired_start:values.desired_start,consent_accepted:true});
+  if(await window.acolherEnsureInitialIntake(currentUser)){location.replace('usuario.html');return;}
+  const {error}=await window.sb.from('intake_requests').insert({id:currentUser.id,user_id:currentUser.id,for_whom:values.for_whom,age,city:values.city.trim(),reason:values.reason,details:values.details?.trim()||null,modality:values.modality,preferred_period:values.preferred_period,preferred_days:values.preferred_days.trim(),interest:values.interest,desired_start:values.desired_start,consent_accepted:true});
   submitButton.disabled=false;submitButton.innerHTML='Enviar solicitação <span>→</span>';
-  if(error)throw error;
+  if(error){if(error.code==='23505'&&await window.acolherEnsureInitialIntake(currentUser)){location.replace('usuario.html');return;}throw error;}
   form.classList.add('hidden');document.querySelector('.intake-mobile-progress').classList.add('hidden');document.querySelector('#intake-success').classList.remove('hidden');document.querySelector('#intake-success').focus();sessionStorage.removeItem('espacoAcolherParaQuem');
   }catch{showFeedback('Não foi possível enviar agora. Confira sua conexão e tente novamente.');}
   finally{submitButton.disabled=false;submitButton.innerHTML='Enviar solicitação <span>→</span>';}
 
 });
-updateStep();init();
+nextButton.disabled=true;backButton.disabled=true;submitButton.disabled=true;updateStep();init().then(()=>{nextButton.disabled=false;backButton.disabled=false;submitButton.disabled=false}).catch(()=>showFeedback('Não foi possível recuperar seu cadastro. Atualize a página para tentar novamente.'));
+
