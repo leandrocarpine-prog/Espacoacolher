@@ -24,18 +24,22 @@ document.querySelector('#forgot').addEventListener('click',async event=>{const e
 registerForm.addEventListener('submit',async event=>{
  event.preventDefault();if(submitButton.disabled||!validateStep())return;
  const data=Object.fromEntries(new FormData(registerForm)),email=data.email.trim().toLowerCase();
+ for(const field of registerForm.querySelectorAll('[required]')){if(!field.checkValidity()){const index=steps.findIndex(step=>step.contains(field));if(index>=0){currentStep=index;updateStep()}field.reportValidity();return}}
+ const birth=new Date(`${data.registration_birth_date}T12:00:00`),today=new Date();let age=today.getFullYear()-birth.getFullYear();if(today<new Date(today.getFullYear(),birth.getMonth(),birth.getDate()))age--;
+ if(!Number.isFinite(age)||age<0||age>120||birth>today){currentStep=1;updateStep();return feedback('#register-feedback','Confira a data de nascimento de quem será atendido.');}
+
  if(!/^[a-z0-9._-]{3,24}$/.test(data.username))return feedback('#register-feedback','Escolha um nome de usuário válido.');
  if(!strongPassword(data.password))return feedback('#register-feedback','A senha ainda não atende a todos os requisitos.');
  if(data.password!==data.password_confirmation)return feedback('#register-feedback','As duas senhas precisam ser iguais.');
  const address=`${data.street}, ${data.number}${data.complement?` - ${data.complement}`:''}, ${data.neighborhood}`;
  submitButton.disabled=true;feedback('#register-feedback','Criando sua conta segura…','success');
  try {
-  const {data:result,error}=await publicSignupClient.auth.signUp({email,password:data.password,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href,data:{full_name:data.full_name.trim(),username:data.username,rg:data.cpf,cep:data.cep,address,street:data.street,address_number:data.number,address_complement:data.complement||null,neighborhood:data.neighborhood,city:data.city,state:data.state,phone:data.phone,social:data.social||null,registration_for_whom:data.registration_for_whom,registration_reason:data.registration_reason,registration_details:data.registration_details.trim(),whatsapp_updates:true,privacy_accepted:true}}});
+  const {data:result,error}=await publicSignupClient.auth.signUp({email,password:data.password,options:{emailRedirectTo:new URL('login.html?next=usuario.html',location.href).href,data:{full_name:data.full_name.trim(),username:data.username,rg:data.cpf,cep:data.cep,address,street:data.street,address_number:data.number,address_complement:data.complement||null,neighborhood:data.neighborhood,city:data.city,state:data.state,phone:data.phone,social:data.social||null,registration_for_whom:data.registration_for_whom,registration_reason:data.registration_reason,registration_details:data.registration_details.trim(),registration_intake:{version:1,birth_date:data.registration_birth_date,modality:data.registration_modality,preferred_period:data.registration_preferred_period,preferred_days:data.registration_preferred_days.trim(),interest:data.registration_interest,desired_start:data.registration_desired_start},whatsapp_updates:true,privacy_accepted:true}}});
   if(error)throw error;
   if(result.session){await publicSignupClient.auth.signOut({scope:'local'});return feedback('#register-feedback','O servidor não exigiu a confirmação do e-mail. A configuração de ativação precisa ser revisada antes de continuar.');}
   steps.forEach(step=>step.classList.remove('active'));
   document.querySelector('.register-progress').classList.add('hidden');document.querySelector('.register-actions').classList.add('hidden');registerForm.querySelector('.register-top').classList.add('hidden');
-  registerForm.insertAdjacentHTML('afterbegin','<div class="activation-success"><span>✓</span><p>CADASTRO RECEBIDO — AGUARDANDO CONFIRMAÇÃO</p><h2>Confirme seu e-mail</h2><div>Enviamos uma mensagem personalizada para <b>'+window.acolherSafety.escape(email)+'</b>. Verifique também a caixa de spam. Seu relato foi recebido exatamente como você escreveu e o acesso só será ativado depois da confirmação.</div><button class="portal-button" type="button" data-tab="login">Ir para entrar ou reenviar ativação</button></div>');
+  registerForm.insertAdjacentHTML('afterbegin','<div class="activation-success"><span>✓</span><p>CADASTRO RECEBIDO — AGUARDANDO CONFIRMAÇÃO</p><h2>Confirme seu e-mail</h2><div>Enviamos uma mensagem personalizada para <b>'+window.acolherSafety.escape(email)+'</b>. Verifique também a caixa de spam. Suas respostas foram salvas. Confirme o e-mail para acompanhar a solicitação na sua área, sem preencher outro questionário.</div><button class="portal-button" type="button" data-tab="login">Ir para entrar ou reenviar ativação</button></div>');
   registerForm.querySelector('[data-tab="login"]').addEventListener('click',()=>showView('login'));
  }catch(error){feedback('#register-feedback',String(error.message||'Não foi possível conectar. Tente novamente.').includes('profiles_username_key')?'Este nome de usuário já está em uso.':String(error.message||'Não foi possível conectar. Tente novamente.'));}
  finally{submitButton.disabled=false;}
@@ -44,7 +48,7 @@ document.querySelector('#resend-activation').addEventListener('click',async even
  const email=loginForm.elements.email.value.trim().toLowerCase();
  if(!loginForm.elements.email.checkValidity()){loginForm.elements.email.reportValidity();return;}
  const button=event.currentTarget;button.disabled=true;
- try{const {error}=await publicSignupClient.auth.resend({type:'signup',email,options:{emailRedirectTo:new URL('login.html?next=triagem.html',location.href).href}});
+ try{const {error}=await publicSignupClient.auth.resend({type:'signup',email,options:{emailRedirectTo:new URL('login.html?next=usuario.html',location.href).href}});
  if(error)throw error;feedback('#login-feedback','Solicitação de reenvio aceita. Verifique a caixa de entrada e o spam; a conta precisa estar aguardando confirmação.','success');
  }catch{feedback('#login-feedback','Não foi possível reenviar a ativação. O serviço de e-mail pode estar indisponível ou limitado. Tente novamente mais tarde.');}
  finally{button.disabled=false;}
@@ -62,3 +66,4 @@ function strongPassword(value){return value.length>=8&&/[A-Z]/.test(value)&&/[a-
 
 const authArt=document.querySelector('.auth-side');
 if(authArt&&matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){authArt.addEventListener('pointermove',event=>{const box=authArt.getBoundingClientRect(),x=(event.clientX-box.left)/box.width-.5,y=(event.clientY-box.top)/box.height-.5;authArt.style.setProperty('--mx',`${x*22}px`);authArt.style.setProperty('--my',`${y*18}px`)});authArt.addEventListener('pointerleave',()=>{authArt.style.setProperty('--mx','0px');authArt.style.setProperty('--my','0px')})}
+
